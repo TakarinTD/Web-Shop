@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <!--[if (gte IE 9)|!(IE)]><!-->
-<html lang="en">
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
 <!--<![endif]-->
 
 <head>
@@ -21,15 +21,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="viewport" content="width=device-width">
     <!-- =====  CSS  ===== -->
-    <link rel="stylesheet" type="text/css" href="../static/css/font-awesome.min.css"/>
-    <link rel="stylesheet" type="text/css" href="../static/css/bootstrap.css"/>
-    <link rel="stylesheet" type="text/css" href="../static/css/style.css">
-    <link rel="stylesheet" type="text/css" href="../static/css/magnific-popup.css">
-    <link rel="stylesheet" type="text/css" href="../static/css/owl.carousel.css">
-    <link rel="shortcut icon" href="../static/images/favicon.png">
-    <link rel="apple-touch-icon" href="../static/images/apple-touch-icon.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="../static/images/apple-touch-icon-72x72.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="../static/images/apple-touch-icon-114x114.png">
+    <link rel="stylesheet" type="text/css" th:href="@{/static/css/font-awesome.min.css}" href="../static/css/font-awesome.min.css"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/static/css/bootstrap.css}"  href="../static/css/bootstrap.css"/>
+    <link rel="stylesheet" type="text/css" th:href="@{static/css/style.css}"  href="../static/css/style.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/static/css/magnific-popup.css}"  href="../static/css/magnific-popup.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/static/css/owl.carousel.css}"  href="../static/css/owl.carousel.css">
+    <link rel="shortcut icon" th:href="@{/static/images/favicon.png}" href="../static/images/favicon.png">
+    <link rel="apple-touch-icon" th:href="@{/static/images/apple-touch-icon.png}" href="../static/images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" th:href="@{/static/images/apple-touch-icon-72x72.png}" href="../static/images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" th:href="@{/static/images/apple-touch-icon-114x114.png}" href="../static/images/apple-touch-icon-114x114.png">
 </head>
 
 <body>
@@ -172,17 +172,6 @@
     <!-- =====  CONTAINER START  ===== -->
     <div class="container">
         <div class="row ">
-            <!-- =====  BANNER STRAT  ===== -->
-            <div class="col-sm-12">
-                <div class="breadcrumb ptb_20">
-                    <h1>Login</h1>
-                    <ul>
-                        <li><a href="home_page.html">Home</a></li>
-                        <li class="active">Login</li>
-                    </ul>
-                </div>
-            </div>
-            <!-- =====  BREADCRUMB END===== -->
 <!--            <div id="column-left" class="col-sm-4 col-lg-3 hidden-xs">-->
 <!--                <div id="category-menu" class="navbar collapse in mb_40" aria-expanded="true" style="" role="button">-->
 <!--                    <div class="nav-responsive">-->
@@ -216,10 +205,10 @@
                         <div class="panel-login panel">
                             <div class="panel-heading">
                                 <div class="row mb_20">
-                                    <div class="col-xs-6">
+                                    <div class="col-xs-6" style="text-align:center">
                                         <a href="#" class="active" id="login-form-link">Login</a>
                                     </div>
-                                    <div class="col-xs-6">
+                                    <div class="col-xs-6" style="text-align:center">
                                         <a href="#" id="register-form-link">Register</a>
                                     </div>
                                 </div>

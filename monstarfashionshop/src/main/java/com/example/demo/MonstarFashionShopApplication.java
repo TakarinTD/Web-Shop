@@ -6,10 +6,10 @@ import org.springframework.data.jpa.repository.config.*;
 
 @SpringBootApplication
 @EnableJpaAuditing
-public class MonstarfashionshopApplication {
+public class MonstarFashionShopApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(MonstarfashionshopApplication.class, args);
+		SpringApplication.run(MonstarFashionShopApplication.class, args);
 	}
 
 }
