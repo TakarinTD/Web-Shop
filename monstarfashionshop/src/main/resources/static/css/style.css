@@ -69,7 +69,7 @@ Created by: 	Lionode
   
 04 ===== FOOTER =====
 	4.1 Footer General
-	4.2 Scrollup
+	4.2 Chatbot
 */
 
 
@@ -2402,22 +2402,80 @@ a.thumbnail:hover, a.thumbnail:focus, a.thumbnail.active {
 }
 
 /* ----------------------------------------------
-	4.2 Scrollup
+	4.2 Chatbot
 ----------------------------------------------- */
 
-#scrollup::before {
-    background: #e40001 none repeat scroll 0 0;
-    bottom: 20px;
-    color: #fff;
-    content: "\f106";
-    font-family: fontawesome;
-    font-size: 25px;
-    height: 40px;
-    padding: 6px 12px;
-    position: fixed;
-    right: 20px;
-    width: 40px;
-    z-index: 99;
+{box-sizing: border-box;}
+
+/* Open Chatbox */
+.open-chatbox {
+  background-color: green;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  color: wheat;
+  opacity: 0.8;
+  position: fixed;
+  bottom: 23px;
+  right: 28px;
+  width: 80px;
+  height: 50px;
+}
+
+/* hide chatbox*/
+.Chatbox {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  right: 15px;
+  border: 3px solid #f1f1f1;
+  z-index: 9;
+}
+
+/*style form */
+.form-container{
+  max-width: 300px;
+  padding: 10px;
+  background-color: white;
+}
+
+/*style textarea */
+.form-container textarea {
+  width: 100%;
+  padding: 5px;
+  margin: 5px 0 22px 0;
+  border: none;
+  background: #f1f1f1;
+  resize: none;
+  min-height: 100px;
+}
+
+/*style textarea focus */
+.form-container textarea:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+/*style button in form*/
+.form-container .btn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  margin-bottom:10px;
+  opacity: 0.8;
+}
+
+/* color button close chatbox */
+.form-container .close-chatbox {
+  background-color: red;
+}
+
+/*hover button*/
+.form-container .btn:hover, .nut-mo-chatbox:hover {
+  opacity: 1;
 }
 
 
