@@ -5,7 +5,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.jpa.repository.config.*;
 
 @SpringBootApplication
-@EnableJpaAuditing
 public class MonstarFashionShopApplication {
 
 	public static void main(String[] args) {
