@@ -36,5 +36,5 @@ build/
 /.mvn/
 /target/
 
-monstarfashionshop.iml
+monstarfashionshop/monstarfashionshop.iml
 monstarfashionshop/.idea/workspace.xml
