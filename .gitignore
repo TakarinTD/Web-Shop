@@ -32,10 +32,8 @@ build/
 ### VS Code ###
 .vscode/
 
-/.idea/
-/.mvn/
-/target/
-
-C:\Users\nguye\Desktop\Web-Shop\monstarfashionshop\monstarfashionshop.iml
-monstarfashionshop/.idea/workspace.xml
+./monstarfashionshop/.idea/
+./monstarfashionshop/.mvn/
+./monstarfashionshop/target/
+./monstarfashionshop/mvnw
 test.txt
