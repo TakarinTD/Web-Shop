@@ -31,3 +31,10 @@ build/
 
 ### VS Code ###
 .vscode/
+
+/.idea/**
+/.mvn/**
+/target/**
+
+monstarfashionshop.iml
+monstarfashionshop/.idea/workspace.xml
