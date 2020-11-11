@@ -24,6 +24,9 @@
   <component name="ChangeListManager">
     <list default="true" id="c5d31d86-e85d-4952-a090-3f5b049355fb" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/monstarfashionshop.iml" beforeDir="false" afterPath="$PROJECT_DIR$/monstarfashionshop.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/MonstarFashionShopApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/MonstarfashionshopApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,7 +61,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$USER_HOME$/IdeaProjects/SpringBootCRUD" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
@@ -76,6 +79,17 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -107,6 +121,7 @@
       <workItem from="1605018706934" duration="9332000" />
       <workItem from="1605059241518" duration="9276000" />
       <workItem from="1605075044244" duration="1337000" />
+      <workItem from="1605080141859" duration="629000" />
     </task>
     <servers />
   </component>
@@ -138,10 +153,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="413" y="110" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1366.728@0.0.1366.728" timestamp="1605024339699" />
-    <state x="463" y="118" key="FileChooserDialogImpl" timestamp="1605021841656">
+    <state x="463" y="118" key="FileChooserDialogImpl" timestamp="1605080256081">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="463" y="118" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1605021841656" />
+    <state x="463" y="118" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1605080256081" />
     <state width="1323" height="112" key="GridCell.Tab.0.bottom" timestamp="1605064631369">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
