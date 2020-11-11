@@ -8,9 +8,11 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import javax.transaction.Transactional;
+import org.springframework.data.jpa.repository.config.*;
+
 @SpringBootApplication
 @RequiredArgsConstructor
-
+@EnableJpaAuditing
 public class MonstarfashionshopApplication implements CommandLineRunner {
 
 	public static void main(String[] args) {
@@ -29,24 +31,24 @@ public class MonstarfashionshopApplication implements CommandLineRunner {
 	@Transactional
 	public void run(String... args) throws Exception {
 
-		// lấy một User từ db
-		User user = userRepository.getOne((long) 2);
-
-		ProductDetail productDetail = productDetailRepository.getOne((long) 9);
-
-		// Tạo một order vơi các thông tin
-		Order order = new Order();
-		order.setReciverName("Nguyễn Quỳnh Anh");
-		order.setAddress("Hà Nội");
-//		order.setUser(user);
-
-		OrderDetail orderDetail1 = new OrderDetail();
-		orderDetail1.setProductDetail(productDetail);
-		orderDetail1.setOrder(order);
-
-		order.addOrderDetail(orderDetail1);
-
-		orderRepository.save(order);
+//		// lấy một User từ db
+//		User user = userRepository.getOne((long) 2);
+//
+//		ProductDetail productDetail = productDetailRepository.getOne((long) 9);
+//
+//		// Tạo một order vơi các thông tin
+//		Order order = new Order();
+//		order.setReciverName("Nguyễn Quỳnh Anh");
+//		order.setAddress("Hà Nội");
+////		order.setUser(user);
+//
+//		OrderDetail orderDetail1 = new OrderDetail();
+//		orderDetail1.setProductDetail(productDetail);
+//		orderDetail1.setOrder(order);
+//
+//		order.addOrderDetail(orderDetail1);
+//
+//		orderRepository.save(order);
 
 
 //		// tạo một danh sách khuyến mại
@@ -77,9 +79,5 @@ public class MonstarfashionshopApplication implements CommandLineRunner {
 //		promotionDb1.getProducts().forEach(product -> {
 //			System.out.println(product.toString());
 //		} );
-
-
-
-
 	}
 }
