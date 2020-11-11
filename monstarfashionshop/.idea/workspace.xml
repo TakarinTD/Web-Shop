@@ -23,8 +23,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c5d31d86-e85d-4952-a090-3f5b049355fb" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/monstarfashionshop.iml" beforeDir="false" afterPath="$PROJECT_DIR$/monstarfashionshop.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/MonstarFashionShopApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/MonstarfashionshopApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/example/demo/MonstarFashionShopApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/example/demo/MonstarfashionshopApplicationTests.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,8 +68,8 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration name="MonstarFashionShopApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.example.demo.MonstarFashionShopApplication" />
+    <configuration name="MonstarfashionshopApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.example.demo.MonstarfashionshopApplication" />
       <module name="monstarfashionshop" />
       <extension name="coverage">
         <pattern>
@@ -83,7 +83,7 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.MonstarFashionShopApplication" />
+        <item itemvalue="Application.MonstarfashionshopApplication" />
       </list>
     </recent_temporary>
   </component>
@@ -118,10 +118,10 @@
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="586" y="203" key="#Inspections/0.0.1920.1050@0.0.1920.1050" timestamp="1605003147814" />
-    <state x="681" y="269" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1604981250174">
+    <state x="681" y="269" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1605079964989">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state x="681" y="269" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1604981250174" />
+    <state x="681" y="269" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1605079964989" />
     <state width="1877" height="282" key="GridCell.Tab.0.bottom" timestamp="1604997391451">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
