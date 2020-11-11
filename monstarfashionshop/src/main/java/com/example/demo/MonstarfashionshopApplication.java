@@ -6,17 +6,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.data.jpa.repository.config.*;
 
 import javax.transaction.Transactional;
-import java.time.LocalDateTime;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 @SpringBootApplication
 @RequiredArgsConstructor
+
 public class MonstarfashionshopApplication implements CommandLineRunner {
 
 	public static void main(String[] args) {
