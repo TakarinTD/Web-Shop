@@ -23,20 +23,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c5d31d86-e85d-4952-a090-3f5b049355fb" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/images/chatbox.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/Checkout.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/cart.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/contact_us.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/men.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/product_detail_page.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/women.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../biểu đồ dịch chuyển màn hình.drawio" beforeDir="false" afterPath="$PROJECT_DIR$/../biểu đồ dịch chuyển màn hình.drawio" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/custom.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/custom.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/home_page.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/home_page.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/my_account.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/my_account.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/monstarfashionshop.iml" beforeDir="false" afterPath="$PROJECT_DIR$/monstarfashionshop.iml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
