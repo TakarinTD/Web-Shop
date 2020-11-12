@@ -1,7 +1,5 @@
 <!DOCTYPE html>
-<!--[if (gte IE 9)|!(IE)]><!-->
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<!--<![endif]-->
 
 <head>
     <!-- =====  BASIC PAGE NEEDS  ===== -->
@@ -70,48 +68,29 @@
         <div class="row">
             <div class="cms_banner mt_10">
                 <div class="col-xs-4 mt_10">
-                    <div id="subbanner1" class="sub-hover">
-                        <div class="sub-img"><a href="#"><img th:src="@{/images/sub1.jpg}" alt="Sub Banner1"
-                                                              class="img-responsive"></a></div>
-                        <div class="bannertext text-center">
-                            <button class="btn mb_10 cms_btn">View product</button>
-                            <h2>Hats & collapse</h2>
-                            <p class="mt_10">Wide veriety of sizes,colors</p>
-                        </div>
-                    </div>
-                    <div id="subbanner2" class="sub-hover mt_20">
-                        <div class="sub-img"><a href="#"><img th:src="@{/images/sub2.jpg}" alt="Sub Banner2"
-                                                              class="img-responsive"></a></div>
-                        <div class="bannertext text-center">
-                            <button class="btn mb_10 cms_btn">View product</button>
-                            <h2>Buy Scarfs</h2>
-                            <p class="mt_10">Shop collection of designer</p>
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <h4 class="card-title">John Doe</h4>
+                            <p class="card-text">Some example text.</p>
+                            <a href="#" class="btn btn-primary">See Profile</a>
                         </div>
                     </div>
                 </div>
                 <div class="col-xs-4 mt_10">
-                    <div id="subbanner" class="sub-hover">
-                        <div class="sub-img"><a href="#"><img th:src="@{/images/sub3.jpg}" alt="Sub Banner3"
-                                                              class="img-responsive"></a></div>
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <h4 class="card-title">John Doe</h4>
+                            <p class="card-text">Some example text.</p>
+                            <a href="#" class="btn btn-primary">See Profile</a>
+                        </div>
                     </div>
                 </div>
                 <div class="col-xs-4 mt_10">
-                    <div id="subbanner4" class="sub-hover">
-                        <div class="sub-img"><a href="#"><img th:src="@{/images/sub4.jpg}" alt="Sub Banner4"
-                                                              class="img-responsive"></a></div>
-                        <div class="bannertext text-center">
-                            <button class="btn mb_10 cms_btn">View product</button>
-                            <h2>Handbags</h2>
-                            <p class="mt_10">Bags for men & women only</p>
-                        </div>
-                    </div>
-                    <div id="subbanner5" class="sub-hover mt_20">
-                        <div class="sub-img"><a href="#"><img th:src="@{/images/sub5.jpg}" alt="Sub Banner5"
-                                                              class="img-responsive"></a></div>
-                        <div class="bannertext text-center">
-                            <button class="btn mb_10 cms_btn">View product</button>
-                            <h2>Footware</h2>
-                            <p class="mt_10">Over 400 luxury designers</p>
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <h4 class="card-title">John Doe</h4>
+                            <p class="card-text">Some example text.</p>
+                            <a href="#" class="btn btn-primary">See Profile</a>
                         </div>
                     </div>
                 </div>
@@ -123,77 +102,101 @@
                 <!-- =====  PRODUCT TAB  ===== -->
                 <div id="product-tab" class="mt_50">
                     <div class="heading-part mb_10 ">
-                        <h2 class="main_title">Fashion Items</h2>
+                        <h2 class="main_title">SẢN PHẢM HOT</h2>
                     </div>
                     <ul class="nav text-right">
-                        <li class="active"><a href="#nArrivals" data-toggle="tab">New Arrivals</a></li>
-                        <li><a href="#Bestsellers" data-toggle="tab">Bestsellers</a></li>
-                        <li><a href="#Featured" data-toggle="tab">Featured</a></li>
+                        <li class="active"><a href="#top-women" data-toggle="tab">NỮ</a></li>
+                        <li><a href="#top-men" data-toggle="tab">NAM</a></li>
                     </ul>
                     <div class="tab-content clearfix box">
-                        <div class="tab-pane active" id="nArrivals">
+                        <div class="tab-pane active" id="top-women">
                             <div class="nArrivals owl-carousel">
-                                <div class="product-grid">
-                                    <div class="item">
-                                        <div class="product-thumb">
-                                            <div class="image product-imageblock"><a href="product_detail_page.html">
-                                                <img data-name="product_image"
-                                                     th:src="@{/images/product/product9.jpg}" alt="iPod Classic"
-                                                     title="iPod Classic" class="img-responsive"> <img
-                                                    th:src="@{/images/product/product9-1.jpg}" alt="iPod Classic"
-                                                    title="iPod Classic" class="img-responsive"> </a>
-                                                <div class="button-group text-center">
-                                                    <div class="wishlist"><a href="#"><span>wishlist</span></a></div>
-                                                    <div class="quickview"><a href="#"><span>Quick View</span></a></div>
-                                                    <div class="compare"><a href="#"><span>Compare</span></a></div>
-                                                    <div class="add-to-cart"><a href="#"><span>Add to cart</span></a>
+                                <th:block th:each="product : ${productWomen}">
+                                    <div class="product-grid">
+                                        <div class="item">
+                                            <div class="product-thumb">
+                                                <div class="image product-imageblock">
+                                                    <a href="product_detail_page.html">
+                                                        <img data-name="product_image"
+                                                             th:src="@{'/images/product/' + ${product.image}}"
+                                                             alt="iPod Classic"
+                                                             title="iPod Classic" class="img-responsive">
+                                                        <img th:src="@{/images/product/product9-1.jpg}"
+                                                             alt="iPod Classic"
+                                                             title="iPod Classic" class="img-responsive">
+                                                    </a>
+
+                                                    <div class="button-group text-center">
+                                                        <div class="wishlist"><a href="#"><span>View detail</span></a>
+                                                        </div>
+                                                        <div class="add-to-cart"><a
+                                                                href="#"><span>Add to cart</span></a>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="caption product-detail text-center">
-                                                <h6 data-name="product_name" class="product-name"><a href="#"
-                                                                                                     title="Casual Shirt With Ruffle Hem">New
-                                                    LCDScreen and HD Vide..</a></h6>
-                                                <span class="price"><span class="amount"><span
-                                                        class="currencySymbol">$</span>70.00</span>
-                          </span>
+                                                <div class="caption product-detail text-center">
+                                                    <h6 data-name="product_name" class="product-name">
+                                                        <a href="#" title="Casual Shirt With Ruffle Hem"
+                                                           th:utext="${product.productName}">Product name</a>
+                                                    </h6>
+                                                    <span class="price">
+                                                            <span class="amount" th:utext="${product.salePrice}">
+                                                                <span class="currencySymbol">$</span>
+                                                            </span>
+                                                        </span>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="product-grid">
-                                    <div class="item">
-                                        <div class="product-thumb">
-                                            <div class="image product-imageblock"><a href="product_detail_page.html">
-                                                <img data-name="product_image"
-                                                     th:src="@{/images/product/product1.jpg}" alt="iPod Classic"
-                                                     title="iPod Classic" class="img-responsive"> <img
-                                                    th:src="@{/images/product/product1-1.jpg}" alt="iPod Classic"
-                                                    title="iPod Classic" class="img-responsive"> </a>
-                                                <div class="button-group text-center">
-                                                    <div class="wishlist"><a href="#"><span>wishlist</span></a></div>
-                                                    <div class="quickview"><a href="#"><span>Quick View</span></a></div>
-                                                    <div class="compare"><a href="#"><span>Compare</span></a></div>
-                                                    <div class="add-to-cart"><a href="#"><span>Add to cart</span></a>
+                                </th:block>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="top-men">
+                            <div class="Bestsellers owl-carousel">
+                                <th:block th:each="product : ${productMen}">
+                                    <div class="product-grid">
+                                        <div class="item">
+                                            <div class="product-thumb">
+                                                <div class="image product-imageblock">
+                                                    <a href="product_detail_page.html">
+                                                        <img data-name="product_image"
+                                                             th:src="@{'/images/product/' + ${product.image}}"
+                                                             alt="iPod Classic"
+                                                             title="iPod Classic" class="img-responsive">
+                                                        <img th:src="@{/images/product/product9-1.jpg}"
+                                                             alt="iPod Classic"
+                                                             title="iPod Classic" class="img-responsive">
+                                                    </a>
+
+                                                    <div class="button-group text-center">
+                                                        <div class="wishlist"><a href="#"><span>View detail</span></a>
+                                                        </div>
+                                                        <div class="add-to-cart"><a
+                                                                href="#"><span>Add to cart</span></a>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="caption product-detail text-center">
-                                                <h6 data-name="product_name" class="product-name"><a href="#"
-                                                                                                     title="Casual Shirt With Ruffle Hem">New
-                                                    LCDScreen and HD Vide..</a></h6>
-                                                <span class="price"><span class="amount"><span
-                                                        class="currencySymbol">$</span>70.00</span>
-                          </span>
+                                                <div class="caption product-detail text-center">
+                                                    <h6 data-name="product_name" class="product-name">
+                                                        <a href="#" title="Casual Shirt With Ruffle Hem"
+                                                           th:utext="${product.productName}">Product name</a>
+                                                    </h6>
+                                                    <span class="price">
+                                                            <span class="amount" th:utext="${product.salePrice}">
+                                                                <span class="currencySymbol">$</span>
+                                                            </span>
+                                                        </span>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </th:block>
                             </div>
                         </div>
                     </div>
                 </div>
                 <!-- =====  PRODUCT TAB  END ===== -->
+
                 <!-- =====  SUB BANNER  START ===== -->
                 <div class="row">
                     <div class="cms_banner mt_50">
@@ -206,48 +209,6 @@
                     </div>
                 </div>
                 <!-- =====  SUB BANNER END  ===== -->
-            </div>
-        </div>
-        <div id="brand_carouse" class="ptb_50 text-center">
-            <div class="type-01">
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div class="brand owl-carousel ptb_20">
-                            <div class="item text-center"><a href="#"><img th:src="@{/images/brand/brand1.png}"
-                                                                           alt="Disney" class="img-responsive"/></a>
-                            </div>
-                            <div class="item text-center"><a href="#"><img th:src="@{/images/brand/brand2.png}"
-                                                                           alt="Dell" class="img-responsive"/></a></div>
-                            <div class="item text-center"><a href="#"><img th:src="@{/images/brand/brand3.png}"
-                                                                           alt="Harley" class="img-responsive"/></a>
-                            </div>
-                            <div class="item text-center"><a href="#"><img th:src="@{/images/brand/brand4.png}"
-                                                                           alt="Canon" class="img-responsive"/></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="newsletters mb_50">
-            <div class="row">
-                <div class="col-sm-6">
-                    <div class="news-head pull-left">
-                        <h2>SIGN UP FOR NEWSLETTER</h2>
-                        <div class="new-desc">Be the First to know about our Fresh Arrivals and much more!</div>
-                    </div>
-                </div>
-                <div class="col-sm-6">
-                    <div class="news-form pull-right">
-                        <form onsubmit="return validatemail();" method="post">
-                            <div class="form-group required">
-                                <input name="email" id="email" placeholder="Enter Your Email"
-                                       class="form-control input-lg" required="" type="email">
-                                <button type="submit" class="btn btn-default btn-lg">Subscribe</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
             </div>
         </div>
     </div>

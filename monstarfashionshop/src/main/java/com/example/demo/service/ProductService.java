@@ -1,16 +1,18 @@
 package com.example.demo.service;
 
-import com.example.demo.entity.*;
-import com.example.demo.repository.*;
-import java.util.*;
-import javax.transaction.*;
-import org.springframework.beans.factory.annotation.*;
-import org.springframework.data.domain.*;
-import org.springframework.stereotype.*;
+import com.example.demo.dto.ProductDTO;
+import com.example.demo.entity.Product;
+import com.example.demo.entity.ProductDetail;
 
+import java.util.List;
 @Service
 @Transactional
-public class ProductService {
+public interface ProductService {
+
+    ProductDTO convertProductToProductDTO(Product product);
+    List<ProductDTO> getProductsByCategoryId(long categoryId);
+    List<ProductDTO> getProductsTopSaleMan();
+    List<ProductDTO> getProductsTopSaleWomen();
 
     @Autowired
     private ProductRepository productRepository;
@@ -23,5 +25,4 @@ public class ProductService {
     public List<Product> findProducts(String categoryName){
         return productRepository.findProductsByCategoryCategoryName(categoryName);
     }
-
 }

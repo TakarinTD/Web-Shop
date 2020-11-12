@@ -76,16 +76,8 @@ public class Product {
     public void setProductName (String productName) {
         this.productName = productName;
     }
-
-    public String getImage () {
-        return image;
-    }
-
-    public void setImage (String image) {
-        this.image = image;
-    }
-
-    public float getPurchasePrice () {
+  
+    public float getPurchasePrice() {
         return purchasePrice;
     }
 
@@ -149,8 +141,16 @@ public class Product {
         this.promotions = promotions;
     }
 
-    public void addProductDetail (ProductDetail productDetail) {
-        if (productDetails == null) {
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public void addProductDetail(ProductDetail productDetail) {
+        if(productDetails == null) {
             productDetails = new HashSet<>();
         }
         productDetails.add(productDetail);
