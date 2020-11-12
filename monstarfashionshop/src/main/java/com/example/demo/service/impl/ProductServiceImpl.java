@@ -5,6 +5,9 @@ import com.example.demo.entity.Product;
 import com.example.demo.repository.ProductRepository;
 import com.example.demo.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -39,6 +42,17 @@ public class ProductServiceImpl implements ProductService {
         productDTO.setSalePrice(product.getSalePrice());
 
         return productDTO;
+    }
+
+    @Override
+    public Page<Product> pageProductByCategoryId(Long categoryId, int pageNum, int pageSize) {
+        Pageable pageable = PageRequest.of(pageNum, pageSize);
+        return productRepository.findProductsByCategoryId(categoryId, pageable);
+    }
+
+    @Override
+    public List<Product> findProducts(String categoryName){
+        return productRepository.findProductsByCategoryCategoryName(categoryName);
     }
 
     @Override

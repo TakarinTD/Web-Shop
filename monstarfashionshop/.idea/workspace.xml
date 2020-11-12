@@ -23,26 +23,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c5d31d86-e85d-4952-a090-3f5b049355fb" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/dto/CategoryDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/dto/ColorDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/dto/ProductDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/dto/ProductDetailDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/dto/SizeDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/service/CategoryService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/service/impl/CategoryServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/service/impl/ProductServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/MonstarfashionshopApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/MonstarfashionshopApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/controller/HomeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/controller/HomeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/entity/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/entity/Product.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/entity/ProductColor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/entity/ProductColor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/repository/ProductDetailRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/repository/ProductDetailRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/repository/ProductRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/repository/ProductRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/service/ProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/service/ProductService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/common/footer.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/common/footer.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/common/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/common/header.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/home.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/service/impl/ProductServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/service/impl/ProductServiceImpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -147,7 +131,7 @@
       <workItem from="1605059241518" duration="9276000" />
       <workItem from="1605075044244" duration="1337000" />
       <workItem from="1605080141859" duration="7219000" />
-      <workItem from="1605147484522" duration="17841000" />
+      <workItem from="1605147484522" duration="18934000" />
     </task>
     <servers />
   </component>
@@ -188,25 +172,25 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="463" y="118" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1605166213813" />
-    <state width="1323" height="93" key="GridCell.Tab.0.bottom" timestamp="1605169447843">
+    <state width="1323" height="93" key="GridCell.Tab.0.bottom" timestamp="1605171971015">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="93" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1605169447843" />
+    <state width="1323" height="93" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1605171971015" />
     <state width="1860" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1050@0.0.1920.1050" timestamp="1604980788984" />
-    <state width="1323" height="93" key="GridCell.Tab.0.center" timestamp="1605169447843">
+    <state width="1323" height="93" key="GridCell.Tab.0.center" timestamp="1605171971015">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="93" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1605169447843" />
+    <state width="1323" height="93" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1605171971015" />
     <state width="1860" height="282" key="GridCell.Tab.0.center/0.0.1920.1050@0.0.1920.1050" timestamp="1604980788984" />
-    <state width="1323" height="93" key="GridCell.Tab.0.left" timestamp="1605169447843">
+    <state width="1323" height="93" key="GridCell.Tab.0.left" timestamp="1605171971014">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="93" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1605169447843" />
+    <state width="1323" height="93" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1605171971014" />
     <state width="1860" height="282" key="GridCell.Tab.0.left/0.0.1920.1050@0.0.1920.1050" timestamp="1604980788984" />
-    <state width="1323" height="93" key="GridCell.Tab.0.right" timestamp="1605169447843">
+    <state width="1323" height="93" key="GridCell.Tab.0.right" timestamp="1605171971015">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="93" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1605169447843" />
+    <state width="1323" height="93" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1605171971015" />
     <state width="1860" height="282" key="GridCell.Tab.0.right/0.0.1920.1050@0.0.1920.1050" timestamp="1604980788984" />
     <state x="184" y="8" key="SettingsEditor" timestamp="1604995123856">
       <screen x="0" y="0" width="1366" height="728" />
