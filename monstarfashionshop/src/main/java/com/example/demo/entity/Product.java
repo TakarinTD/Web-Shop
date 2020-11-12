@@ -76,14 +76,6 @@ public class Product {
         this.productName = productName;
     }
 
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
-    }
-
     public float getPurchasePrice() {
         return purchasePrice;
     }
@@ -146,6 +138,14 @@ public class Product {
 
     public void setPromotions(Set<Promotion> promotions) {
         this.promotions = promotions;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public void addProductDetail(ProductDetail productDetail) {

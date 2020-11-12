@@ -20,6 +20,9 @@ public class ProductColor {
     @Column(name = "color_name")
     private String colorName;
 
+    @Column(name = "image")
+    private String image;
+
     @Column(name = "created_at")
     private Date createdAt;
 
@@ -46,6 +49,14 @@ public class ProductColor {
 
     public void setColorName(String colorName) {
         this.colorName = colorName;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public Date getCreatedAt() {
