@@ -1,78 +1,74 @@
 package com.example.demo.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 import javax.persistence.*;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "product_size")
+@Table (name = "product_size")
 public class ProductSize {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "size_name")
+    @Column (name = "size_name")
     private String sizeName;
 
-    @Column(name = "created_at")
+    @Column (name = "created_at")
     private Date createdAt;
 
-    @Column(name = "updated_at")
+    @Column (name = "updated_at")
     private Date updatedAt;
 
-    @OneToMany(mappedBy = "productSize", fetch = FetchType.LAZY)
+    @OneToMany (mappedBy = "productSize", fetch = FetchType.LAZY)
     private Set<ProductDetail> productDetails;
 
-    public ProductSize() {
+    public ProductSize () {
     }
 
-    public Long getId() {
+    public Long getId () {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId (Long id) {
         this.id = id;
     }
 
-    public String getSizeName() {
+    public String getSizeName () {
         return sizeName;
     }
 
-    public void setSizeName(String sizeName) {
+    public void setSizeName (String sizeName) {
         this.sizeName = sizeName;
     }
 
-    public Date getCreatedAt() {
+    public Date getCreatedAt () {
         return createdAt;
     }
 
-    public void setCreatedAt(Date createdAt) {
+    public void setCreatedAt (Date createdAt) {
         this.createdAt = createdAt;
     }
 
-    public Date getUpdatedAt() {
+    public Date getUpdatedAt () {
         return updatedAt;
     }
 
-    public void setUpdatedAt(Date updatedAt) {
+    public void setUpdatedAt (Date updatedAt) {
         this.updatedAt = updatedAt;
     }
 
-    public Set<ProductDetail> getProductDetails() {
+    public Set<ProductDetail> getProductDetails () {
         return productDetails;
     }
 
-    public void setProductDetails(Set<ProductDetail> productDetails) {
+    public void setProductDetails (Set<ProductDetail> productDetails) {
         this.productDetails = productDetails;
     }
 
-    public void addProductDetail(ProductDetail productDetail) {
+    public void addProductDetail (ProductDetail productDetail) {
         if (productDetails == null) {
             productDetails = new HashSet<>();
         }

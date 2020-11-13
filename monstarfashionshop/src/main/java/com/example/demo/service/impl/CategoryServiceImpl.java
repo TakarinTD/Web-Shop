@@ -5,7 +5,6 @@ import com.example.demo.repository.CategoryRepository;
 import com.example.demo.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import javax.transaction.Transactional;
 import java.util.List;
 
@@ -17,7 +16,7 @@ public class CategoryServiceImpl implements CategoryService {
     private CategoryRepository categoryRepository;
 
     @Override
-    public List<Category> getListCategory() {
+    public List<Category> getListCategory () {
         List<Category> listCategory = categoryRepository.findAll();
         return listCategory;
     }
