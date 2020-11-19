@@ -226,5 +226,12 @@
 <script th:src="@{/js/jquery.firstVisitPopup.js}"></script>
 <script th:src="@{/js/custom.js}"></script>
 </body>
-
+<script>
+    $("#search-submit").click(function () {
+        let keyword = $("#search-input").val();
+        if(keyword !== "") {
+            window.location = "/search?keyword=" + keyword + "&page=1&pageSize=6&sortField=salePrice&sortDir=asc";
+        }
+    });
+</script>
 </html>

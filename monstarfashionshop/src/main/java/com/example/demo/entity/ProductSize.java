@@ -1,9 +1,5 @@
 package com.example.demo.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 import javax.persistence.*;
 import java.util.Date;
 import java.util.HashSet;
@@ -11,7 +7,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "product_size")
-public class ProductSize {
+public class ProductSize implements Comparable<ProductSize>{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -77,5 +73,10 @@ public class ProductSize {
             productDetails = new HashSet<>();
         }
         productDetails.add(productDetail);
+    }
+
+    @Override
+    public int compareTo(ProductSize o) {
+        return (int) (this.getId() - o.getId());
     }
 }

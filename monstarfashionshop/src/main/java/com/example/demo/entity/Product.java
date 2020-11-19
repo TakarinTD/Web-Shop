@@ -1,10 +1,6 @@
 package com.example.demo.entity;
 
 import com.fasterxml.jackson.annotation.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -15,7 +11,7 @@ import java.util.Set;
 
 @Entity
 @Table (name = "product")
-@JsonIgnoreProperties (value = {"category", "productDetails", "productDetails"})
+@JsonIgnoreProperties (value = {"category", "productDetails"})
 public class Product {
 
     @Id

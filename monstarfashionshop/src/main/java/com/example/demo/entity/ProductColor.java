@@ -11,7 +11,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "product_color")
-public class ProductColor {
+public class ProductColor implements Comparable<ProductColor> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -88,5 +88,10 @@ public class ProductColor {
             productDetails = new HashSet<>();
         }
         productDetails.add(productDetail);
+    }
+
+    @Override
+    public int compareTo(ProductColor o) {
+        return (int) (this.getId() - o.getId());
     }
 }

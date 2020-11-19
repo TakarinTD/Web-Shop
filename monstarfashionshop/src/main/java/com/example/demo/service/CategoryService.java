@@ -6,6 +6,8 @@ import java.util.List;
 
 public interface CategoryService {
 
+    Category findCategoryByName(String categoryName);
+
     List<Category> getListCategory();
 
 
