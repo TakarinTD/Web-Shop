@@ -36,5 +36,5 @@ build/
 ./monstarfashionshop/.mvn/
 ./monstarfashionshop/target/
 ./monstarfashionshop/mvnw
-.monstarfashionshop/.idea/workspace.xml
+./monstarfashionshop/.idea/workspace.xml
 test.txt
