@@ -23,10 +23,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c5d31d86-e85d-4952-a090-3f5b049355fb" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/repository/ProductRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/repository/ProductRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/service/ProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/service/ProductService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/service/impl/ProductServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/service/impl/ProductServiceImpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,6 +37,7 @@
       <list>
         <option value="Interface" />
         <option value="Class" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -64,7 +64,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$USER_HOME$/IdeaProjects/SpringBootCRUD" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="restartRequiresConfirmation" value="false" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
@@ -90,15 +90,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -131,7 +129,16 @@
       <workItem from="1605059241518" duration="9276000" />
       <workItem from="1605075044244" duration="1337000" />
       <workItem from="1605080141859" duration="7219000" />
-      <workItem from="1605147484522" duration="18934000" />
+      <workItem from="1605147484522" duration="23777000" />
+      <workItem from="1605192339260" duration="6606000" />
+      <workItem from="1605252280866" duration="1886000" />
+      <workItem from="1605577707102" duration="29476000" />
+      <workItem from="1605620602360" duration="13103000" />
+      <workItem from="1605666031425" duration="6816000" />
+      <workItem from="1605679357906" duration="16177000" />
+      <workItem from="1605707019081" duration="12284000" />
+      <workItem from="1605750468760" duration="11349000" />
+      <workItem from="1605764754878" duration="6076000" />
     </task>
     <servers />
   </component>
@@ -151,47 +158,63 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="456" y="0" key="#Auto_Import" timestamp="1604993225706">
+    <state x="456" y="0" key="#Auto_Import" timestamp="1605173810011">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="456" y="0" key="#Auto_Import/0.0.1366.728@0.0.1366.728" timestamp="1604993225706" />
+    <state x="456" y="0" key="#Auto_Import/0.0.1366.728@0.0.1366.728" timestamp="1605173810011" />
     <state x="309" y="42" key="#Inspections" timestamp="1605082753693">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="309" y="42" key="#Inspections/0.0.1366.728@0.0.1366.728" timestamp="1605082753693" />
-    <state x="488" y="70" key="#com.intellij.ide.util.MemberChooser" timestamp="1605169946821">
+    <state x="488" y="70" key="#com.intellij.ide.util.MemberChooser" timestamp="1605712992629">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="488" y="70" key="#com.intellij.ide.util.MemberChooser/0.0.1366.728@0.0.1366.728" timestamp="1605169946821" />
+    <state x="488" y="70" key="#com.intellij.ide.util.MemberChooser/0.0.1366.728@0.0.1366.728" timestamp="1605712992629" />
     <state x="686" y="101" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1050@0.0.1920.1050" timestamp="1605080566322" />
     <state x="413" y="110" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1605024339699">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="413" y="110" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1366.728@0.0.1366.728" timestamp="1605024339699" />
-    <state x="463" y="118" key="FileChooserDialogImpl" timestamp="1605166213813">
+    <state x="463" y="118" key="FileChooserDialogImpl" timestamp="1605605045032">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="463" y="118" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1605166213813" />
-    <state width="1323" height="93" key="GridCell.Tab.0.bottom" timestamp="1605171971015">
+    <state x="463" y="118" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1605605045032" />
+    <state width="1323" height="99" key="GridCell.Tab.0.bottom" timestamp="1605768255858">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="93" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1605171971015" />
+    <state width="1323" height="99" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1605768255858" />
     <state width="1860" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1050@0.0.1920.1050" timestamp="1604980788984" />
-    <state width="1323" height="93" key="GridCell.Tab.0.center" timestamp="1605171971015">
+    <state width="1323" height="99" key="GridCell.Tab.0.center" timestamp="1605768255858">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="93" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1605171971015" />
+    <state width="1323" height="99" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1605768255858" />
     <state width="1860" height="282" key="GridCell.Tab.0.center/0.0.1920.1050@0.0.1920.1050" timestamp="1604980788984" />
-    <state width="1323" height="93" key="GridCell.Tab.0.left" timestamp="1605171971014">
+    <state width="1323" height="99" key="GridCell.Tab.0.left" timestamp="1605768255858">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="93" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1605171971014" />
+    <state width="1323" height="99" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1605768255858" />
     <state width="1860" height="282" key="GridCell.Tab.0.left/0.0.1920.1050@0.0.1920.1050" timestamp="1604980788984" />
-    <state width="1323" height="93" key="GridCell.Tab.0.right" timestamp="1605171971015">
+    <state width="1323" height="99" key="GridCell.Tab.0.right" timestamp="1605768255858">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="93" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1605171971015" />
+    <state width="1323" height="99" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1605768255858" />
     <state width="1860" height="282" key="GridCell.Tab.0.right/0.0.1920.1050@0.0.1920.1050" timestamp="1604980788984" />
+    <state width="1323" height="229" key="GridCell.Tab.1.bottom" timestamp="1605764539513">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="229" key="GridCell.Tab.1.bottom/0.0.1366.728@0.0.1366.728" timestamp="1605764539513" />
+    <state width="1323" height="229" key="GridCell.Tab.1.center" timestamp="1605764539513">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="229" key="GridCell.Tab.1.center/0.0.1366.728@0.0.1366.728" timestamp="1605764539513" />
+    <state width="1323" height="229" key="GridCell.Tab.1.left" timestamp="1605764539513">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="229" key="GridCell.Tab.1.left/0.0.1366.728@0.0.1366.728" timestamp="1605764539513" />
+    <state width="1323" height="229" key="GridCell.Tab.1.right" timestamp="1605764539513">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="229" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1605764539513" />
     <state x="184" y="8" key="SettingsEditor" timestamp="1604995123856">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -201,5 +224,9 @@
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="92" y="92" width="1736" height="866" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1605084187174" />
+    <state x="500" y="277" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1605172713228">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="500" y="277" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1366.728@0.0.1366.728" timestamp="1605172713228" />
   </component>
 </project>

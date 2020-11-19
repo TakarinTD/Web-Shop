@@ -19,7 +19,6 @@ target/
 *.iml
 *.ipr
 *.xml
-.mvn/
 mvnw
 
 ### NetBeans ###
@@ -36,9 +35,5 @@ build/
 .vscode/
 
 .idea/workspace.xml
+C:\Users\nguye\Desktop\Web-Shop\monstarfashionshop\.idea\workspace.xml
 #monstarfashionshop/.idea/
-#monstarfashionshop/.mvn/
-#monstarfashionshop/target/
-#monstarfashionshop/mvnw
-#monstarfashionshop/.idea/workspace.xml
-#test.txt
