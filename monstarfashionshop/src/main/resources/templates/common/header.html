@@ -48,10 +48,10 @@
             <div class="row">
                 <div class="col-xs-12 col-sm-4">
                     <div class="main-search mt_40">
-                        <input id="search-input" name="search" value="" placeholder="Tìm kiếm"
+                        <input id="search-input" name="search" value="" placeholder="Tìm kiếm sản phẩm, danh mục"
                                class="form-control input-lg" autocomplete="off" type="text">
                         <span class="input-group-btn">
-                            <button type="button" class="btn btn-default btn-lg"><i class="fa fa-search"></i></button>
+                            <button id="search-submit" type="button" class="btn btn-default btn-lg"><i class="fa fa-search"></i></button>
                         </span>
                     </div>
                 </div>
@@ -77,9 +77,9 @@
                 </button>
                 <div class="collapse navbar-collapse js-navbar-collapse">
                     <ul id="menu" class="nav navbar-nav">
-                        <li><a href="home.html">Trang chủ</a></li>
-                        <li><a href="women.html">Quần áo nam</a></li>
-                        <li><a href="men.html">Quần áo nữ</a></li>
+                        <li><a th:href="@{/}">Trang chủ</a></li>
+                        <li><a th:href="@{'/category?name=Men&page=1&sortField=salePrice&sortDir=asc&pageSize=6'}">Quần áo nam</a></li>
+                        <li><a th:href="@{'/category?name=Women&page=1&sortField=salePrice&sortDir=asc&pageSize=6'}">Quần áo nữ</a></li>
                         <li><a href="contact_us.html">Liên hệ</a></li>
 
                     </ul>
