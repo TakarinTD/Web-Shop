@@ -7,14 +7,14 @@
                     <ul class="header-top-right text-right">
                         <li>
                             <!--                                if="login==false"-->
-                            <a href="login.html">Login/Register</a>
+                            <a th:href="@{/login}">Login/Register</a>
                         </li>
                         <li>
                             <!--                                if="login==true"-->
-                            <a href="home.html">Logout</a>
+                            <a th:href="@{/home}">Logout</a>
                         </li>
                         <li class="account">
-                            <a href="my_account.html">My Account</a>
+                            <a th:href="@{/my_account}">My Account</a>
                         </li>
                         <li class="language dropdown"><span class="dropdown-toggle" id="dropdownMenu1"
                                                             data-toggle="dropdown" aria-haspopup="true"

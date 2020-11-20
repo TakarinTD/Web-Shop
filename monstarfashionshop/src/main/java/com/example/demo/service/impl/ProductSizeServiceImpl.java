@@ -16,4 +16,5 @@ public class ProductSizeServiceImpl implements ProductSizeService {
     public List<ProductSize> findProductSizes (Long productId) {
         return productSizeRepository.findProductSizes(productId);
     }
+
 }

@@ -1,5 +1,6 @@
 package com.example.demo.entity;
 
+import com.fasterxml.jackson.annotation.*;
 import javax.persistence.*;
 import java.util.Date;
 import java.util.HashSet;
@@ -7,6 +8,7 @@ import java.util.Set;
 
 @Entity
 @Table (name = "product_size")
+@JsonIgnoreProperties (value = "productDetails")
 public class ProductSize {
 
     @Id

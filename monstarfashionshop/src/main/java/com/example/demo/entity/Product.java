@@ -10,7 +10,6 @@ import java.util.Set;
 
 @Entity
 @Table (name = "product")
-@JsonIgnoreProperties (value = {"category", "productDetails", "productDetails"})
 public class Product {
 
     @Id

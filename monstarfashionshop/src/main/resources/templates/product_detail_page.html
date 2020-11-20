@@ -26,6 +26,7 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/css/magnific-popup.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/css/owl.carousel.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/jquery-ui.css}">
     <link rel="shortcut icon" th:href="@{/images/favicon.png}">
 </head>
 
@@ -88,18 +89,6 @@
                                     <div class="caption product-detail">
                                         <h6 class="product-name"><a href="#">New LCDScreen and HD Video Recording</a>
                                         </h6>
-                                        <div class="rating">
-                                            <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i><i
-                                                    class="fa fa-star fa-stack-1x"></i></span>
-                                            <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i><i
-                                                    class="fa fa-star fa-stack-1x"></i></span>
-                                            <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i><i
-                                                    class="fa fa-star fa-stack-1x"></i></span>
-                                            <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i><i
-                                                    class="fa fa-star fa-stack-1x"></i></span>
-                                            <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i><i
-                                                    class="fa fa-star fa-stack-x"></i></span>
-                                        </div>
                                         <span class="price"><span class="amount"><span class="currencySymbol">$</span>70.00</span>
                       </span>
                                     </div>
@@ -127,9 +116,10 @@
                         </div>
                     </div>
                     <div class="col-md-6 prodetail caption product-thumb">
-                        <h4 data-name="product_name" class="product-name"><a href="#"
-                                                                             title="${product.productName}"
-                                                                             th:utext="${product.productName}"></a></h4>
+                        <h4 data-name="product_name" class="product-name"><a
+                                th:href="@{/product_detail_page/{id}(id=${product.id})}"
+                                title="${product.productName}"
+                                th:utext="${product.productName}"></a></h4>
                         <span class="price mb_20">$<span class="amount" th:utext="${product.purchasePrice}"><span
                                 class="currencySymbol"></span></span>
               </span>
@@ -141,33 +131,35 @@
                         </ul>
                         <hr>
                         <p class="product-desc mtb_30" th:utext="${product.description}"></p>
+                        <input name="productId" th:value="${product.id}" id="productId" hidden/>
                         <div id="product">
                             <div class="form-group">
                                 <div class="row">
                                     <div class="Color col-md-6">
-                                        <label>Color</label>
-                                        <select name="product_color" id="select-by-color"
+                                        <label>Màu sắc</label>
+                                        <select name="colorId" id="select-by-color"
                                                 class="selectpicker form-control">
-                                            <option th:each="color: ${colors}" th:utext="${color.colorName}"></option>
+                                            <option th:each="color: ${colors}" th:utext="${color.colorName}"
+                                                    th:value=${color.id}></option>
                                         </select>
                                     </div>
                                     <div class="Sort-by col-md-6">
                                         <label>Kích thước</label>
-                                        <select name="product_size" id="select-by-size"
+                                        <select name="sizeId" id="select-by-size"
                                                 class="selectpicker form-control">
-                                            <option th:each="size: ${sizes}" th:utext="${size.sizeName}"></option>
+                                            <option th:each="size: ${sizes}" th:utext="${size.sizeName}"
+                                                    th:value=${size.id}></option>
                                         </select>
                                     </div>
                                 </div>
                             </div>
                             <div class="qty mt_30 form-group2">
                                 <label>Số lượng</label>
-                                <input name="product_quantity" min="1" value="1" type="number">
+                                <input id="product_quantity" min="1" th:value="1" type="number">
                             </div>
+                            <input id="quantity" th:value="${quantity}">
                             <div class="button-group mt_30">
-                                <div class="add-to-cart"><a href="#"><span>Add to cart</span></a></div>
-                                <div class="wishlist"><a href="#"><span>wishlist</span></a></div>
-                                <div class="compare"><a href="#"><span>Compare</span></a></div>
+                                <button type="submit" class="btn add-to-cart" id="btnAddToCart"></button>
                             </div>
                         </div>
                     </div>
@@ -253,9 +245,7 @@
                                                 th:src="@{/images/product/product7-1.jpg}" alt="iPod Classic"
                                                 title="iPod Classic" class="img-responsive"> </a>
                                             <div class="button-group text-center">
-                                                <div class="wishlist"><a href="#"><span>wishlist</span></a></div>
                                                 <div class="quickview"><a href="#"><span>Quick View</span></a></div>
-                                                <div class="compare"><a href="#"><span>Compare</span></a></div>
                                                 <div class="add-to-cart"><a href="#"><span>Add to cart</span></a></div>
                                             </div>
                                         </div>
@@ -263,18 +253,6 @@
                                             <h6 data-name="product_name" class="product-name mt_20"><a href="#"
                                                                                                        title="Casual Shirt With Ruffle Hem">New
                                                 LCDScreen and HD Video Recording</a></h6>
-                                            <div class="rating">
-                                                <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i><i
-                                                        class="fa fa-star fa-stack-1x"></i></span>
-                                                <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i><i
-                                                        class="fa fa-star fa-stack-1x"></i></span>
-                                                <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i><i
-                                                        class="fa fa-star fa-stack-1x"></i></span>
-                                                <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i><i
-                                                        class="fa fa-star fa-stack-1x"></i></span>
-                                                <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i><i
-                                                        class="fa fa-star fa-stack-x"></i></span>
-                                            </div>
                                             <span class="price"><span class="amount"><span
                                                     class="currencySymbol">$</span>70.00</span>
                         </span>
@@ -289,9 +267,7 @@
                                                 th:src="@{/images/product/product8-1.jpg}" alt="iPod Classic"
                                                 title="iPod Classic" class="img-responsive"> </a>
                                             <div class="button-group text-center">
-                                                <div class="wishlist"><a href="#"><span>wishlist</span></a></div>
                                                 <div class="quickview"><a href="#"><span>Quick View</span></a></div>
-                                                <div class="compare"><a href="#"><span>Compare</span></a></div>
                                                 <div class="add-to-cart"><a href="#"><span>Add to cart</span></a></div>
                                             </div>
                                         </div>
@@ -299,18 +275,6 @@
                                             <h6 data-name="product_name" class="product-name mt_20"><a href="#"
                                                                                                        title="Casual Shirt With Ruffle Hem">New
                                                 LCDScreen and HD Video Recording</a></h6>
-                                            <div class="rating">
-                                                <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i><i
-                                                        class="fa fa-star fa-stack-1x"></i></span>
-                                                <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i><i
-                                                        class="fa fa-star fa-stack-1x"></i></span>
-                                                <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i><i
-                                                        class="fa fa-star fa-stack-1x"></i></span>
-                                                <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i><i
-                                                        class="fa fa-star fa-stack-1x"></i></span>
-                                                <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i><i
-                                                        class="fa fa-star fa-stack-x"></i></span>
-                                            </div>
                                             <span class="price"><span class="amount"><span
                                                     class="currencySymbol">$</span>70.00</span>
                         </span>
@@ -325,9 +289,7 @@
                                                 th:src="@{/images/product/product9-1.jpg}" alt="iPod Classic"
                                                 title="iPod Classic" class="img-responsive"> </a>
                                             <div class="button-group text-center">
-                                                <div class="wishlist"><a href="#"><span>wishlist</span></a></div>
                                                 <div class="quickview"><a href="#"><span>Quick View</span></a></div>
-                                                <div class="compare"><a href="#"><span>Compare</span></a></div>
                                                 <div class="add-to-cart"><a href="#"><span>Add to cart</span></a></div>
                                             </div>
                                         </div>
@@ -335,18 +297,6 @@
                                             <h6 data-name="product_name" class="product-name mt_20"><a href="#"
                                                                                                        title="Casual Shirt With Ruffle Hem">New
                                                 LCDScreen and HD Video Recording</a></h6>
-                                            <div class="rating">
-                                                <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i><i
-                                                        class="fa fa-star fa-stack-1x"></i></span>
-                                                <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i><i
-                                                        class="fa fa-star fa-stack-1x"></i></span>
-                                                <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i><i
-                                                        class="fa fa-star fa-stack-1x"></i></span>
-                                                <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i><i
-                                                        class="fa fa-star fa-stack-1x"></i></span>
-                                                <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i><i
-                                                        class="fa fa-star fa-stack-x"></i></span>
-                                            </div>
                                             <span class="price"><span class="amount"><span
                                                     class="currencySymbol">$</span>70.00</span>
                         </span>
@@ -397,6 +347,8 @@
 <script th:src="@{/js/bootstrap.min.js}"></script>
 <script th:src="@{/js/jquery.magnific-popup.js}"></script>
 <script th:src="@{/js/custom.js}"></script>
+<script language="javascript">
+</script>
 </body>
 
 </html>
