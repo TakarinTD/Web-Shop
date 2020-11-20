@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.List;
 
 @Controller
-@RequestMapping("/")
+@RequestMapping ("/")
 public class HomeController {
 
     @Autowired
@@ -23,7 +23,7 @@ public class HomeController {
     private ProductServiceImpl productService;
 
     @GetMapping
-    public String viewHome(Model model) {
+    public String viewHome (Model model) {
         List<Category> listCategory = categoryService.getListCategory();
         List<ProductDTO> listProductMen = productService.getProductsByCategoryId(16);
         List<ProductDTO> listProductWomen = productService.getProductsByCategoryId(1);
