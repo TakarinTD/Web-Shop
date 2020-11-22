@@ -23,31 +23,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="123f3a3e-8e82-4b32-9c10-edbbb700c956" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/monstarfashionshop/src/main/java/com/example/demo/controller/CartController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/monstarfashionshop/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/monstarfashionshop/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/monstarfashionshop/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/monstarfashionshop/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/monstarfashionshop/src/main/java/com/example/demo/MonstarfashionshopApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/monstarfashionshop/src/main/java/com/example/demo/MonstarfashionshopApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/monstarfashionshop/src/main/java/com/example/demo/controller/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/monstarfashionshop/src/main/java/com/example/demo/controller/ProductController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/monstarfashionshop/src/main/java/com/example/demo/entity/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/monstarfashionshop/src/main/java/com/example/demo/entity/Product.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/monstarfashionshop/src/main/java/com/example/demo/entity/ProductColor.java" beforeDir="false" afterPath="$PROJECT_DIR$/monstarfashionshop/src/main/java/com/example/demo/entity/ProductColor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/monstarfashionshop/src/main/java/com/example/demo/entity/ProductSize.java" beforeDir="false" afterPath="$PROJECT_DIR$/monstarfashionshop/src/main/java/com/example/demo/entity/ProductSize.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/monstarfashionshop/src/main/java/com/example/demo/repository/ProductColorRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/monstarfashionshop/src/main/java/com/example/demo/repository/ProductColorRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/monstarfashionshop/src/main/java/com/example/demo/repository/ProductDetailRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/monstarfashionshop/src/main/java/com/example/demo/repository/ProductDetailRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/monstarfashionshop/src/main/java/com/example/demo/repository/ProductSizeRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/monstarfashionshop/src/main/java/com/example/demo/repository/ProductSizeRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/monstarfashionshop/src/main/java/com/example/demo/service/ProductColorService.java" beforeDir="false" afterPath="$PROJECT_DIR$/monstarfashionshop/src/main/java/com/example/demo/service/ProductColorService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/monstarfashionshop/src/main/java/com/example/demo/service/ProductDetailService.java" beforeDir="false" afterPath="$PROJECT_DIR$/monstarfashionshop/src/main/java/com/example/demo/service/ProductDetailService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/monstarfashionshop/src/main/java/com/example/demo/service/impl/ProductColorServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/monstarfashionshop/src/main/java/com/example/demo/service/impl/ProductColorServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/monstarfashionshop/src/main/java/com/example/demo/service/impl/ProductDetailServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/monstarfashionshop/src/main/java/com/example/demo/service/impl/ProductDetailServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/monstarfashionshop/src/main/java/com/example/demo/service/impl/ProductSizeServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/monstarfashionshop/src/main/java/com/example/demo/service/impl/ProductSizeServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/monstarfashionshop/src/main/resources/templates/cart.html" beforeDir="false" afterPath="$PROJECT_DIR$/monstarfashionshop/src/main/resources/templates/cart.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/monstarfashionshop/src/main/resources/templates/category.html" beforeDir="false" afterPath="$PROJECT_DIR$/monstarfashionshop/src/main/resources/templates/category.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/monstarfashionshop/src/main/resources/templates/checkout.html" beforeDir="false" afterPath="$PROJECT_DIR$/monstarfashionshop/src/main/resources/templates/checkout.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/monstarfashionshop/src/main/resources/templates/common/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/monstarfashionshop/src/main/resources/templates/common/header.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/monstarfashionshop/src/main/resources/templates/contact_us.html" beforeDir="false" afterPath="$PROJECT_DIR$/monstarfashionshop/src/main/resources/templates/contact_us.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/monstarfashionshop/src/main/resources/templates/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/monstarfashionshop/src/main/resources/templates/home.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/monstarfashionshop/src/main/resources/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/monstarfashionshop/src/main/resources/templates/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/monstarfashionshop/src/main/resources/templates/my_account.html" beforeDir="false" afterPath="$PROJECT_DIR$/monstarfashionshop/src/main/resources/templates/my_account.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/monstarfashionshop/src/main/resources/templates/product_detail_page.html" beforeDir="false" afterPath="$PROJECT_DIR$/monstarfashionshop/src/main/resources/templates/product_detail_page.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -133,6 +109,10 @@
     </state>
     <state x="574" y="124" key="#com.intellij.ide.util.MemberChooser/0.0.1536.834@0.0.1536.834" timestamp="1605596345954" />
     <state x="718" y="155" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1605608333821" />
+    <state x="92" y="92" width="1736" height="856" key="DiffContextDialog" timestamp="1605832777273">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="92" y="92" width="1736" height="856" key="DiffContextDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1605832777273" />
     <state width="1877" height="265" key="GridCell.Tab.0.bottom" timestamp="1605781947422">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

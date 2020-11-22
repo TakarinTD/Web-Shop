@@ -3,7 +3,6 @@ package com.example.demo.entity;
 import com.fasterxml.jackson.annotation.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-
 import javax.persistence.*;
 import java.util.Date;
 import java.util.HashSet;
@@ -11,7 +10,6 @@ import java.util.Set;
 
 @Entity
 @Table (name = "product")
-@JsonIgnoreProperties (value = {"category", "productDetails"})
 public class Product {
 
     @Id
@@ -72,8 +70,8 @@ public class Product {
     public void setProductName (String productName) {
         this.productName = productName;
     }
-  
-    public float getPurchasePrice() {
+
+    public float getPurchasePrice () {
         return purchasePrice;
     }
 
@@ -137,16 +135,16 @@ public class Product {
         this.promotions = promotions;
     }
 
-    public String getImage() {
+    public String getImage () {
         return image;
     }
 
-    public void setImage(String image) {
+    public void setImage (String image) {
         this.image = image;
     }
 
-    public void addProductDetail(ProductDetail productDetail) {
-        if(productDetails == null) {
+    public void addProductDetail (ProductDetail productDetail) {
+        if (productDetails == null) {
             productDetails = new HashSet<>();
         }
         productDetails.add(productDetail);
