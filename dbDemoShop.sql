@@ -61,7 +61,7 @@ CREATE TABLE `category` (
 
 LOCK TABLES `category` WRITE;
 /*!40000 ALTER TABLE `category` DISABLE KEYS */;
-INSERT INTO `category` VALUES (1,'SmartPhone',NULL,NULL),(16,'Men',NULL,NULL);
+INSERT INTO `category` VALUES (1,'Women',NULL,NULL),(16,'Men',NULL,NULL);
 /*!40000 ALTER TABLE `category` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -109,7 +109,7 @@ CREATE TABLE `order_detail` (
   KEY `fk_order_detail_product_detail1_idx` (`product_detail_id`),
   CONSTRAINT `fk_order_detail_order1` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`),
   CONSTRAINT `fk_order_detail_product_detail1` FOREIGN KEY (`product_detail_id`) REFERENCES `product_detail` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -118,7 +118,7 @@ CREATE TABLE `order_detail` (
 
 LOCK TABLES `order_detail` WRITE;
 /*!40000 ALTER TABLE `order_detail` DISABLE KEYS */;
-INSERT INTO `order_detail` VALUES (1,7,9,0,0),(2,8,9,0,0);
+INSERT INTO `order_detail` VALUES (1,7,9,0,0),(2,8,9,0,0),(3,9,9,0,0),(4,10,9,0,0);
 /*!40000 ALTER TABLE `order_detail` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -143,7 +143,7 @@ CREATE TABLE `orders` (
   PRIMARY KEY (`id`),
   KEY `fk_order_user1_idx` (`user_id`),
   CONSTRAINT `fk_order_user1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -152,7 +152,7 @@ CREATE TABLE `orders` (
 
 LOCK TABLES `orders` WRITE;
 /*!40000 ALTER TABLE `orders` DISABLE KEYS */;
-INSERT INTO `orders` VALUES (1,1,'Phạm Nguyên',NULL,NULL,NULL,NULL,NULL,NULL,NULL),(2,1,'Nguyễn Văn A',NULL,NULL,NULL,NULL,NULL,NULL,NULL),(3,1,'Nguyễn Quỳnh',NULL,NULL,NULL,NULL,NULL,NULL,NULL),(4,2,'Nguyễn Quỳnh','Hà Nội',NULL,0,0,'0',NULL,NULL),(5,2,'Nguyễn Quỳnh Anh','Hà Nội',NULL,0,0,'0',NULL,NULL),(7,2,'Nguyễn Quỳnh Anh','Hà Nội',NULL,0,0,'0',NULL,NULL),(8,NULL,'Nguyễn Quỳnh Anh','Hà Nội',NULL,0,0,'0',NULL,NULL);
+INSERT INTO `orders` VALUES (1,1,'Phạm Nguyên',NULL,NULL,NULL,NULL,NULL,NULL,NULL),(2,1,'Nguyễn Văn A',NULL,NULL,NULL,NULL,NULL,NULL,NULL),(3,1,'Nguyễn Quỳnh',NULL,NULL,NULL,NULL,NULL,NULL,NULL),(4,2,'Nguyễn Quỳnh','Hà Nội',NULL,0,0,'0',NULL,NULL),(5,2,'Nguyễn Quỳnh Anh','Hà Nội',NULL,0,0,'0',NULL,NULL),(7,2,'Nguyễn Quỳnh Anh','Hà Nội',NULL,0,0,'0',NULL,NULL),(8,NULL,'Nguyễn Quỳnh Anh','Hà Nội',NULL,0,0,'0',NULL,NULL),(9,NULL,'Nguyễn Quỳnh Anh','Hà Nội',NULL,0,0,'0',NULL,NULL),(10,NULL,'Nguyễn Quỳnh Anh','Hà Nội',NULL,0,0,'0',NULL,NULL);
 /*!40000 ALTER TABLE `orders` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -176,7 +176,7 @@ CREATE TABLE `product` (
   PRIMARY KEY (`id`),
   KEY `fk_product_category1_idx` (`category_id`),
   CONSTRAINT `fk_product_category1` FOREIGN KEY (`category_id`) REFERENCES `category` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -185,7 +185,7 @@ CREATE TABLE `product` (
 
 LOCK TABLES `product` WRITE;
 /*!40000 ALTER TABLE `product` DISABLE KEYS */;
-INSERT INTO `product` VALUES (1,1,'iphone','iphone.jpg',1000,1200,NULL,NULL,NULL),(15,16,'Áo phông',NULL,0,0,NULL,'2020-11-10 15:13:22','2020-11-10 15:13:22');
+INSERT INTO `product` VALUES (1,1,'iphone','product1.jpg',1000,1200,'CLorem ipsum dolor sit amet, consectetur adipiscing elit. Ut lobortis malesuada mi id tristique. Sed ipsum nisi, dapibus at faucibus non, dictum a diam. Nunc vitae interdum diam. Sed finibus, justo vel maximus facilisis, sapien turpis euismod tellus, vulputate semper diam ipsum vel tellus.',NULL,NULL),(15,16,'Áo phông','product1.jpg',1000,12000,'Sản phẩm mới nhất, rất chất lượng','2020-11-10 15:13:22','2020-11-10 15:13:22'),(16,1,'SamSung','product1.jpg',1000,12000,'Sản phẩm mới nhất, rất chất lượng',NULL,NULL),(17,1,'Áo dạ hội','product1.jpg',1000,12000,'Sản phẩm mới nhất, rất chất lượng',NULL,NULL),(18,1,'Áo dài','product1.jpg',1000,12000,'Sản phẩm mới nhất, rất chất lượng',NULL,NULL),(19,1,'Váy dạ hội','product1.jpg',1000,12000,'Sản phẩm mới nhất, rất chất lượng',NULL,NULL),(20,1,'Váy','product1.jpg',1000,12000,'Sản phẩm mới nhất, rất chất lượng',NULL,NULL),(21,1,'Váy','product1.jpg',1000,12000,'Sản phẩm mới nhất, rất chất lượng',NULL,NULL),(22,1,'Váy','product1.jpg',10000,12000,'Sản phẩm mới nhất, rất chất lượng',NULL,NULL),(23,1,'Váy','product1.jpg',10000,12000,'Sản phẩm mới nhất, rất chất lượng',NULL,NULL),(25,16,'Áo vest tây','product3-1.jpg',10000,12001,'Sản phẩm mới nhất, rất chất lượng',NULL,NULL),(26,16,'Áo dạ mùa đông','product3-1.jpg',10000,12002,'Sản phẩm mới nhất, rất chất lượng',NULL,NULL),(27,16,'Áo vest tây','product3-1.jpg',10000,12003,'Sản phẩm mới nhất, rất chất lượng',NULL,NULL),(28,16,'Áo dạ mùa đông','product3-1.jpg',10000,12004,'Sản phẩm mới nhất, rất chất lượng',NULL,NULL),(29,16,'Áo vest tây','product3-1.jpg',10000,12005,'Sản phẩm mới nhất, rất chất lượng',NULL,NULL),(30,16,'Áo dạ mùa đông','product3-1.jpg',10000,12006,'Sản phẩm mới nhất, rất chất lượng',NULL,NULL),(31,16,'Áo vest tây','product3-1.jpg',10000,12004,'Sản phẩm mới nhất, rất chất lượng',NULL,NULL),(32,16,'Áo dạ mùa đông','product3-1.jpg',10000,12003,'Sản phẩm mới nhất, rất chất lượng',NULL,NULL),(33,16,'Áo vest tây','product3-1.jpg',10000,12012,'Sản phẩm mới nhất, rất chất lượng',NULL,NULL),(34,16,'Áo dạ mùa đông','product3-1.jpg',10000,12000,'Sản phẩm mới nhất, rất chất lượng',NULL,NULL),(35,16,'Áo vest tây','product3-1.jpg',10000,11000,'Sản phẩm mới nhất, rất chất lượng',NULL,NULL),(36,16,'Áo dạ mùa đông','product3-1.jpg',10000,12009,'Sản phẩm mới nhất, rất chất lượng',NULL,NULL),(37,16,'Áo vest tây','product3-1.jpg',10000,12008,'Sản phẩm mới nhất, rất chất lượng',NULL,NULL),(38,16,'Áo dạ mùa đông','product3-1.jpg',10000,12004,'Sản phẩm mới nhất, rất chất lượng',NULL,NULL),(39,16,'Áo dạ mùa đông','product3-1.jpg',10000,11400,'Sản phẩm mới nhất, rất chất lượng',NULL,NULL),(40,16,'Áo dạ mùa đông','product3-1.jpg',10000,12006,'Sản phẩm mới nhất, rất chất lượng',NULL,NULL),(41,16,'Áo dạ mùa đông','product3-1.jpg',10000,12007,'Sản phẩm mới nhất, rất chất lượng',NULL,NULL),(42,16,'Áo vest tây','product3-1.jpg',10000,13000,'Sản phẩm mới nhất, rất chất lượng',NULL,NULL),(43,16,'Áo vest tây','product3-1.jpg',10000,12004,'Sản phẩm mới nhất, rất chất lượng',NULL,NULL),(44,16,'Áo vest tây','product3-1.jpg',10000,12504,'Sản phẩm mới nhất, rất chất lượng',NULL,NULL),(45,16,'Áo vest tây','product3-1.jpg',10000,12006,'Sản phẩm mới nhất, rất chất lượng',NULL,NULL),(46,16,'Áo dạ mùa đông','product3-1.jpg',10000,12002,'Sản phẩm mới nhất, rất chất lượng',NULL,NULL),(47,16,'Áo dạ mùa đông','product3-1.jpg',10000,12111,'Sản phẩm mới nhất, rất chất lượng',NULL,NULL);
 /*!40000 ALTER TABLE `product` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -227,7 +227,7 @@ CREATE TABLE `product_detail` (
   `product_id` int NOT NULL,
   `product_color_id` int NOT NULL,
   `product_size_id` int NOT NULL,
-  `quantity_available` int DEFAULT NULL,
+  `image` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`,`product_id`,`product_color_id`,`product_size_id`),
   KEY `fk_product_detail_product_color1_idx` (`product_color_id`),
   KEY `fk_product_detail_product_size1_idx` (`product_size_id`),
@@ -235,7 +235,7 @@ CREATE TABLE `product_detail` (
   CONSTRAINT `fk_product_detail_product1` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`),
   CONSTRAINT `fk_product_detail_product_color1` FOREIGN KEY (`product_color_id`) REFERENCES `product_color` (`id`),
   CONSTRAINT `fk_product_detail_product_size1` FOREIGN KEY (`product_size_id`) REFERENCES `product_size` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=72 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -244,7 +244,7 @@ CREATE TABLE `product_detail` (
 
 LOCK TABLES `product_detail` WRITE;
 /*!40000 ALTER TABLE `product_detail` DISABLE KEYS */;
-INSERT INTO `product_detail` VALUES (3,1,1,1,5),(8,1,1,2,6),(9,1,1,3,5);
+INSERT INTO `product_detail` VALUES (3,1,1,1,'product1.jpg'),(8,1,1,2,'product1.jpg'),(9,1,1,3,'product1.jpg'),(18,15,1,2,'product1.jpg'),(19,15,1,3,'product3-1.jpg'),(20,15,2,1,'product9.jpg'),(21,15,2,2,'product3-1.jpg'),(22,15,2,3,'product3-1.jpg'),(23,15,1,1,'product3-1.jpg'),(24,16,1,1,'product9.jpg'),(25,16,1,2,'product9.jpg'),(26,16,1,3,'product9.jpg'),(27,16,2,1,'product9.jpg'),(28,16,2,2,'product9.jpg'),(29,16,2,3,'product9.jpg'),(30,17,1,1,'product9.jpg'),(31,17,1,2,'product9.jpg'),(32,17,1,3,'product9.jpg'),(33,18,1,1,'product9.jpg'),(34,19,1,1,'product9.jpg'),(35,20,1,1,'product9.jpg'),(36,21,1,1,'product9.jpg'),(37,22,1,1,'product3-1.jpg'),(45,23,1,1,'product3-1.jpg'),(46,25,1,1,'product3-1.jpg'),(47,26,1,1,'product3-1.jpg'),(48,27,1,1,'product3-1.jpg'),(49,28,1,1,'product3-1.jpg'),(50,29,1,1,'product3-1.jpg'),(51,25,1,2,'product3-1.jpg'),(52,26,1,2,'product3-1.jpg'),(53,27,1,2,'product3-1.jpg'),(54,28,1,2,'product3-1.jpg'),(55,29,1,2,'product3-1.jpg'),(56,30,1,1,'product3-1.jpg'),(57,31,1,1,'product3-1.jpg'),(58,32,1,1,'product3-1.jpg'),(59,33,1,1,'product3-1.jpg'),(60,34,1,1,'product3-1.jpg'),(61,35,1,1,'product3-1.jpg'),(62,36,1,1,'product3-1.jpg'),(63,37,1,1,'product3-1.jpg'),(64,38,1,1,'product3-1.jpg'),(65,39,1,1,'product3-1.jpg'),(66,1,2,1,'product3-1.jpg'),(67,1,2,3,'product3-1.jpg'),(68,1,2,2,'product3-1.jpg'),(69,1,3,1,'product3-1.jpg'),(70,1,3,2,'product3-1.jpg'),(71,1,3,3,'product3-1.jpg');
 /*!40000 ALTER TABLE `product_detail` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -414,6 +414,33 @@ LOCK TABLES `user_role` WRITE;
 INSERT INTO `user_role` VALUES (1,1),(2,1),(1,2);
 /*!40000 ALTER TABLE `user_role` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `warehouse`
+--
+
+DROP TABLE IF EXISTS `warehouse`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `warehouse` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `product_detail_id` int NOT NULL,
+  `quantity_available` int DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_warehouse_product_detail1_idx` (`product_detail_id`),
+  CONSTRAINT `fk_warehouse_product_detail1` FOREIGN KEY (`product_detail_id`) REFERENCES `product_detail` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `warehouse`
+--
+
+LOCK TABLES `warehouse` WRITE;
+/*!40000 ALTER TABLE `warehouse` DISABLE KEYS */;
+INSERT INTO `warehouse` VALUES (1,3,5),(2,8,6),(3,9,7),(4,18,4),(5,19,3),(6,20,2),(7,21,8),(8,22,4),(9,23,6),(10,24,7),(11,25,3),(12,26,1),(13,27,6),(14,28,8),(15,29,3),(16,30,45),(17,31,6),(18,32,4),(19,33,8),(20,34,3),(21,35,4),(22,36,8),(23,37,3),(24,45,4),(25,46,5),(26,47,6),(27,48,7),(28,49,9),(29,50,2),(30,51,1),(31,52,3),(32,53,4),(33,54,5),(34,55,6),(35,56,7),(36,57,6),(37,58,4),(38,59,3),(39,60,5),(40,61,9),(41,62,7),(42,63,8),(43,64,6),(44,65,4),(45,66,2),(46,67,3),(47,68,1),(48,69,4),(49,70,9),(50,71,4);
+/*!40000 ALTER TABLE `warehouse` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -424,4 +451,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-11-11 10:48:53
+-- Dump completed on 2020-11-23 23:24:14
