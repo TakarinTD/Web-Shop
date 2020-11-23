@@ -1,0 +1,94 @@
+<!-- =====  HEADER START  ===== -->
+<header id="header">
+    <div class="header-top">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12">
+                    <ul class="header-top-right text-right">
+                        <li>
+                            <!--                                if="login==false"-->
+                            <a href="login.html">Login/Register</a>
+                        </li>
+                        <li>
+                            <!--                                if="login==true"-->
+                            <a href="home.html">Logout</a>
+                        </li>
+                        <li class="account">
+                            <a href="my_account.html">My Account</a>
+                        </li>
+                        <li class="language dropdown"><span class="dropdown-toggle" id="dropdownMenu1"
+                                                            data-toggle="dropdown" aria-haspopup="true"
+                                                            aria-expanded="false" role="button">Language <span
+                                class="caret"></span> </span>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                <li><a href="#">English</a></li>
+                                <li><a href="#">French</a></li>
+                                <li><a href="#">German</a></li>
+                                <li><a href="#">Vietnam</a></li>
+                            </ul>
+                        </li>
+                        <li class="currency dropdown"><span class="dropdown-toggle" id="dropdownMenu12"
+                                                            data-toggle="dropdown" aria-haspopup="true"
+                                                            aria-expanded="false" role="button">Currency <span
+                                class="caret"></span> </span>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu12">
+                                <li><a href="#">€ Euro</a></li>
+                                <li><a href="#">£ Pound Sterling</a></li>
+                                <li><a href="#">$ US Dollar</a></li>
+                                <li><a href="#">₫ VND</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="header">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-4">
+                    <div class="main-search mt_40">
+                        <input id="search-input" name="search" value="" placeholder="Tìm kiếm sản phẩm, danh mục"
+                               class="form-control input-lg" autocomplete="off" type="text">
+                        <span class="input-group-btn">
+                            <button id="search-submit" type="button" class="btn btn-default btn-lg"><i class="fa fa-search"></i></button>
+                        </span>
+                    </div>
+                </div>
+                <div class="navbar-header col-xs-6 col-sm-4">
+                    <a class="navbar-brand" href="home.html">
+                    <img alt="MonstarFashionShop" th:src="@{/images/logo.png}">
+                    </a>
+                </div>
+                <div class="col-xs-6 col-sm-4 shopcart">
+                    <div id="cart" class="btn-group btn-block mtb_40">
+                        <button type="button" class="btn" data-target="#cart-dropdown" data-toggle="collapse" aria-expanded="true">
+                            <span id="shoppingcart">Giỏ hàng</span>
+                            <span id="cart-total">Số mặt hàng
+                                <span id="cart-size" th:if="${session.cart}" th:utext="${'(' + session.cart.size() +')'}"></span>
+                                <span id="cart-size" th:unless="${session.cart}">(0)</span>
+                            </span>
+                        </button>
+                    </div>
+                    <div id="cart-dropdown" class="cart-menu collapse">Empty!
+                    </div>
+                </div>
+            </div>
+            <nav class="navbar">
+                <p>Menu</p>
+                <button class="navbar-toggle" type="button" data-toggle="collapse"
+                        data-target=".js-navbar-collapse"><span class="i-bar"><i class="fa fa-bars"></i></span>
+                </button>
+                <div class="collapse navbar-collapse js-navbar-collapse">
+                    <ul id="menu" class="nav navbar-nav">
+                        <li><a th:href="@{/}">Trang chủ</a></li>
+                        <li><a th:href="@{'/category?name=Men&page=1&sortField=salePrice&sortDir=asc&pageSize=6'}">Quần áo nam</a></li>
+                        <li><a th:href="@{'/category?name=Women&page=1&sortField=salePrice&sortDir=asc&pageSize=6'}">Quần áo nữ</a></li>
+                        <li><a href="contact_us.html">Liên hệ</a></li>
+
+                    </ul>
+                </div>
+                <!-- /.nav-collapse -->
+            </nav>
+        </div>
+    </div>

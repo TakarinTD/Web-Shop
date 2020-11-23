@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<!--[if (gte IE 9)|!(IE)]><!-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!--<![endif]-->
+
+<head>
+    <!-- =====  BASIC PAGE NEEDS  ===== -->
+    <meta charset="utf-8">
+    <title>Cart</title>
+    <!-- =====  SEO MATE  ===== -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="distribution" content="global">
+    <meta name="revisit-after" content="2 Days">
+    <meta name="robots" content="ALL">
+    <meta name="rating" content="8 YEARS">
+    <meta name="Language" content="en-us">
+    <meta name="GOOGLEBOT" content="NOARCHIVE">
+    <!-- =====  MOBILE SPECIFICATION  ===== -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="viewport" content="width=device-width">
+    <!-- =====  CSS  ===== -->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/font-awesome.min.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/magnific-popup.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/owl.carousel.css}">
+    <link rel="shortcut icon" th:href="@{/images/favicon.png}">
+</head>
+
+<body>
+<!-- =====  LOADER  ===== -->
+<!--<div class="loader"></div>-->
+<div class="wrapper">
+    <div id="subscribe-me" class="modal animated fade in" role="dialog" data-keyboard="true" tabindex="-1">
+        <div class="newsletter-popup"><img class="offer" th:src="@{/images/newsbg.jpg}" alt="offer">
+            <div class="newsletter-popup-static newsletter-popup-top">
+                <div class="popup-text">
+                    <div class="popup-title">50% <span>off</span></div>
+                    <div class="popup-desc">
+                        <div>Sign up and get 50% off your next Order</div>
+                    </div>
+                </div>
+                <form onsubmit="return  validatpopupemail();" method="post">
+                    <div class="form-group required">
+                        <input type="email" name="email-popup" id="email-popup" placeholder="Enter Your Email"
+                               class="form-control input-lg" required/>
+                        <button type="submit" class="btn btn-default btn-lg" id="email-popup-submit">Subscribe</button>
+                        <label class="checkme">
+                            <input type="checkbox" value="" id="checkme"/> Don't show again</label>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <th:block th:include="common/header"></th:block>
+    <!-- =====  HEADER END  ===== -->
+    <!-- =====  CONTAINER START  ===== -->
+    <div class="container">
+        <div class="row ">
+            <div id="column-left" class="col-sm-4 col-lg-3 hidden-xs">
+                <th:block th:include="common/category_menu"></th:block>
+                <div class="left_banner left-sidebar-widget mb_50 mt_30"><a href="#">
+                    <img th:src="@{/images/left1.jpg}" alt="Left Banner" class="img-responsive"/></a>
+                </div>
+            </div>
+            <div class="col-sm-8 col-lg-9 mtb_20">
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <td class="text-center" style="width: 15%;">Ảnh</td>
+                            <td class="text-center">Tên sản phẩm</td>
+                            <td class="text-center">Số lượng</td>
+                            <td class="text-center">xóa</td>
+                            <td class="text-center">Đơn giá</td>
+                            <td class="text-right">Tổng</td>
+                        </tr>
+                        </thead>
+                        <tbody id="items-cart">
+                        <th:block th:if="${session.cart}" th:each="item : ${session.cart}">
+                            <tr th:attr="data_productDetail=${item.getKey()}">
+                                <td class="text-center">
+                                    <a th:href="@{'product/' + ${item.getKey()} + '/detail'}">
+                                        <img style="max-height: 100px;"
+                                            th:src="@{'/images/product/' + ${item.getValue().getProductDetail().getImage()}}"
+                                            alt="iPod Classic" title="iPod Classic">
+                                    </a>
+                                </td>
+                                <td class="text-center">
+                                    <a th:href="@{'product/' + ${item.getKey()} + '/detail'}" th:utext="${item.getValue().getProductDetail().getProduct().getProductName()}">
+                                    </a>
+                                    <p>
+                                        <span><strong>Màu sắc : </strong></span><span th:utext="${item.getValue().getProductDetail().getProductColor().getColorName()}"></span>
+                                    </p>
+                                    <p>
+                                        <span><strong>Size : </strong></span><span th:utext="${item.getValue().getProductDetail().getProductSize().getSizeName()}"></span>
+                                    </p>
+                                </td>
+                                <td class="text-center">
+                                    <div style="max-width: 200px; align-items: center;" class="input-group btn-block">
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-danger" data-toggle="tooltip" type="button"
+                                                    data-original-title="bớt">
+                                                -
+                                            </button>
+                                        </span>
+                                        <input type="text" class="form-control quantity"
+                                               th:value="${item.getValue().getQuantitiesProduct()}" name="quantity">
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-danger" data-toggle="tooltip" type="button"
+                                                    data-original-title="thêm">
+                                                +
+                                            </button>
+                                        </span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <button class="btn btn-danger" type="button" data-original-title="xóa">
+                                        <i class="fa fa-times-circle"></i>
+                                    </button>
+                                </td>
+                                <td class="text-center unit-item-price"
+                                    th:utext="${item.getValue().getProductDetail().getProduct().salePrice}"></td>
+                                <td class="text-right total-item-price"
+                                    th:utext="${item.getValue().getTotalProductPay()}"></td>
+                            </tr>
+                        </th:block>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="row">
+                    <div class="col-sm-5 col-sm-offset-7">
+                        <table class="table table-bordered">
+                            <tbody>
+                            <tr>
+                                <td class="text-right"><strong>Tổng các mặt hàng:</strong></td>
+                                <td class="text-right"><span id="total-items-pay" th:utext="${totalPay}"></span></td>
+                            </tr>
+                            <tr>
+                                <td class="text-right"><strong>VAT (20%):</strong></td>
+                                <td class="text-right"><span id="vat" th:utext="${totalPay*0.2}"></span></td>
+                            </tr>
+                            <tr>
+                                <td class="text-right"><strong>Tổng thanh toán:</strong></td>
+                                <td class="text-right"><span id="total-pay" th:utext="${totalPay + totalPay*0.2}"></span></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <button class="btn pull-left mt_30">
+                    <a th:href="@{/}" style="color: white;">Continue Shopping</a>
+                </button>
+                <button class="btn pull-right mt_30">
+                    <a th:href="@{/cart/checkout}" style="color: white;">Checkout</a>
+                </button>
+            </div>
+        </div>
+    </div>
+    <!-- =====  CONTAINER END  ===== -->
+    <!-- =====  FOOTER START  ===== -->
+    <th:block th:include="common/footer"></th:block>
+    <!-- =====  FOOTER END  ===== -->
+</div>
+<div class="chatB">
+    <button class="open-chatbox" onclick="openForm()" id="chat">Chat</button>
+    <div class="Chatbox" id="chatBoxForm">
+        <form action="" class="form-container">
+            <h1><img th:src="@{/images/chatbox.png}" style="width:50px;height:50px"/>Chat with us</h1>
+            <label for="msg"><b>We are here to help you!</b></label>
+            <textarea placeholder="Input message..." id="msg" name="msg" required></textarea>
+            <button type="submit" class="btn">Send</button>
+            <button type="button" class="btn close-chatbox" onclick="closeForm()">Close</button>
+        </form>
+    </div>
+</div>
+<script>
+
+    /*Open chatbox*/
+    function openForm() {
+        document.getElementById("chatBoxForm").style.display = "block";
+        document.getElementById("chat").style.display = "none";
+    }
+
+    /*Close chat box*/
+    function closeForm() {
+        document.getElementById("chatBoxForm").style.display = "none";
+        document.getElementById("chat").style.display = "block";
+    }
+</script>
+<script th:src="@{/js/jQuery_v3.1.1.min.js}"></script>
+<script th:src="@{/js/owl.carousel.min.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/jquery.magnific-popup.js}"></script>
+<script th:src="@{/js/custom.js}"></script>
+<script>
+    $(document).ready(function () {
+        $("button[data-original-title='bớt']").click(function () {
+            let self = $(this);
+            let newQuantity = parseInt(self.parent().siblings("input[name='quantity']").val()) - 1;
+            let idProductDetail = self.closest("tr").attr("data_productDetail");
+            let unitItemPrice = parseFloat(self.closest("tr").children("td.unit-item-price").text());
+            self.closest("tr").find("input[name='quantity']").val(newQuantity);
+            self.closest("tr").children("td.total-item-price").text(parseFloat(unitItemPrice * newQuantity));
+            editItemCart(idProductDetail, newQuantity);
+            caculateTotalCart();
+        });
+
+        $("button[data-original-title='thêm']").click(function () {
+            let self = $(this);
+            let newQuantity = parseInt(self.parent().siblings("input[name='quantity']").val()) + 1;
+            let idProductDetail = self.closest("tr").attr("data_productDetail");
+            let unitItemPrice = parseFloat(self.closest("tr").children("td.unit-item-price").text());
+            self.closest("tr").find("input[name='quantity']").val(newQuantity);
+            self.closest("tr").children("td.total-item-price").text(parseFloat(unitItemPrice * newQuantity));
+            editItemCart(idProductDetail, newQuantity);
+            caculateTotalCart();
+        });
+
+        $("button[data-original-title='xóa']").click(function () {
+            let idProductDetail = $(this).closest("tr").attr("data_productDetail");
+            removeItemCart(idProductDetail);
+            $(this).closest("tr").remove();
+            caculateTotalCart();
+        });
+
+        function caculateTotalCart() {
+            let totalPay = 0.0;
+            $("tbody#items-cart > tr").each(function (index) {
+                totalPay += parseFloat($(this).children("td.total-item-price").text());
+            });
+            $("#total-items-pay").text(totalPay);
+            $("#vat").text(totalPay * 0.2);
+            $("#total-pay").text(totalPay + totalPay * 0.2);
+        }
+
+        function editItemCart(idProductDetail, quantity) {
+            let data = {};
+            data.productDetailId = idProductDetail;
+            data.quantity = quantity;
+            $.ajax({
+                url: "/cart/editItemCart",
+                type: "GET",
+                data: data,
+                dataType: 'json',
+                success: function (result) {
+                },
+                error: function (XMLHttpRequest) {
+                    alert("Đã có lỗi xảy ra");
+                }
+            });
+        }
+
+        function removeItemCart(idProductDetail) {
+            let data = {};
+            data.productDetailId = idProductDetail;
+            $.ajax({
+                url: "/cart/removeItemCart",
+                type: "GET",
+                data: data,
+                dataType: 'json',
+                success: function (cartSize) {
+                    $("#cart-size").text("(" + cartSize + ")");
+                },
+                error: function (XMLHttpRequest) {
+                    alert("Đã có lỗi xảy ra");
+                }
+            });
+        }
+    });
+</script>
+</body>
+</html>
