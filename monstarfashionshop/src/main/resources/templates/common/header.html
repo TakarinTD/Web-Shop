@@ -1,6 +1,5 @@
-
 <!-- =====  HEADER START  ===== -->
-<header id="header" >
+<header id="header">
     <div class="header-top">
         <div class="container">
             <div class="row">
@@ -8,14 +7,14 @@
                     <ul class="header-top-right text-right">
                         <li>
                             <!--                                if="login==false"-->
-                            <a href="login.html">Login/Register</a>
+                            <a th:href="@{/login}">Login/Register</a>
                         </li>
                         <li>
                             <!--                                if="login==true"-->
-                            <a href="home.html">Logout</a>
+                            <a th:href="@{/home}">Logout</a>
                         </li>
                         <li class="account">
-                            <a href="my_account.html">My Account</a>
+                            <a th:href="@{/my_account}">My Account</a>
                         </li>
                         <li class="language dropdown"><span class="dropdown-toggle" id="dropdownMenu1"
                                                             data-toggle="dropdown" aria-haspopup="true"
@@ -49,19 +48,23 @@
             <div class="row">
                 <div class="col-xs-12 col-sm-4">
                     <div class="main-search mt_40">
-                        <input id="search-input" name="search" value="" placeholder="Search"
+                        <input id="search-input" name="search" value="" placeholder="Tìm kiếm"
                                class="form-control input-lg" autocomplete="off" type="text">
                         <span class="input-group-btn">
-              <button type="button" class="btn btn-default btn-lg"><i class="fa fa-search"></i></button>
-              </span></div>
+                            <button type="button" class="btn btn-default btn-lg"><i class="fa fa-search"></i></button>
+                        </span>
+                    </div>
                 </div>
-                <div class="navbar-header col-xs-6 col-sm-4"><a class="navbar-brand" href="home.html"> <img
-                        alt="MonstarFashionShop" th:src="@{/images/logo.png}"> </a></div>
+                <div class="navbar-header col-xs-6 col-sm-4">
+                    <a class="navbar-brand" href="home.html">
+                    <img alt="MonstarFashionShop" th:src="@{/images/logo.png}">
+                    </a>
+                </div>
                 <div class="col-xs-6 col-sm-4 shopcart">
                     <div id="cart" class="btn-group btn-block mtb_40">
                         <button type="button" class="btn" data-target="#cart-dropdown" data-toggle="collapse"
-                                aria-expanded="true"><span id="shoppingcart">Shopping cart</span><span
-                                id="cart-total">items (0)</span></button>
+                                aria-expanded="true"><span id="shoppingcart">Giỏ hàng</span><span
+                                id="cart-total">Số mặt hàng (0)</span></button>
                     </div>
                     <div id="cart-dropdown" class="cart-menu collapse">Empty!
                     </div>
@@ -74,10 +77,10 @@
                 </button>
                 <div class="collapse navbar-collapse js-navbar-collapse">
                     <ul id="menu" class="nav navbar-nav">
-                        <li><a href="home.html">Home</a></li>
-                        <li><a href="women.html">women</a></li>
-                        <li><a href="men.html">men</a></li>
-                        <li><a href="contact_us.html">Contact us</a></li>
+                        <li><a href="home.html">Trang chủ</a></li>
+                        <li><a href="women.html">Quần áo nam</a></li>
+                        <li><a href="men.html">Quần áo nữ</a></li>
+                        <li><a href="contact_us.html">Liên hệ</a></li>
 
                     </ul>
                 </div>

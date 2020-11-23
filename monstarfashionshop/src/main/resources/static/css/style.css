@@ -1806,7 +1806,7 @@ blockquote {
 }
 
 /* ----------------------------------------------
-	3.2.7 Product + Category Page 
+	3.2.7 Product + Category Page
 ----------------------------------------------- */
 
 #product-tab .product-thumb {
@@ -1818,12 +1818,7 @@ blockquote {
 .product-thumb a img+img {
     display: none;
 }
-.product-thumb:hover a img {
-    display: none;
-}
-.product-thumb:hover a img+img {
-    display: block;
-}
+
 .image.product-imageblock>a {
     background: #ffffff none repeat scroll 0 0;
     overflow: hidden;
@@ -2849,4 +2844,5 @@ a.thumbnail:hover, a.thumbnail:focus, a.thumbnail.active {
     width: 150px;
     }
 }
+
     /* =====  END RESPONSIVE CSS  =====*/
