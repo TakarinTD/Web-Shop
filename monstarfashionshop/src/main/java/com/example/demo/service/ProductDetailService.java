@@ -1,9 +1,10 @@
 package com.example.demo.service;
 
-import com.example.demo.entity.*;
-import java.util.*;
+import com.example.demo.entity.ProductDetail;
+
+import java.util.Optional;
 
 public interface ProductDetailService {
-    List<ProductDetail> findProductDetails(Long productId);
-    int findQuantity(Long productId, Long colorId, Long sizeId);
+
+    Optional<ProductDetail> findProductDetail(Long productId, Long productColorId, Long productSizeId);
 }

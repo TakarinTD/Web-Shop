@@ -1,0 +1,14 @@
+<div id="category-menu" class="navbar collapse in mb_40" aria-expanded="true" style="" role="button">
+    <div class="nav-responsive">
+        <div class="heading-part">
+            <h2 class="main_title">Top category</h2>
+        </div>
+        <ul class="nav  main-navigation collapse in">
+            <th:block th:each="item : ${categories}">
+                <li>
+                    <a th:href="@{'/category?name=' + ${item.getCategoryName()} + '&page=1&sortField=salePrice&sortDir=asc'}"
+                       th:utext="${item.getCategoryName()}">Appliances</a></li>
+            </th:block>
+        </ul>
+    </div>
+</div>

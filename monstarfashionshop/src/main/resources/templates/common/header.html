@@ -7,14 +7,14 @@
                     <ul class="header-top-right text-right">
                         <li>
                             <!--                                if="login==false"-->
-                            <a th:href="@{/login}">Login/Register</a>
+                            <a href="login.html">Login/Register</a>
                         </li>
                         <li>
                             <!--                                if="login==true"-->
-                            <a th:href="@{/home}">Logout</a>
+                            <a href="home.html">Logout</a>
                         </li>
                         <li class="account">
-                            <a th:href="@{/my_account}">My Account</a>
+                            <a href="my_account.html">My Account</a>
                         </li>
                         <li class="language dropdown"><span class="dropdown-toggle" id="dropdownMenu1"
                                                             data-toggle="dropdown" aria-haspopup="true"
@@ -48,10 +48,10 @@
             <div class="row">
                 <div class="col-xs-12 col-sm-4">
                     <div class="main-search mt_40">
-                        <input id="search-input" name="search" value="" placeholder="Tìm kiếm"
+                        <input id="search-input" name="search" value="" placeholder="Tìm kiếm sản phẩm, danh mục"
                                class="form-control input-lg" autocomplete="off" type="text">
                         <span class="input-group-btn">
-                            <button type="button" class="btn btn-default btn-lg"><i class="fa fa-search"></i></button>
+                            <button id="search-submit" type="button" class="btn btn-default btn-lg"><i class="fa fa-search"></i></button>
                         </span>
                     </div>
                 </div>
@@ -62,9 +62,13 @@
                 </div>
                 <div class="col-xs-6 col-sm-4 shopcart">
                     <div id="cart" class="btn-group btn-block mtb_40">
-                        <button type="button" class="btn" data-target="#cart-dropdown" data-toggle="collapse"
-                                aria-expanded="true"><span id="shoppingcart">Giỏ hàng</span><span
-                                id="cart-total">Số mặt hàng (0)</span></button>
+                        <button type="button" class="btn" data-target="#cart-dropdown" data-toggle="collapse" aria-expanded="true">
+                            <span id="shoppingcart">Giỏ hàng</span>
+                            <span id="cart-total">Số mặt hàng
+                                <span id="cart-size" th:if="${session.cart}" th:utext="${'(' + session.cart.size() +')'}"></span>
+                                <span id="cart-size" th:unless="${session.cart}">(0)</span>
+                            </span>
+                        </button>
                     </div>
                     <div id="cart-dropdown" class="cart-menu collapse">Empty!
                     </div>
@@ -77,9 +81,9 @@
                 </button>
                 <div class="collapse navbar-collapse js-navbar-collapse">
                     <ul id="menu" class="nav navbar-nav">
-                        <li><a href="home.html">Trang chủ</a></li>
-                        <li><a href="women.html">Quần áo nam</a></li>
-                        <li><a href="men.html">Quần áo nữ</a></li>
+                        <li><a th:href="@{/}">Trang chủ</a></li>
+                        <li><a th:href="@{'/category?name=Men&page=1&sortField=salePrice&sortDir=asc&pageSize=6'}">Quần áo nam</a></li>
+                        <li><a th:href="@{'/category?name=Women&page=1&sortField=salePrice&sortDir=asc&pageSize=6'}">Quần áo nữ</a></li>
                         <li><a href="contact_us.html">Liên hệ</a></li>
 
                     </ul>

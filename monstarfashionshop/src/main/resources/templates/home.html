@@ -24,7 +24,6 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/css/magnific-popup.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/css/owl.carousel.css}">
-    <link rel="stylesheet" type="text/css" th:href="@{/css/jquery-ui.css}">
     <link rel="shortcut icon" th:href="@{/images/favicon.png}">
 </head>
 
@@ -117,7 +116,7 @@
                                         <div class="item">
                                             <div class="product-thumb">
                                                 <div class="image product-imageblock">
-                                                    <a href="product_detail_page.html">
+                                                    <a href="product_detail.html">
                                                         <img data-name="product_image"
                                                              th:src="@{'/images/product/' + ${product.image}}"
                                                              alt="iPod Classic"
@@ -128,10 +127,8 @@
                                                     </a>
 
                                                     <div class="button-group text-center">
-                                                        <div class="wishlist"><a href="#"><span>View detail</span></a>
-                                                        </div>
-                                                        <div class="add-to-cart"><a
-                                                                href="#"><span>Add to cart</span></a>
+                                                        <div>
+                                                            <a class="quickview" th:href="@{'/product/' + ${product.getId()} + '/detail'}"></a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -159,7 +156,7 @@
                                         <div class="item">
                                             <div class="product-thumb">
                                                 <div class="image product-imageblock">
-                                                    <a href="product_detail_page.html">
+                                                    <a href="product_detail.html">
                                                         <img data-name="product_image"
                                                              th:src="@{'/images/product/' + ${product.image}}"
                                                              alt="iPod Classic"
@@ -227,5 +224,12 @@
 <script th:src="@{/js/jquery.firstVisitPopup.js}"></script>
 <script th:src="@{/js/custom.js}"></script>
 </body>
-
+<script>
+    $("#search-submit").click(function () {
+        let keyword = $("#search-input").val();
+        if(keyword !== "") {
+            window.location = "/search?keyword=" + keyword + "&page=1&pageSize=6&sortField=salePrice&sortDir=asc";
+        }
+    });
+</script>
 </html>
