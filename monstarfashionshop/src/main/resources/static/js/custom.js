@@ -377,6 +377,19 @@ function owl_carousel () {
         }
     });
 }
+$(window).scroll(function(){
+    if ($(this).scrollTop() > 250) {
+
+        $('#scrollup').fadeIn(300);
+        }
+    else {
+        $('#scrollup').fadeOut(300);
+        }
+   });
+        $('#scrollup').on('click',function(){
+        $("html, body").animate({ scrollTop: 0 }, 1000);
+        return false;
+    });
 
     $(document).ready(function(){     
         gl_active();

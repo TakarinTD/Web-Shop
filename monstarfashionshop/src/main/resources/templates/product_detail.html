@@ -374,8 +374,8 @@
                     </div>
                     <div class="col-md-6 prodetail caption product-thumb" style="margin-top: 15px;">
                         <th:block th:if="${product}" th:object="${product}">
-                            <h4 data-name="product_name" class="product-name">
-                                <a href="#" th:utext="*{productName}" title="Casual Shirt With Ruffle Hem">Product
+                            <h4 data-name="product_name" class="product-name" id="productName">
+                                <a href="#" th:utext="*{productName}" title="Thông tin sản phẩm" >Product
                                     Name</a>
                             </h4>
                             <br>
@@ -433,7 +433,7 @@
                                 </div>
                                 <div class="qty mt_30 form-group2">
                                     <label>Số lượng</label>
-                                    <input name="product_quantity" min="1" max="10" value="1" type="number">
+                                    <input id="product_quantity" name="product_quantity" min="1" max="10" value="1" type="number">
                                 </div>
                                 <div class="qty mt_30 form-group2">
                                     <label>Số sản phẩm còn lại : </label>
@@ -663,36 +663,58 @@
                 </div>
             </div>
         </div>
+        <div class="modal fade" id="cartAdd" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Add to cart!</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <p id="addCart"></p>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Continue shopping</button>
+                        <a th:href="@{/cart/checkout}" class="btn btn-secondary">Checkout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <!-- =====  CONTAINER END  ===== -->
     <th:block th:include="common/footer"></th:block>
     <!-- =====  FOOTER END  ===== -->
 </div>
-<div class="chatB">
-    <button class="open-chatbox" onclick="openForm()" id="chat">Chat</button>
-    <div class="Chatbox" id="chatBoxForm">
-        <form action="" class="form-container">
-            <h1><img th:src="@{/images/chatbox.jpg}" style="width:50px;height:50px"/>Chat with us</h1>
-            <label for="msg"><b>We are here to help you!</b></label>
-            <textarea placeholder="Input message..." id="msg" name="msg" required></textarea>
-            <button type="submit" class="btn">Send</button>
-            <button type="button" class="btn close-chatbox" onclick="closeForm()">Close</button>
-        </form>
-    </div>
-</div>
-<script>
-    /*Open chatbox*/
-    function openForm() {
-        document.getElementById("chatBoxForm").style.display = "block";
-        document.getElementById("chat").style.display = "none";
-    }
+<!--<div class="chatB">-->
+<!--    <button class="open-chatbox" onclick="openForm()" id="chat">Chat</button>-->
+<!--    <div class="Chatbox" id="chatBoxForm">-->
+<!--        <form action="" class="form-container">-->
+<!--            <h1><img th:src="@{/images/chatbox.jpg}" style="width:50px;height:50px"/>Chat with us</h1>-->
+<!--            <label for="msg"><b>We are here to help you!</b></label>-->
+<!--            <textarea placeholder="Input message..." id="msg" name="msg" required></textarea>-->
+<!--            <button type="submit" class="btn">Send</button>-->
+<!--            <button type="button" class="btn close-chatbox" onclick="closeForm()">Close</button>-->
+<!--        </form>-->
+<!--    </div>-->
+<!--</div>-->
+<!--<script>-->
+<!--    /*Open chatbox*/-->
+<!--    function openForm() {-->
+<!--        document.getElementById("chatBoxForm").style.display = "block";-->
+<!--        document.getElementById("chat").style.display = "none";-->
+<!--    }-->
 
-    /*Close chat box*/
-    function closeForm() {
-        document.getElementById("chatBoxForm").style.display = "none";
-        document.getElementById("chat").style.display = "block";
-    }
-</script>
+<!--    /*Close chat box*/-->
+<!--    function closeForm() {-->
+<!--        document.getElementById("chatBoxForm").style.display = "none";-->
+<!--        document.getElementById("chat").style.display = "block";-->
+<!--    }-->
+<!--</script>-->
+<a id="scrollup"></a>
 <script th:src="@{/js/jQuery_v3.1.1.min.js}"></script>
 <script th:src="@{/js/owl.carousel.min.js}"></script>
 <script th:src="@{/js/bootstrap.min.js}"></script>
@@ -710,7 +732,6 @@
         });
 
         $("#add-cart").click(function () {
-            alert("Add to cart");
             let data = {};
             data.productId = [[${product.getId()}]];
             data.productColorId = $("#select-by-color option:selected").val();
@@ -724,12 +745,15 @@
                 success: function (cartSize) {
                     if(cartSize > 0) {
                         $("#cart-size").text("(" + cartSize + ")");
+                        document.getElementById("addCart").innerHTML= "Thêm thành công " + $("#product_quantity").val() +" " + document.getElementById("productName").innerHTML + " vào giỏ hàng!";
                     } else {
-                        alert("Không tồn tại sản phẩm");
+                        document.getElementById("addCart").innerHTML= "Không tồn tại sản phẩm!";
                     }
+                    $('#cartAdd').modal();
                 },
                 error: function (XMLHttpRequest) {
-                    alert("Đã có lỗi xảy ra");
+                     document.getElementById("addCart").innerHTML= "Đã có lỗi xảy ra khi thêm sản phẩm!";
+                     $('#cartAdd').modal();
                 }
             });
         });
@@ -756,7 +780,8 @@
 
             },
             error: function (XMLHttpRequest) {
-                alert("Đã có lỗi xảy ra");
+                $("#addCart").val("Đã có lỗi xảy ra khi lấy số lượng sản phẩm!");
+                $('#cart').modal();
             }
         });
     }

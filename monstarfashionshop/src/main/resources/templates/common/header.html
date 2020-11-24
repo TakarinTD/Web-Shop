@@ -7,14 +7,14 @@
                     <ul class="header-top-right text-right">
                         <li>
                             <!--                                if="login==false"-->
-                            <a href="login.html">Login/Register</a>
+                            <a th:href="@{/login}">Login/Register</a>
                         </li>
                         <li>
                             <!--                                if="login==true"-->
-                            <a href="home.html">Logout</a>
+                            <a th:href="@{/home}">Logout</a>
                         </li>
                         <li class="account">
-                            <a href="my_account.html">My Account</a>
+                            <a th:href="@{/my_account}">My Account</a>
                         </li>
                         <li class="language dropdown"><span class="dropdown-toggle" id="dropdownMenu1"
                                                             data-toggle="dropdown" aria-haspopup="true"
@@ -56,7 +56,7 @@
                     </div>
                 </div>
                 <div class="navbar-header col-xs-6 col-sm-4">
-                    <a class="navbar-brand" href="home.html">
+                    <a class="navbar-brand" th:href="@{/home}">
                     <img alt="MonstarFashionShop" th:src="@{/images/logo.png}">
                     </a>
                 </div>
@@ -81,11 +81,10 @@
                 </button>
                 <div class="collapse navbar-collapse js-navbar-collapse">
                     <ul id="menu" class="nav navbar-nav">
-                        <li><a th:href="@{/}">Trang chủ</a></li>
+                        <li><a th:href="@{/home}">Trang chủ</a></li>
                         <li><a th:href="@{'/category?name=Men&page=1&sortField=salePrice&sortDir=asc&pageSize=6'}">Quần áo nam</a></li>
                         <li><a th:href="@{'/category?name=Women&page=1&sortField=salePrice&sortDir=asc&pageSize=6'}">Quần áo nữ</a></li>
-                        <li><a href="contact_us.html">Liên hệ</a></li>
-
+                        <li><a th:href="@{/contact_us}">Liên hệ</a></li>
                     </ul>
                 </div>
                 <!-- /.nav-collapse -->

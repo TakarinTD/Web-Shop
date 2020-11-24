@@ -42,7 +42,7 @@
                         <div>Sign up and get 50% off your next Order</div>
                     </div>
                 </div>
-                <form onsubmit="return  validatpopupemail();" method="post">
+                <form onsubmit="return validatpopupemail();" method="post">
                     <div class="form-group required">
                         <input type="email" name="email-popup" id="email-popup" placeholder="Enter Your Email"
                                class="form-control input-lg" required/>
@@ -164,32 +164,33 @@
     <th:block th:include="common/footer"></th:block>
     <!-- =====  FOOTER END  ===== -->
 </div>
-<div class="chatB">
-    <button class="open-chatbox" onclick="openForm()" id="chat">Chat</button>
-    <div class="Chatbox" id="chatBoxForm">
-        <form action="" class="form-container">
-            <h1><img th:src="@{/images/chatbox.png}" style="width:50px;height:50px"/>Chat with us</h1>
-            <label for="msg"><b>We are here to help you!</b></label>
-            <textarea placeholder="Input message..." id="msg" name="msg" required></textarea>
-            <button type="submit" class="btn">Send</button>
-            <button type="button" class="btn close-chatbox" onclick="closeForm()">Close</button>
-        </form>
-    </div>
-</div>
-<script>
+<!--<div class="chatB">-->
+<!--    <button class="open-chatbox" onclick="openForm()" id="chat">Chat</button>-->
+<!--    <div class="Chatbox" id="chatBoxForm">-->
+<!--        <form action="" class="form-container">-->
+<!--            <h1><img th:src="@{/images/chatbox.png}" style="width:50px;height:50px"/>Chat with us</h1>-->
+<!--            <label for="msg"><b>We are here to help you!</b></label>-->
+<!--            <textarea placeholder="Input message..." id="msg" name="msg" required></textarea>-->
+<!--            <button type="submit" class="btn">Send</button>-->
+<!--            <button type="button" class="btn close-chatbox" onclick="closeForm()">Close</button>-->
+<!--        </form>-->
+<!--    </div>-->
+<!--</div>-->
+<!--<script>-->
 
-    /*Open chatbox*/
-    function openForm() {
-        document.getElementById("chatBoxForm").style.display = "block";
-        document.getElementById("chat").style.display = "none";
-    }
+<!--    /*Open chatbox*/-->
+<!--    function openForm() {-->
+<!--        document.getElementById("chatBoxForm").style.display = "block";-->
+<!--        document.getElementById("chat").style.display = "none";-->
+<!--    }-->
 
-    /*Close chat box*/
-    function closeForm() {
-        document.getElementById("chatBoxForm").style.display = "none";
-        document.getElementById("chat").style.display = "block";
-    }
-</script>
+<!--    /*Close chat box*/-->
+<!--    function closeForm() {-->
+<!--        document.getElementById("chatBoxForm").style.display = "none";-->
+<!--        document.getElementById("chat").style.display = "block";-->
+<!--    }-->
+<!--</script>-->
+<a id="scrollup"></a>
 <script th:src="@{/js/jQuery_v3.1.1.min.js}"></script>
 <script th:src="@{/js/owl.carousel.min.js}"></script>
 <script th:src="@{/js/bootstrap.min.js}"></script>
