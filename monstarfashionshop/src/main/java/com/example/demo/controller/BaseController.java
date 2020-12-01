@@ -41,4 +41,7 @@ public class BaseController {
         _mvShare.addObject("sortDir", sortDir);
     }
 
+
+    int a = 0;
+
 }
