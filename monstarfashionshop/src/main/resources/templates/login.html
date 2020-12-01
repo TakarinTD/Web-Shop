@@ -34,7 +34,7 @@
 <!--<div class="loader"></div>-->
 <div class="wrapper">
     <div id="subscribe-me" class="modal animated fade in" role="dialog" data-keyboard="true" tabindex="-1">
-        <div class="newsletter-popup"><img class="offer" src="../static/images/newsbg.jpg" alt="offer">
+        <div class="newsletter-popup"><img class="offer" th:src="@{/images/newsbg.jpg}" alt="offer">
             <div class="newsletter-popup-static newsletter-popup-top">
                 <div class="popup-text">
                     <div class="popup-title">50% <span>off</span></div>
@@ -90,7 +90,7 @@
                                                    class="form-control" placeholder="Password" required>
                                         </div>
                                         <div class="form-group text-center">
-                                            <input type="checkbox" tabindex="3" class="" name="remember"
+                                            <input type="checkbox" tabindex="3" class="" name="remember-me"
                                                    id="remember">
                                             <label for="remember"> Remember Me</label>
                                         </div>

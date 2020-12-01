@@ -48,6 +48,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 
         // Các yêu cầu phải login với vai trò user hoặc admin
         // Nếu chưa login, nó sẽ redirect tới trang /login.
+//        http.authorizeRequests().antMatchers("/category").permitAll();
         http.authorizeRequests().antMatchers("/my_account","/editInfo")//
                 .access("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')");
 
@@ -65,17 +66,18 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
                 //
                 .loginProcessingUrl("/login") // Submit URL
                 .loginPage("/login")//
-                .defaultSuccessUrl("/home")//
+                .defaultSuccessUrl("/login-success")//
                 .failureUrl("/login?error=true")//
                 .usernameParameter("email")//
                 .passwordParameter("password")
 
                 // Cấu hình cho trang Logout.
                 // (Sau khi logout, chuyển tới trang home)
-                .and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/home");
+                .and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/home").deleteCookies("JSESSIONID");
         //Remember me
         http.authorizeRequests().and().rememberMe().tokenRepository(persistentTokenRepository())
-                .tokenValiditySeconds(1*24*60*60);
+                .tokenValiditySeconds(60);
+        http.exceptionHandling().accessDeniedPage("/access_denied");
     }
 
     @Bean

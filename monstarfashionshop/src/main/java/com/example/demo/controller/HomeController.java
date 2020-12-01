@@ -7,10 +7,10 @@ import com.example.demo.service.impl.ProductServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import org.springframework.web.servlet.*;
 
 @Controller
 @RequestMapping("/home")
@@ -31,5 +31,12 @@ public class HomeController {
         model.addAttribute("productWomen", listProductWomen);
         model.addAttribute("productMen", listProductMen);
         return "home";
+    }
+
+    @RequestMapping (value = {"/access_denied"}, method = RequestMethod.GET)
+    public ModelAndView accessDenied () {
+        ModelAndView model = new ModelAndView();
+        model.setViewName("/access_denied");
+        return model;
     }
 }
