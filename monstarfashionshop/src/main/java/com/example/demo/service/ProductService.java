@@ -31,5 +31,9 @@ public interface ProductService {
 
     Map<ProductColor, Integer> getListColorAndAmount(Long categoryId);
 
+    Map<ProductColor, Integer> getListColorAndAmount(String keyword);
+
     Map<ProductSize, Integer> getListSizeAndAmount(Long categoryId);
+
+    Map<ProductSize, Integer> getListSizeAndAmount(String keyword);
 }

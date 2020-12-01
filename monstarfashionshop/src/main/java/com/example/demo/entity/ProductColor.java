@@ -1,5 +1,6 @@
 package com.example.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -27,6 +28,7 @@ public class ProductColor implements Comparable<ProductColor> {
     private Date updatedAt;
 
     @OneToMany(mappedBy = "productColor", fetch = FetchType.LAZY)
+    @JsonIgnore
     private Set<ProductDetail> productDetails;
 
     public ProductColor() {

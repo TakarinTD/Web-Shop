@@ -75,7 +75,7 @@ Created by: 	Lionode
 
 /* ----------------------------------------------
 	BASIC
-	1.1 General  
+	1.1 General
 ----------------------------------------------- */
 
 body, html {
@@ -181,7 +181,7 @@ ul {
 }
 
 /* ----------------------------------------------
-	1.2 Typography 
+	1.2 Typography
 ----------------------------------------------- */
 
 a {
@@ -253,7 +253,7 @@ h6 {
 }
 
 /* ----------------------------------------------
-	1.3 Spacing 
+	1.3 Spacing
 ----------------------------------------------- */
 
 .box {
@@ -504,7 +504,7 @@ h6 {
 }
 
 /* ----------------------------------------------
-	1.4 Button 
+	1.4 Button
 ----------------------------------------------- */
 
 .btn {
@@ -550,7 +550,7 @@ h6 {
 }
 
 /* ----------------------------------------------
-	1.5 Elements 
+	1.5 Elements
 ----------------------------------------------- */
 
 .alert {
@@ -596,7 +596,7 @@ i.right {
 }
 
 /* ----------------------------------------------
-	1.6 Accordian 
+	1.6 Accordian
 ----------------------------------------------- */
 
 .panel-default {
@@ -614,7 +614,7 @@ i.right {
 }
 
 /* ----------------------------------------------
-	1.7 Tabs 
+	1.7 Tabs
 ----------------------------------------------- */
 
 .nav>li>a {
@@ -2581,7 +2581,7 @@ a.thumbnail:hover, a.thumbnail:focus, a.thumbnail.active {
 /*-----------------------------------*/
 
 @media (max-width: 767px) {
-    
+
     .header-top-left, .header-top-right {
         text-align: center;
     }
@@ -2695,7 +2695,7 @@ a.thumbnail:hover, a.thumbnail:focus, a.thumbnail.active {
         background:transparent;
     }
     .view-blog{
-        border-color: #ccc; 
+        border-color: #ccc;
     }
     .newsletter-popup-top {
         width: 50%;
@@ -2844,5 +2844,22 @@ a.thumbnail:hover, a.thumbnail:focus, a.thumbnail.active {
     width: 150px;
     }
 }
+
+    #scrollup::before {
+        background: #e40001 none repeat scroll 0 0;
+        bottom: 20px;
+        color: #fff;
+        content: "\f106";
+        font-family: fontawesome;
+        font-size: 25px;
+        height: 40px;
+        padding: 6px 12px;
+        position: fixed;
+        right: 20px;
+        width: 40px;
+        z-index: 99;
+    }
+
+
 
     /* =====  END RESPONSIVE CSS  =====*/

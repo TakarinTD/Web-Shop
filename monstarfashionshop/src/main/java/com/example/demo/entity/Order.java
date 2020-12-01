@@ -1,5 +1,9 @@
 package com.example.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.HashSet;
@@ -29,19 +33,28 @@ public class Order {
     private boolean status;
 
     @Column(name = "note")
-    private boolean note;
+    private String note;
 
     @Column(name = "order_date")
+    @CreationTimestamp
     private Date orderDate;
 
     @Column(name = "delivery_date")
+    @UpdateTimestamp
     private Date deliveryDate;
+
+    @Column(name = "delivery_method")
+    private String deliveryMethod;
+
+    @Column(name = "payment_method")
+    private String paymentMethod;
 
     @OneToMany(mappedBy = "order", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<OrderDetail> orderDetails;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
+    @JsonIgnore
     private User user;
 
     public Order() {
@@ -95,11 +108,11 @@ public class Order {
         this.status = status;
     }
 
-    public boolean isNote() {
+    public String getNote() {
         return note;
     }
 
-    public void setNote(boolean note) {
+    public void setNote(String note) {
         this.note = note;
     }
 
@@ -135,8 +148,25 @@ public class Order {
         this.user = user;
     }
 
+
+    public String getDeliveryMethod() {
+        return deliveryMethod;
+    }
+
+    public void setDeliveryMethod(String deliveryMethod) {
+        this.deliveryMethod = deliveryMethod;
+    }
+
+    public String getPaymentMethod() {
+        return paymentMethod;
+    }
+
+    public void setPaymentMethod(String paymentMethod) {
+        this.paymentMethod = paymentMethod;
+    }
+
     public void addOrderDetail(OrderDetail orderDetail) {
-        if(orderDetails == null) {
+        if (orderDetails == null) {
             orderDetails = new HashSet<>();
         }
         orderDetails.add(orderDetail);

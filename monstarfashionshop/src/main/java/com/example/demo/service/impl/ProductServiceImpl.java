@@ -47,7 +47,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Product getProductByIdProduct(Long id) {
-        return productRepository.getOne(id);
+        return productRepository.findById(id).get();
     }
 
     @Override
@@ -97,9 +97,9 @@ public class ProductServiceImpl implements ProductService {
     public Page<Product> findProductsWithCondition(
             Long categoryId, List<Long> colorIds, List<Long> sizeIds, float price1, float price2,
             int page, int pageSize, String sortField, String sortDir) {
+
         Pageable pageable = PageRequest.of(page - 1, pageSize,
                 sortDir.equalsIgnoreCase("asc") ? Sort.by(sortField).ascending() : Sort.by(sortField).descending());
-
         Page<Product> pageProduct;
         if ((colorIds != null) && (sizeIds != null)) {
             if (categoryId != null) {
@@ -145,11 +145,41 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public Map<ProductColor, Integer> getListColorAndAmount(String keyword) {
+        Map<ProductColor, Integer> listColorAndAmount = new TreeMap<>();
+        List<ProductColor> productColorList = productColorRepository.findAll();
+        productColorList.forEach(productColor -> {
+            Integer totalQuantitiesForColor = productDetailRepository.countAvailableByKeywordAndColor(keyword, productColor.getId());
+            if (totalQuantitiesForColor == null) {
+                totalQuantitiesForColor = 0;
+            }
+            listColorAndAmount.put(productColor, totalQuantitiesForColor);
+        });
+
+        return listColorAndAmount;
+    }
+
+    @Override
     public Map<ProductSize, Integer> getListSizeAndAmount(Long categoryId) {
         Map<ProductSize, Integer> listSizeAndAmount = new TreeMap<>();
         List<ProductSize> productSizeList = productSizeRepository.findAll();
         productSizeList.forEach(productSize -> {
             Integer totalQuantitiesForSize = productDetailRepository.countAvailableByCategoryAndSize(categoryId, productSize.getId());
+            if (totalQuantitiesForSize == null) {
+                totalQuantitiesForSize = 0;
+            }
+            listSizeAndAmount.put(productSize, totalQuantitiesForSize);
+        });
+
+        return listSizeAndAmount;
+    }
+
+    @Override
+    public Map<ProductSize, Integer> getListSizeAndAmount(String keyword) {
+        Map<ProductSize, Integer> listSizeAndAmount = new TreeMap<>();
+        List<ProductSize> productSizeList = productSizeRepository.findAll();
+        productSizeList.forEach(productSize -> {
+            Integer totalQuantitiesForSize = productDetailRepository.countAvailableByKeywordAndSize(keyword, productSize.getId());
             if (totalQuantitiesForSize == null) {
                 totalQuantitiesForSize = 0;
             }

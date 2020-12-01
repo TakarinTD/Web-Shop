@@ -355,9 +355,10 @@
                     <div class="col-md-6">
                         <th:block th:if="${product}" th:object="${product}">
                             <div>
-                                <a class="thumbnails"><img data-name="product_image"
-                                                           th:src="@{'/images/product/' + ${product.image}}"
-                                                           alt=""/></a>
+                                <a class="thumbnails">
+                                    <img data-name="product_image_detail"
+                                         th:src="@{'/images/product/' + ${product.image}}" alt=""/>
+                                </a>
                             </div>
                             <div id="product-thumbnail" class="owl-carousel">
                                 <div class="item" th:each="item : ${images}">
@@ -375,39 +376,30 @@
                     <div class="col-md-6 prodetail caption product-thumb" style="margin-top: 15px;">
                         <th:block th:if="${product}" th:object="${product}">
                             <h4 data-name="product_name" class="product-name">
-                                <a href="#" th:utext="*{productName}" title="Casual Shirt With Ruffle Hem">Product
-                                    Name</a>
+                                <a th:href="@{'/product/' + ${product.getId()} + '/detail'}"
+                                   th:utext="*{productName}"></a>
                             </h4>
                             <br>
-                            <!--                            <div class="rating">-->
-                            <!--                                <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i><i-->
-                            <!--                                    class="fa fa-star fa-stack-1x"></i></span>-->
-                            <!--                                <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i><i-->
-                            <!--                                        class="fa fa-star fa-stack-1x"></i></span>-->
-                            <!--                                <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i><i-->
-                            <!--                                        class="fa fa-star fa-stack-1x"></i></span>-->
-                            <!--                                <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i><i-->
-                            <!--                                        class="fa fa-star fa-stack-1x"></i></span>-->
-                            <!--                                <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i><i-->
-                            <!--                                        class="fa fa-star fa-stack-x"></i></span>-->
-                            <!--                            </div>-->
                             <span class="price mb_20">
-                                <span class="amount"><span class="currencySymbol">$</span><span th:utext="*{salePrice}">70.00</span></span>
-                            </span>
+                                <th:block th:if="${product.getSalePriceDiscount() > 0}">
+                                    <span style="font-size: 25px; line-height: 40px; margin-right: 8px;" class="amount"><span
+                                            class="currencySymbol">$</span><span
+                                            th:utext="${product.getSalePriceDiscount()}"></span></span>
+                                    <span style="margin-right: 10px; text-decoration: line-through; font-size: 14px; line-height: 20px;"
+                                          class="amount"><span class="currencySymbol">$</span><span
+                                            th:utext="*{salePrice}"></span></span>
+                                    <span style="font-size: 14px; line-height: 20px;"><span
+                                            th:utext="*{promotion.getDiscount() * 100}"></span><span>%</span></span>
+                                </th:block>
+                                <th:block th:unless="${product.getSalePriceDiscount() > 0}">
+                                    <span style="font-size: 25px; line-height: 40px; margin-right: 8px;" class="amount">
+                                        <span class="currencySymbol">$</span>
+                                        <span th:utext="*{salePrice}"></span>
+                                    </span>
+                                </th:block>
+                        </span>
                             <hr>
-                            <!--                            <ul class="list-unstyled product_info mtb_20">-->
-                            <!--                                <li>-->
-                            <!--                                    <label>Brand:</label>-->
-                            <!--                                    <span> <a href="#">Apple</a></span></li>-->
-                            <!--                                <li>-->
-                            <!--                                    <label>Product Code:</label>-->
-                            <!--                                    <span> product 20</span></li>-->
-                            <!--                                <li>-->
-                            <!--                                    <label>Availability:</label>-->
-                            <!--                                    <span> In Stock</span></li>-->
-                            <!--                            </ul>-->
-                            <hr>
-                            <p class="product-desc mtb_30" th:utext="*{description}"> Mô tả sản phẩm </p>
+                            <p class="product-desc mtb_30" th:utext="*{description}"></p>
                             <div id="product">
                                 <div class="form-group">
                                     <div class="row">
@@ -432,17 +424,18 @@
                                     </div>
                                 </div>
                                 <div class="qty mt_30 form-group2">
-                                    <label>Số lượng</label>
-                                    <input name="product_quantity" min="1" max="10" value="1" type="number">
+                                    <span>
+                                        <label>Số lượng</label>
+                                        <input name="product_quantity" min="1" max="10" value="1" type="number">
+                                    </span>
+                                    <span id="sold-out" style="margin-left: 20px;font-size: 15px;color: red;">Sản phẩm đã bán hết!</span>
                                 </div>
-                                <div class="qty mt_30 form-group2">
-                                    <label>Số sản phẩm còn lại : </label>
-                                    <span id="quantity_available"></span>
+                                <div id="quantity_available" class="qty mt_30 form-group2" style="display: none;">
+                                    <label>Chỉ còn lại : </label>
+                                    <span></span>
                                 </div>
                                 <div class="button-group mt_30">
-                                    <div>
-                                        <p id="add-cart" class="add-to-cart"></p>
-                                    </div>
+                                    <button type="button" id="add-cart" class="add-to-cart"></button>
                                 </div>
                             </div>
                         </th:block>
@@ -452,9 +445,8 @@
                     <div class="col-md-12">
                         <div id="exTab5" class="mtb_30">
                             <ul class="nav nav-tabs">
-                                <li class="active"><a href="#1c" data-toggle="tab">Overview</a></li>
-                                <li><a href="#2c" data-toggle="tab">Reviews (1)</a></li>
-                                <li><a href="#3c" data-toggle="tab">Solution</a></li>
+                                <li class="active"><a href="#1c" data-toggle="tab">Mô tả chi tiết</a></li>
+                                <li><a href="#2c" data-toggle="tab">Nhận xet (1)</a></li>
                             </ul>
                             <div class="tab-content ">
                                 <div class="tab-pane active" id="1c">
@@ -502,13 +494,6 @@
                                             </div>
                                         </div>
                                     </form>
-                                </div>
-                                <div class="tab-pane" id="3c">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut lobortis malesuada mi
-                                        id tristique. Sed ipsum nisi, dapibus at faucibus non, dictum a diam. Nunc vitae
-                                        interdum diam. Sed finibus, justo vel maximus facilisis, sapien turpis euismod
-                                        tellus, vulputate semper diam ipsum vel tellus.applied clearfix to the
-                                        tab-content to rid of the gap between the tab and the content</p>
                                 </div>
                             </div>
                         </div>
@@ -635,34 +620,6 @@
                 </div>
             </div>
         </div>
-        <div id="brand_carouse" class="ptb_30 text-center">
-            <div class="type-01">
-                <div class="heading-part mb_10 ">
-                    <h2 class="main_title">Brand Logo</h2>
-                </div>
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div class="brand owl-carousel ptb_20">
-                            <div class="item text-center"><a href="#"><img th:src="@{/images/brand/brand1.jpg}"
-                                                                           alt="Disney"
-                                                                           class="img-responsive"/></a></div>
-                            <div class="item text-center"><a href="#"><img th:src="@{/images/brand/brand2.jpg}"
-                                                                           alt="Dell"
-                                                                           class="img-responsive"/></a></div>
-                            <div class="item text-center"><a href="#"><img th:src="@{/images/brand/brand3.jpg}"
-                                                                           alt="Harley"
-                                                                           class="img-responsive"/></a></div>
-                            <div class="item text-center"><a href="#"><img th:src="@{/images/brand/brand4.jpg}"
-                                                                           alt="Canon"
-                                                                           class="img-responsive"/></a></div>
-                            <div class="item text-center"><a href="#"><img th:src="@{/images/brand/brand5.jpg}"
-                                                                           alt="Canon"
-                                                                           class="img-responsive"/></a></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
     <!-- =====  CONTAINER END  ===== -->
     <th:block th:include="common/footer"></th:block>
@@ -680,6 +637,7 @@
         </form>
     </div>
 </div>
+<a id="scrollup"></a>
 <script>
     /*Open chatbox*/
     function openForm() {
@@ -698,10 +656,13 @@
 <script th:src="@{/js/bootstrap.min.js}"></script>
 <script th:src="@{/js/jquery.magnific-popup.js}"></script>
 <script th:src="@{/js/custom.js}"></script>
-<script>
-
+<script th:inline="javascript">
+    /*<![CDATA[*/
     $(document).ready(function () {
         $("#select-by-color").change(function () {
+            let colorId = $("#select-by-color option:selected").val();
+            let url_image = $("a[data-colorId='" + colorId + "']").attr("href");
+            $("img[data-name='product_image_detail']").attr('src', url_image);
             getAmountOfProductAvailable();
         });
 
@@ -710,7 +671,6 @@
         });
 
         $("#add-cart").click(function () {
-            alert("Add to cart");
             let data = {};
             data.productId = [[${product.getId()}]];
             data.productColorId = $("#select-by-color option:selected").val();
@@ -721,11 +681,13 @@
                 type: "GET",
                 data: data,
                 dataType: 'json',
-                success: function (cartSize) {
-                    if(cartSize > 0) {
-                        $("#cart-size").text("(" + cartSize + ")");
+                success: function (result) {
+                    if (result.cartSize > 0) {
+                        alert("Product is added to cart");
+                        $("#cart-size").text("(" + result.cartSize + ")");
+                        changeCartHeader(result.itemsCart, result.totalPay);
                     } else {
-                        alert("Không tồn tại sản phẩm");
+                        alert("Số lượng không đủ để đáp ứng");
                     }
                 },
                 error: function (XMLHttpRequest) {
@@ -746,20 +708,88 @@
             data: data,
             dataType: 'json',
             success: function (quantity) {
-                if(quantity > 0) {
-                    $('#quantity_available').text(quantity);
+                if (quantity > 0) {
+                    $('#sold-out').css('display', 'none');
+                    $('button[id="add-cart"]').prop('disabled', false);
+                    if (quantity < 10) {
+                        $('#quantity_available').css('display', 'block');
+                        $('#quantity_available > span').text(quantity);
+                    }
                     $('input[name="product_quantity"]').attr('max', quantity);
                 } else {
-                    $('#quantity_available').text(0);
+                    $('#quantity_available').css('display', 'none');
+                    $('#sold-out').css('display', 'inline');
                     $('input[name="product_quantity"]').attr('max', 0);
+                    $('button[id="add-cart"]').prop('disabled', true);
                 }
-
             },
             error: function (XMLHttpRequest) {
                 alert("Đã có lỗi xảy ra");
             }
         });
     }
+
+    function changeCartHeader(itemsCart, totalPay) {
+        let totalItemsPay = totalPay;
+        let vat = totalPay * 0.05;
+        let totalCart = totalItemsPay + vat;
+
+        $("#smal-cart-view").empty();
+        let html = "<li>\n" +
+            "                                    <table class=\"table table-striped\">";
+        jQuery.each(itemsCart, function (index, item) {
+            html += "<tr data_productdetail_header=\"" + item.productDetail.product.id + "\">\n" +
+                "                                            <td class=\"text-center\">\n" +
+                "                                                <a href=\"/product/" + item.productDetail.product.id + "/detail\">\n" +
+                "                                                    <img src=\"/images/product/" + item.productDetail.image + "\" alt=\"iPod Classic\" title=\"iPod Classic\" style=\"width: 60px; max-height: 100%;\">\n" +
+                "                                                </a>\n" +
+                "                                            </td>\n" +
+                "                                            <td class=\"text-left product-name\">\n" +
+                "                                                <a href=\"/product/" + item.productDetail.product.id + "/detail\">" + item.productDetail.product.productName + "</a>\n" +
+                "                                                <p>\n" +
+                "                                                    <span><strong>Đơn giá : </strong></span>\n" +
+                "                                                    <span class=\"text-left\">" + item.productDetail.product.salePriceDiscount + "<span>đ</span></span>\n" +
+                "                                                    <span class=\"text-right\" style=\"margin-left: 5px; text-decoration: line-through;\">" + item.productDetail.product.salePrice + "<span>đ</span></span>\n" +
+                "                                                </p>\n" +
+                "                                                <p>\n" +
+                "                                                    <span><strong>Màu sắc : </strong></span>\n" +
+                "                                                    <span>" + item.productDetail.productColor.colorName + "</span>\n" +
+                "                                                </p>\n" +
+                "                                                <p>\n" +
+                "                                                    <span><strong>Size : </strong></span><span>" + item.productDetail.productSize.sizeName + "</span>\n" +
+                "                                                </p>\n" +
+                "                                                <p>\n" +
+                "                                                    <span><strong>Số lượng : </strong></span><span id=\"item-quantity-header\">" + item.quantitiesProduct + "</span>\n" +
+                "                                                </p>\n" +
+                "                                            </td>\n" +
+                "                                        </tr>";
+        });
+        html += "</table>\n" +
+            "</li>" +
+            "<li>\n" +
+            "                                    <table class=\"table\">\n" +
+            "                                        <tbody>\n" +
+            "                                        <tr>\n" +
+            "                                            <td class=\"text-center\"><strong>Tạm tính:</strong></td>\n" +
+            "                                            <td class=\"text-center\"><span id=\"total-items-pay-header\">" + totalItemsPay + "</span><span>đ</span></td>\n" +
+            "                                        </tr>\n" +
+            "                                        </tbody>\n" +
+            "                                    </table>\n" +
+            "</li>\n" +
+            "<li>\n" +
+            "                                    <div style=\"display:flex; justify-content: space-between;\">\n" +
+            "                                        <a href=\"/cart\">\n" +
+            "                                            <button class=\"btn pull-left mt_10\" type=\"button\">xem giỏ hàng</button>\n" +
+            "                                        </a>\n" +
+            "                                        <a href=\"/checkout\">\n" +
+            "                                            <button class=\"btn pull-right mt_10\" type=\"button\">Checkout</button>\n" +
+            "                                        </a>\n" +
+            "                                    </div>\n" +
+            "                                </li>"
+        $("#smal-cart-view").append(html);
+    }
+
+    /*]]>*/
 </script>
 </body>
 

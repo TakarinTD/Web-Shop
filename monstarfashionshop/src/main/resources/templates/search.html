@@ -28,7 +28,7 @@
     <link rel="shortcut icon" th:href="@{/images/favicon.png}">
 </head>
 
-<body>
+<body onload="onloadPage()">
 <!-- =====  LOADER  ===== -->
 <!--<div class="loader"></div>-->
 <div class="wrapper">
@@ -94,7 +94,7 @@
                         <label class="control-label" for="input-limit">Show : </label>
                         <div class="limit">
                             <select id="input-limit" class="form-control">
-                                <option value="6" selected="selected">06</option>
+                                <option value="6">06</option>
                                 <option value="9">09</option>
                                 <option value="12">12</option>
                             </select>
@@ -106,10 +106,10 @@
                         <div class="sort-inner">
                             <form>
                                 <select id="input-sort" class="form-control">
-                                    <option value="ASC" selected="selected">Name (A - Z)</option>
-                                    <option value="DESC">Name (Z - A)</option>
-                                    <option value="ASC">Price (Low &gt; High)</option>
-                                    <option value="DESC">Price (High &gt; Low)</option>
+                                    <option id="productName-asc" value="asc">Name (A - Z)</option>
+                                    <option id="productName-desc" value="desc">Name (Z - A)</option>
+                                    <option id="salePrice-asc" value="asc">Price (Low &gt; High)</option>
+                                    <option id="salePrice-desc"  value="desc">Price (High &gt; Low)</option>
                                 </select>
                             </form>
                         </div>
@@ -134,11 +134,22 @@
                                     </div>
                                     <div class="caption product-detail text-center">
                                         <h6 data-name="product_name" class="product-name mt_20">
-                                            <a th:href="@{'/product/' + ${item.getId()} + '/detail'}" th:title="${item.productName}"
-                                               th:utext="${item.productName}"></a>
+                                            <strong>
+                                                <a th:href="@{'/product/' + ${item.getId()} + '/detail'}"
+                                                   th:title="${item.productName}"
+                                                   th:utext="${item.productName}"></a>
+                                            </strong>
+
                                         </h6>
-                                        <span class="price">$<span class="amount" th:utext="${item.salePrice}"><span
-                                                class="currencySymbol"></span></span></span>
+                                        <th:block th:if="${item.getSalePriceDiscount() > 0}">
+                                            <span class="price" style="color: rgba(0,0,0,.54); text-decoration: line-through;margin-right: 5px; font-size: 14px; ">
+                                                $<span class="amount" th:utext="${item.getSalePrice()}"></span>
+                                            </span>
+                                            <span class="price" style="color: #ee4d2d;">$<span class="amount" th:utext="${item.getSalePriceDiscount()}"></span></span>
+                                        </th:block>
+                                        <th:block th:if="${item.getSalePriceDiscount() == 0}">
+                                            <span class="price" style="color: #ee4d2d;">$<span class="amount" th:utext="${item.getSalePrice()}"></span></span>
+                                        </th:block>
                                         <p class="product-desc mt_20 mb_60" th:utext="${item.description}"></p>
                                     </div>
                                 </div>
@@ -272,6 +283,7 @@
     <th:block th:include="common/footer"></th:block>
     <!-- =====  FOOTER END  ===== -->
 </div>
+<a id="scrollup"></a>
 <script th:src="@{/js/jQuery_v3.1.1.min.js}"></script>
 <script th:src="@{/js/owl.carousel.min.js}"></script>
 <script th:src="@{/js/bootstrap.min.js}"></script>
@@ -309,8 +321,6 @@
 
             if ("[[${categoryId}]]" !== "") {
                 url += "&categoryId=" + "[[${categoryId}]]";
-            } else {
-                url += "&categoryId=null";
             }
 
             if ("[[${colorIds}]]" !== "") {
@@ -338,6 +348,7 @@
             } else if (sortName === "Price") {
                 url += "&pageSize=" + pageSize + "&sortField=salePrice&sortDir=" + sortDir;
             }
+
             window.location = url;
         }
 
@@ -361,7 +372,6 @@
             }
         });
 
-
         $("#slider-range").slider({
             range: true,
             min: 0,
@@ -372,57 +382,77 @@
             }
         });
 
-        $("#amount").val("$" + $("#slider-range").slider("values", 0) +
-            " - $" + $("#slider-range").slider("values", 1));
-    })
-    ;
+        $("#amount").val("$" + $("#slider-range").slider("values", 0) + " - $" + $("#slider-range").slider("values", 1));
 
-    $("#search > button[type='button']").click(function () {
-        let price1 = $('#slider-range').slider("values")[0];
-        let price2 = $('#slider-range').slider("values")[1];
+        $("#search > button[type='button']").click(function () {
+            let price1 = $('#slider-range').slider("values")[0];
+            let price2 = $('#slider-range').slider("values")[1];
 
-        let colorIds = [];
-        let sizeIds = [];
-        $('input[name="colorId"]:checked').each(function () {
-            colorIds.push(this.value);
+            let colorIds = [];
+            let sizeIds = [];
+            $('input[name="colorId"]:checked').each(function () {
+                colorIds.push(this.value);
+            });
+
+            $('input[name="sizeId"]:checked').each(function () {
+                sizeIds.push(this.value);
+            });
+
+            let url = "/search?page=1";
+
+            if ("[[${keyword}]]" !== "") {
+                url += "&keyword=" + "[[${keyword}]]";
+            }
+
+            if ("[[${categoryId}]]" !== "") {
+                url += "&categoryId=" + "[[${categoryId}]]";
+            }
+
+            if (colorIds.length > 0) {
+                url += "&colorIds=" + colorIds.toString().replace(",", ".");
+            } else {
+                url += "&colorIds=null";
+            }
+
+            if (sizeIds.length > 0) {
+                url += "&sizeIds=" + sizeIds.toString().replace(",", ".");
+            } else {
+                url += "&sizeIds=null";
+            }
+
+            url += "&price1=" + price1 + "&price2=" + price2 + "&pageSize=" + "[[${pageSize}]]" + "&sortField=salePrice&sortDir=asc";
+            window.location = url;
         });
 
-        $('input[name="sizeId"]:checked').each(function () {
-            sizeIds.push(this.value);
+        $("#search-submit").click(function () {
+            let keyword = $("#search-input").val();
+            if (keyword !== "") {
+                window.location = "/search?keyword=" + keyword + "&page=1&pageSize=" + "[[${pageSize}]]" + "&sortField=salePrice&sortDir=asc";
+            }
         });
-
-        let url = "/search?page=1";
-
-        if ("[[${keyword}]]" !== "") {
-            url += "&keyword=" + "[[${keyword}]]";
-        }
-
-        if ("[[${categoryId}]]" !== "") {
-            url += "&categoryId=" + "[[${categoryId}]]";
-        }
-
-        if (colorIds.length > 0) {
-            url += "&colorIds=" + colorIds.toString().replace(",", ".");
-        } else {
-            url += "&colorIds=null";
-        }
-
-        if (sizeIds.length > 0) {
-            url += "&sizeIds=" + sizeIds.toString().replace(",", ".");
-        } else {
-            url += "&sizeIds=null";
-        }
-
-        url += "&price1=" + price1 + "&price2=" + price2 + "&pageSize=" + "[[${pageSize}]]" + "&sortField=salePrice&sortDir=asc";
-        window.location = url;
     });
-
-    $("#search-submit").click(function () {
-        let keyword = $("#search-input").val();
-        if (keyword !== "") {
-            window.location = "/search?keyword=" + keyword + "&page=1&pageSize=" + "[[${pageSize}]]" + "&sortField=salePrice&sortDir=asc";
+    function onloadPage() {
+        let searchField = "[[${sortField}]]";
+        let searchDir = "[[${sortDir}]]";
+        if(searchField === "salePrice" && searchDir === "asc") {
+            $('#salePrice-asc').attr('selected', "selected");
         }
-    });
+        if(searchField === "salePrice" && searchDir === "desc") {
+            $('#salePrice-desc').attr('selected', "selected");
+        }
+        if(searchField === "productName" && searchDir === "asc") {
+            $('#productName-asc').attr('selected', "selected");
+        }
+        if(searchField === "productName" && searchDir === "asc") {
+            $('#productName-desc').attr('selected', "selected");
+        }
+
+        $('#input-limit option').each(function () {
+            if($(this).val() === "[[${pageSize}]]") {
+                $(this).attr('selected', "selected");
+            }
+        });
+    }
 
 </script>
 </body>

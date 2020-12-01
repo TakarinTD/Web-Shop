@@ -28,7 +28,7 @@
     <link rel="shortcut icon" th:href="@{/images/favicon.png}">
 </head>
 
-<body>
+<body onload="onloadPage()">
 <!-- =====  LOADER  ===== -->
 <!--<div class="loader"></div>-->
 <div class="wrapper">
@@ -106,10 +106,10 @@
                         <div class="sort-inner">
                             <form>
                                 <select id="input-sort" class="form-control">
-                                    <option value="ASC">Name (A - Z)</option>
-                                    <option value="DESC">Name (Z - A)</option>
-                                    <option value="ASC">Price (Low &gt; High)</option>
-                                    <option value="DESC">Price (High &gt; Low)</option>
+                                    <option id="productName-asc" value="asc">Name (A - Z)</option>
+                                    <option id="productName-desc" value="desc">Name (Z - A)</option>
+                                    <option id="salePrice-asc" value="asc">Price (Low &gt; High)</option>
+                                    <option id="salePrice-desc"  value="desc">Price (High &gt; Low)</option>
                                 </select>
                             </form>
                         </div>
@@ -123,22 +123,39 @@
                                 <div class="product-thumb clearfix mb_30">
                                     <div class="image product-imageblock">
                                         <a th:href="@{'/product/' + ${item.getId()} + '/detail'}">
-                                            <img data-name="product_image" th:src="@{'/images/product/' + ${item.image}}"
-                                            th:alt="${item.image}" th:title="${item.image}" class="img-responsive"/>
+                                            <img data-name="product_image"
+                                                 th:src="@{'/images/product/' + ${item.image}}"
+                                                 th:alt="${item.image}" th:title="${item.image}"
+                                                 class="img-responsive"/>
                                         </a>
                                         <div class="button-group text-center">
                                             <div>
-                                                <a class="quickview" th:href="@{'/product/' + ${item.getId()} + '/detail'}"></a>
+                                                <a class="quickview"
+                                                   th:href="@{'/product/' + ${item.getId()} + '/detail'}"></a>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="caption product-detail text-center">
                                         <h6 data-name="product_name" class="product-name mt_20">
-                                            <a th:href="@{'/product/' + ${item.getId()} + '/detail'}" th:title="${item.productName}"
-                                               th:utext="${item.productName}"></a>
+                                            <strong>
+                                                <a th:href="@{'/product/' + ${item.getId()} + '/detail'}"
+                                                   th:title="${item.productName}"
+                                                   th:utext="${item.productName}"></a>
+                                            </strong>
+
                                         </h6>
-                                        <span class="price">$<span class="amount" th:utext="${item.salePrice}"><span
-                                                class="currencySymbol"></span></span></span>
+                                        <th:block th:if="${item.getSalePriceDiscount() > 0}">
+                                            <span class="price"
+                                                  style="color: rgba(0,0,0,.54); text-decoration: line-through;margin-right: 5px; font-size: 14px; ">
+                                                $<span class="amount" th:utext="${item.getSalePrice()}"></span>
+                                            </span>
+                                            <span class="price" style="color: #ee4d2d;">$<span class="amount"
+                                                                                               th:utext="${item.getSalePriceDiscount()}"></span></span>
+                                        </th:block>
+                                        <th:block th:if="${item.getSalePriceDiscount() == 0}">
+                                            <span class="price" style="color: #ee4d2d;">$<span class="amount"
+                                                                                               th:utext="${item.getSalePrice()}"></span></span>
+                                        </th:block>
                                         <p class="product-desc mt_20 mb_60" th:utext="${item.description}"></p>
                                     </div>
                                 </div>
@@ -179,46 +196,6 @@
                     </ul>
                 </div>
             </div>
-            <div id="brand_carouse" class="ptb_30 text-center">
-                <div class="type-01">
-                    <div class="heading-part mb_10 ">
-                        <h2 class="main_title">Brand Logo</h2>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <div class="brand owl-carousel ptb_20">
-                                <div class="item text-center"><a href="#"><img th:src="@{/images/brand/brand1.png}"
-                                                                               alt="Disney" class="img-responsive"/></a>
-                                </div>
-                                <div class="item text-center"><a href="#"><img th:src="@{/images/brand/brand2.png}"
-                                                                               alt="Dell" class="img-responsive"/></a>
-                                </div>
-                                <div class="item text-center"><a href="#"><img th:src="@{/images/brand/brand3.png}"
-                                                                               alt="Harley" class="img-responsive"/></a>
-                                </div>
-                                <div class="item text-center"><a href="#"><img th:src="@{/images/brand/brand4.png}"
-                                                                               alt="Canon" class="img-responsive"/></a>
-                                </div>
-                                <div class="item text-center"><a href="#"><img th:src="@{/images/brand/brand5.png}"
-                                                                               alt="Canon" class="img-responsive"/></a>
-                                </div>
-                                <div class="item text-center"><a href="#"><img th:src="@{/images/brand/brand6.png}"
-                                                                               alt="Canon" class="img-responsive"/></a>
-                                </div>
-                                <div class="item text-center"><a href="#"><img th:src="@{/images/brand/brand7.png}"
-                                                                               alt="Canon" class="img-responsive"/></a>
-                                </div>
-                                <div class="item text-center"><a href="#"><img th:src="@{/images/brand/brand8.png}"
-                                                                               alt="Canon" class="img-responsive"/></a>
-                                </div>
-                                <div class="item text-center"><a href="#"><img th:src="@{/images/brand/brand9.png}"
-                                                                               alt="Canon" class="img-responsive"/></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
     <!-- =====  CONTAINER END  ===== -->
@@ -226,6 +203,7 @@
     <th:block th:include="common/footer"></th:block>
     <!-- =====  FOOTER END  ===== -->
 </div>
+<a id="scrollup"></a>
 <script th:src="@{/js/jQuery_v3.1.1.min.js}"></script>
 <script th:src="@{/js/owl.carousel.min.js}"></script>
 <script th:src="@{/js/bootstrap.min.js}"></script>
@@ -311,6 +289,29 @@
         });
         $("#amount").val("$" + $("#slider-range").slider("values", 0) + " - $" + $("#slider-range").slider("values", 1));
     });
+
+    function onloadPage() {
+        let searchField = "[[${sortField}]]";
+        let searchDir = "[[${sortDir}]]";
+        if(searchField === "salePrice" && searchDir === "asc") {
+            $('#salePrice-asc').attr('selected', "selected");
+        }
+        if(searchField === "salePrice" && searchDir === "desc") {
+            $('#salePrice-desc').attr('selected', "selected");
+        }
+        if(searchField === "productName" && searchDir === "asc") {
+            $('#productName-asc').attr('selected', "selected");
+        }
+        if(searchField === "productName" && searchDir === "asc") {
+            $('#productName-desc').attr('selected', "selected");
+        }
+
+        $('#input-limit option').each(function () {
+            if($(this).val() === "[[${pageSize}]]") {
+                $(this).attr('selected', "selected");
+            }
+        });
+    }
 </script>
 </body>
 </html>

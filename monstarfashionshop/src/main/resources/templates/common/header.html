@@ -1,3 +1,12 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+</head>
+<body>
 <!-- =====  HEADER START  ===== -->
 <header id="header">
     <div class="header-top">
@@ -51,26 +60,122 @@
                         <input id="search-input" name="search" value="" placeholder="Tìm kiếm sản phẩm, danh mục"
                                class="form-control input-lg" autocomplete="off" type="text">
                         <span class="input-group-btn">
-                            <button id="search-submit" type="button" class="btn btn-default btn-lg"><i class="fa fa-search"></i></button>
+                            <button id="search-submit" type="button" class="btn btn-default btn-lg"><i
+                                    class="fa fa-search"></i></button>
                         </span>
                     </div>
                 </div>
                 <div class="navbar-header col-xs-6 col-sm-4">
                     <a class="navbar-brand" href="home.html">
-                    <img alt="MonstarFashionShop" th:src="@{/images/logo.png}">
+                        <img alt="MonstarFashionShop" th:src="@{/images/logo.png}">
                     </a>
                 </div>
                 <div class="col-xs-6 col-sm-4 shopcart">
                     <div id="cart" class="btn-group btn-block mtb_40">
-                        <button type="button" class="btn" data-target="#cart-dropdown" data-toggle="collapse" aria-expanded="true">
+                        <button type="button" class="btn" data-target="#cart-dropdown" data-toggle="collapse"
+                                aria-expanded="true">
                             <span id="shoppingcart">Giỏ hàng</span>
                             <span id="cart-total">Số mặt hàng
-                                <span id="cart-size" th:if="${session.cart}" th:utext="${'(' + session.cart.size() +')'}"></span>
+                                <span id="cart-size" th:if="${session.cart}"
+                                      th:utext="${'(' + session.cart.size() +')'}"></span>
                                 <span id="cart-size" th:unless="${session.cart}">(0)</span>
                             </span>
                         </button>
                     </div>
-                    <div id="cart-dropdown" class="cart-menu collapse">Empty!
+                    <div id="cart-dropdown" class="cart-menu collapse">
+                        <th:block th:if="${session.cart}">
+                            <ul id="smal-cart-view" style="width: 280px;">
+                                <li>
+                                    <table class="table table-striped">
+                                        <tbody id="items-cart-header" th:each="item : ${session.cart}">
+                                        <tr th:attr="data_productDetail_header=${item.getKey()}">
+                                            <td class="text-center">
+                                                <a th:href="@{'/product/' + ${item.getKey()} + '/detail'}">
+                                                    <img th:src="@{'/images/product/' + ${item.getValue().getProductDetail().getImage()}}"
+                                                         alt="iPod Classic" title="iPod Classic"
+                                                         style="width: 60px; max-height: 100%;">
+                                                </a>
+                                            </td>
+                                            <td class="text-left product-name">
+                                                <a th:href="@{'/product/' + ${item.getKey()} + '/detail'}"
+                                                   th:utext="${item.getValue().getProductDetail().getProduct().getProductName()}"></a>
+                                                <p>
+                                                    <span><strong>Đơn giá : </strong></span>
+                                                    <span class="text-left"
+                                                        th:utext="${item.getValue().getProductDetail().getProduct().getSalePriceDiscount()}"><span>đ</span></span>
+                                                    <span class="text-right" style="margin-left: 5px; text-decoration: line-through; font-size: 11px;"
+                                                          th:utext="${item.getValue().getProductDetail().getProduct().getSalePrice()}"><span>đ</span></span>
+                                                </p>
+                                                <p>
+                                                    <span><strong>Màu sắc : </strong></span>
+                                                    <span th:utext="${item.getValue().getProductDetail().getProductColor().getColorName()}"></span>
+                                                </p>
+                                                <p>
+                                                    <span><strong>Size : </strong></span><span
+                                                        th:utext="${item.getValue().getProductDetail().getProductSize().getSizeName()}"></span>
+                                                </p>
+                                                <p>
+                                                    <span><strong>Số lượng : </strong></span><span id="item-quantity-header"
+                                                        th:utext="${item.getValue().getQuantitiesProduct()}"><span>đ</span></span>
+                                                </p>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </li>
+                                <li>
+                                    <table class="table" id="caculate-total-Cart">
+                                        <tbody>
+                                        <tr>
+                                            <td class="text-right"><strong>Tạm tính:</strong></td>
+                                            <td class="text-right"><span id="total-items-pay-header"
+                                                                         th:utext="${session.totalPay}"></span></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </li>
+                                <li>
+                                    <div style="display:flex; justify-content: space-between;">
+                                        <a th:href="@{/cart}">
+                                            <button class="btn pull-left mt_10" type="button">xem giỏ hàng</button>
+                                        </a>
+                                        <a th:href="@{/checkout}">
+                                            <button class="btn pull-right mt_10" type="button">Checkout</button>
+                                        </a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </th:block>
+                        <th:block th:unless="${session.cart}">
+                            <ul id="smal-cart-view" style="width: 280px;">
+                                <li>
+                                    <table class="table table-striped">
+                                        <tbody id="items-cart-header">
+                                        </tbody>
+                                    </table>
+                                </li>
+                                <li>
+                                    <table class="table">
+                                        <tbody>
+                                        <tr>
+                                            <td class="text-center"><strong>Tạm tính:</strong></td>
+                                            <td class="text-center"><span id="total-items-pay-header"></span></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </li>
+                                <li>
+                                    <div style="display:flex; justify-content: space-between;">
+                                        <a href="/cart">
+                                            <button class="btn pull-left mt_10" type="button">xem giỏ hàng</button>
+                                        </a>
+                                        <a href="/checkout">
+                                            <button class="btn pull-right mt_10" type="button">Checkout</button>
+                                        </a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </th:block>
                     </div>
                 </div>
             </div>
@@ -84,7 +189,8 @@
                         <li><a th:href="@{/}">Trang chủ</a></li>
                         <li><a th:href="@{'/category?name=Men&page=1&sortField=salePrice&sortDir=asc&pageSize=6'}">Quần áo nam</a></li>
                         <li><a th:href="@{'/category?name=Women&page=1&sortField=salePrice&sortDir=asc&pageSize=6'}">Quần áo nữ</a></li>
-                        <li><a href="contact_us.html">Liên hệ</a></li>
+                        <li><a href="#">Khuyến mãi</a></li>
+                        <li><a href="#">Liên hệ</a></li>
 
                     </ul>
                 </div>
@@ -92,3 +198,6 @@
             </nav>
         </div>
     </div>
+</header>
+</body>
+</html>

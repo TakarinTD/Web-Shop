@@ -25,11 +25,34 @@ public interface ProductDetailRepository extends JpaRepository<ProductDetail, Lo
     Integer countAvailableByCategoryAndColor(@Param("categoryId") Long categoryId, @Param("colorId") Long colorId);
 
     @Query(value = "select sum(w.quantity_available)\n" +
+            "from warehouse as w \n" +
+            "inner join product_detail as pd on w.product_detail_id = pd.id \n" +
+            "inner join product as p on pd.product_id = p.id \n" +
+            "inner join category as c on p.category_id = c.id\n" +
+            "inner join product_color as pc on pd.product_color_id = pc.id \n" +
+            "where (p.product_name like %:keyword% or c.category_name like %:keyword%) and pc.id = :colorId\n" +
+            "order by pc.color_name asc",
+            nativeQuery = true)
+    Integer countAvailableByKeywordAndColor(@Param("keyword") String keyword, @Param("colorId") Long colorId);
+
+    @Query(value = "select sum(w.quantity_available)\n" +
             "from warehouse as w inner join product_detail as pd on w.product_detail_id = pd.id\n" +
             "inner join product as p on pd.product_id = p.id\n" +
+            "inner join category as c on p.id = c.id\n" +
             "inner join product_size as ps on pd.product_color_id = ps.id\n" +
             "where p.category_id = :categoryId and ps.id = :sizeId\n" +
             "order by ps.size_name asc ",
             nativeQuery = true)
     Integer countAvailableByCategoryAndSize(@Param("categoryId") Long categoryId, @Param("sizeId") Long sizeId);
+
+    @Query(value = "select sum(w.quantity_available)\n" +
+            "from warehouse as w \n" +
+            "inner join product_detail as pd on w.product_detail_id = pd.id\n" +
+            "inner join product as p on pd.product_id = p.id\n" +
+            "inner join category as c on p.category_id = c.id\n" +
+            "inner join product_size as ps on pd.product_size_id = ps.id\n" +
+            "where (p.product_name like %:keyword% or c.category_name like %:keyword%) and ps.id = :sizeId\n" +
+            "order by ps.size_name asc",
+            nativeQuery = true)
+    Integer countAvailableByKeywordAndSize(@Param("keyword") String keyword, @Param("sizeId") Long sizeId);
 }

@@ -6,7 +6,7 @@
 <head>
     <!-- =====  BASIC PAGE NEEDS  ===== -->
     <meta charset="utf-8">
-    <title>Cart</title>
+    <title>Thanh toán</title>
     <!-- =====  SEO MATE  ===== -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="description" content="">
@@ -27,12 +27,6 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/magnific-popup.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/css/owl.carousel.css}">
     <link rel="shortcut icon" th:href="@{/images/favicon.png}">
-    <style type="text/css">
-        td {
-            text-align: center;
-            vertical-align: middle;
-        }
-    </style>
 </head>
 
 <body>
@@ -72,98 +66,11 @@
                 </div>
             </div>
             <div class="col-sm-8 col-lg-9 mtb_20">
-                <div class="table-responsive">
-                    <table class="table table-bordered">
-                        <thead>
-                        <tr>
-                            <td class="text-center" style="width: 15%;">Ảnh</td>
-                            <td class="text-center">Tên sản phẩm</td>
-                            <td class="text-center">Số lượng</td>
-                            <td class="text-center">xóa</td>
-                            <td class="text-center">Đơn giá</td>
-                            <td class="text-right">Tổng</td>
-                        </tr>
-                        </thead>
-                        <tbody id="items-cart">
-                        <th:block th:if="${session.cart}" th:each="item : ${session.cart}">
-                            <tr th:attr="data_productDetail=${item.getKey()}">
-                                <td class="text-center">
-                                    <a th:href="@{'product/' + ${item.getKey()} + '/detail'}">
-                                        <img style="max-height: 100px;"
-                                             th:src="@{'/images/product/' + ${item.getValue().getProductDetail().getImage()}}"
-                                             alt="iPod Classic" title="iPod Classic">
-                                    </a>
-                                </td>
-                                <td class="text-center">
-                                    <a th:href="@{'product/' + ${item.getKey()} + '/detail'}"
-                                       th:utext="${item.getValue().getProductDetail().getProduct().getProductName()}">
-                                    </a>
-                                    <p>
-                                        <span><strong>Màu sắc : </strong></span><span
-                                            th:utext="${item.getValue().getProductDetail().getProductColor().getColorName()}"></span>
-                                    </p>
-                                    <p>
-                                        <span><strong>Size : </strong></span><span
-                                            th:utext="${item.getValue().getProductDetail().getProductSize().getSizeName()}"></span>
-                                    </p>
-                                </td>
-                                <td class="text-center">
-                                    <div style="display: inline-table; width: 100px;" class="input-group btn-block">
-                                        <span class="input-group-btn">
-                                            <button class="btn btn-danger" data-toggle="tooltip" type="button"
-                                                    data-original-title="bớt">
-                                                -
-                                            </button>
-                                        </span>
-                                        <input type="text" class="form-control quantity"
-                                               th:value="${item.getValue().getQuantitiesProduct()}" name="quantity">
-                                        <span class="input-group-btn">
-                                            <button class="btn btn-danger" data-toggle="tooltip" type="button"
-                                                    data-original-title="thêm">
-                                                +
-                                            </button>
-                                        </span>
-                                    </div>
-                                </td>
-                                <td>
-                                    <button style="display: inline-table;" class="btn btn-danger" type="button" data-original-title="xóa">
-                                        <i class="fa fa-times-circle"></i>
-                                    </button>
-                                </td>
-                                <td class="text-center">
-                                    <p style="font-size: 15px; font-weight: 500; color: black;" class="unit-item-price" th:utext="${item.getValue().getProductDetail().getProduct().getSalePriceDiscount()}"></p>
-                                    <p>
-                                        <span style="text-decoration: line-through;" th:utext="${item.getValue().getProductDetail().getProduct().getSalePrice()}"></span> <span>đ</span>
-                                         |
-                                        <span>- </span><span style="font-weight: 500; color: black;" th:utext="${item.getValue().getProductDetail().getProduct().getPromotion().getDiscount() * 100}"></span><span>%</span>
-                                    </p>
-
-                                </td>
-                                <td class="text-right total-item-price" style="font-size: 15px;"
-                                    th:utext="${item.getValue().getTotalProductPay()}"><span>đ</span></td>
-                            </tr>
-                        </th:block>
-                        </tbody>
-                    </table>
+                <div class="text-center">
+                    <h3 style="color: #4cae4c">Bạn đã đặt hàng thành công, theo dõi đơn hàng của mình tại mục quản lý đơn hàng</h3>
                 </div>
-                <div class="row">
-                    <div class="col-sm-5 col-sm-offset-7">
-                        <table class="table table-bordered">
-                            <tbody>
-                            <tr>
-                                <td class="text-right"><strong>Tạm tính:</strong></td>
-                                <td class="text-right"><span id="total-items-pay" th:utext="${session.totalPay}"></span>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                <button class="btn pull-left mt_30">
-                    <a th:href="@{/}" style="color: white;">Continue Shopping</a>
-                </button>
-                <button class="btn pull-right mt_30">
-                    <a th:href="@{/checkout}" style="color: white;">Checkout</a>
+                <button class="btn center-pill mt_30">
+                    <a th:href="@{/}" style="color: white;">Quay về trang chủ</a>
                 </button>
             </div>
         </div>
@@ -213,14 +120,16 @@
             if (oldQuantity > 1) {
                 let newQuantity = oldQuantity - 1;
                 let idProductDetail = self.closest("tr").attr("data_productDetail");
-                let unitItemPrice = parseFloat(self.closest("tr").find("p.unit-item-price").text());
+                let unitItemPrice = parseFloat(self.closest("tr").children("td.unit-item-price").text());
                 $('tr[data_productDetail_header="' + idProductDetail + '"]').find("td > p > span#item-quantity-header").text(newQuantity);
                 self.closest("tr").find("input[name='quantity']").val(newQuantity);
-                self.closest("tr").find("td.total-item-price").text(parseFloat(unitItemPrice * newQuantity));
-                editItemCart(idProductDetail, unitItemPrice, oldQuantity, newQuantity);
+                self.closest("tr").children("td.total-item-price").text(parseFloat(unitItemPrice * newQuantity));
+                editItemCart(idProductDetail, oldQuantity, newQuantity);
             } else {
                 self.closest("tr").find("input[name='quantity']").val(1);
             }
+
+
         });
 
         $("button[data-original-title='thêm']").click(function () {
@@ -228,11 +137,11 @@
             let oldQuantity = parseInt(self.parent().siblings("input[name='quantity']").val());
             let newQuantity = oldQuantity + 1;
             let idProductDetail = self.closest("tr").attr("data_productDetail");
-            let unitItemPrice = parseFloat(self.closest("tr").find("p.unit-item-price").text());
+            let unitItemPrice = parseFloat(self.closest("tr").children("td.unit-item-price").text());
             $('tr[data_productDetail_header="' + idProductDetail + '"]').find("td > p > span#item-quantity-header").text(newQuantity);
             self.closest("tr").find("input[name='quantity']").val(newQuantity);
-            self.closest("tr").find("td.total-item-price").text(parseFloat(unitItemPrice * newQuantity));
-            editItemCart(idProductDetail, unitItemPrice, oldQuantity, newQuantity);
+            self.closest("tr").children("td.total-item-price").text(parseFloat(unitItemPrice * newQuantity));
+            editItemCart(idProductDetail, oldQuantity, newQuantity);
         });
 
         $("button[data-original-title='xóa']").click(function () {
@@ -255,7 +164,7 @@
             $("#total-pay-header").text(totalPay + totalPay * 0.2);
         }
 
-        function editItemCart(idProductDetail, unitItemPrice, oldQuantity, newQuantity) {
+        function editItemCart(idProductDetail, oldQuantity, newQuantity) {
             let data = {};
             data.productDetailId = idProductDetail;
             data.quantity = newQuantity;
@@ -267,8 +176,7 @@
                 success: function (result) {
                     if (result === false) {
                         alert("Không đủ số lượng đáp ứng");
-                        $('tr[data_productDetail="' + idProductDetail + '"]').find("input[name='quantity']").val(oldQuantity);
-                        $('tr[data_productDetail="' + idProductDetail + '"]').find("td.total-item-price").text(parseFloat(unitItemPrice * oldQuantity));
+                        $('tr[data_productDetail="' + idProductDetail + '"]').closest("tr").find("input[name='quantity']").val(oldQuantity);
                         $('#item-quantity-header').text(oldQuantity);
                     } else {
                         caculateTotalCart();
