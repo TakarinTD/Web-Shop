@@ -1,5 +1,6 @@
 package com.example.demo.entity;
 
+import com.example.demo.dto.*;
 import com.fasterxml.jackson.annotation.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -28,8 +29,8 @@ public class User {
     @Column (name = "password")
     private String password;
 
-    @Column (name = "password_confirm")
-    private String passwordConfirm;
+//    @Column (name = "password_confirm")
+//    private String passwordConfirm;
 
     @Column (name = "fullname")
     private String fullName;
@@ -72,6 +73,12 @@ public class User {
     private Set<Role> roles;
 
     public User () {
+    }
+
+    public User (String email, String password, String fullName) {
+        this.email = email;
+        this.password = password;
+        this.fullName = fullName;
     }
 
     public Long getId () {
@@ -185,13 +192,13 @@ public class User {
         orders.add(order);
     }
 
-    public String getPasswordConfirm () {
-        return passwordConfirm;
-    }
-
-    public void setPasswordConfirm (String passwordConfirm) {
-        this.passwordConfirm = passwordConfirm;
-    }
+//    public String getPasswordConfirm () {
+//        return passwordConfirm;
+//    }
+//
+//    public void setPasswordConfirm (String passwordConfirm) {
+//        this.passwordConfirm = passwordConfirm;
+//    }
 
     public int getStatus () {
         return status;
@@ -200,4 +207,9 @@ public class User {
     public void setStatus (int status) {
         this.status = status;
     }
+
+//    public User convertUserRegisterDTOToUser(UserRegisterDTO userRegisterDTO){
+//        User user=new User(userRegisterDTO.getEmail(),userRegisterDTO.getPassword(),userRegisterDTO.getFullName());
+//        return user;
+//    }
 }
