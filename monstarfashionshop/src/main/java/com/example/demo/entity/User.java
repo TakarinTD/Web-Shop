@@ -1,11 +1,10 @@
 package com.example.demo.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.example.demo.dto.UserRegisterDTO;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -30,6 +29,7 @@ public class User {
     private String fullName;
 
     @Column(name = "birthday")
+    @DateTimeFormat(pattern = "dd-MM-yyyy")
     private Date birthday;
 
     @Column(name = "address")
@@ -55,15 +55,25 @@ public class User {
     private Date updatedAt;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonIgnore
     private Set<Order> orders;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Set<Review> reviews;
+
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "user_role",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
 
     public User() {
+    }
+
+    public User (String email, String password, String fullName) {
+        this.email = email;
+        this.password = password;
+        this.fullName = fullName;
     }
 
     public Long getId() {
@@ -162,6 +172,14 @@ public class User {
         this.orders = orders;
     }
 
+    public Set<Review> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(Set<Review> reviews) {
+        this.reviews = reviews;
+    }
+
     public Set<Role> getRoles() {
         return roles;
     }
@@ -175,5 +193,10 @@ public class User {
             orders = new HashSet<>();
         }
         orders.add(order);
+    }
+
+    public User convertUserRegisterDTOToUser(UserRegisterDTO userRegisterDTO){
+        User user=new User(userRegisterDTO.getEmail(),userRegisterDTO.getPassword(),userRegisterDTO.getFullName());
+        return user;
     }
 }

@@ -71,5 +71,4 @@ public class SearchController extends BaseController{
 
         return _mvShare;
     }
-
 }

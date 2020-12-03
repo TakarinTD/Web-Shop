@@ -19,7 +19,7 @@ public class OrderServiceImpl implements OrderService {
     public boolean save(Order order) {
         try {
             Order savedOrder = orderRepository.save(order);
-            System.out.println("order is saved with id : " + savedOrder.getId());
+//            System.out.println("order is saved with id : " + savedOrder.getId());
             return true;
         }catch (RuntimeException e) {
             // add log errors or other logic here

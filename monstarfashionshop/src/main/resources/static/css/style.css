@@ -2844,6 +2844,20 @@ a.thumbnail:hover, a.thumbnail:focus, a.thumbnail.active {
     width: 150px;
     }
 }
+#scrollup::before {
+    background: #e40001 none repeat scroll 0 0;
+    bottom: 20px;
+    color: #fff;
+    content: "\f106";
+    font-family: fontawesome;
+    font-size: 25px;
+    height: 40px;
+    padding: 6px 12px;
+    position: fixed;
+    right: 20px;
+    width: 40px;
+    z-index: 99;
+}
 
     #scrollup::before {
         background: #e40001 none repeat scroll 0 0;

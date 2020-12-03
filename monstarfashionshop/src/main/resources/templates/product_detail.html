@@ -250,12 +250,9 @@
                             <li class="item product-layout-left mb_20">
                                 <div class="product-list col-xs-4">
                                     <div class="product-thumb">
-                                        <div class="image product-imageblock"><a href="product_detail.html"> <img
-                                                class="img-responsive" title="iPod Classic" alt="iPod Classic"
-                                                th:src="@{/images/product/product2.jpg}"> <img class="img-responsive"
-                                                                                               title="iPod Classic"
-                                                                                               alt="iPod Classic"
-                                                                                               th:src="@{/images/product/product2-1.jpg}">
+                                        <div class="image product-imageblock"><a href="product_detail.html">
+                                            <img class="img-responsive" title="iPod Classic" alt="iPod Classic" th:src="@{/images/product/product2.jpg}">
+                                            <img class="img-responsive" title="iPod Classic" alt="iPod Classic" th:src="@{/images/product/product2-1.jpg}">
                                         </a></div>
                                     </div>
                                 </div>
@@ -341,8 +338,7 @@
                                             <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i><i
                                                     class="fa fa-star fa-stack-x"></i></span>
                                         </div>
-                                        <span class="price"><span class="amount"><span class="currencySymbol">$</span>70.00</span>
-                      </span>
+                                        <span class="price"><span class="amount"><span class="currencySymbol">$</span>70.00</span></span>
                                     </div>
                                 </div>
                             </li>
@@ -379,7 +375,9 @@
                                 <a th:href="@{'/product/' + ${product.getId()} + '/detail'}"
                                    th:utext="*{productName}"></a>
                             </h4>
-                            <br>
+                            <div class="rating">
+                                <label>Ratting : </label><label>4.5</label><label>/5</label>
+                            </div>
                             <span class="price mb_20">
                                 <th:block th:if="${product.getSalePriceDiscount() > 0}">
                                     <span style="font-size: 25px; line-height: 40px; margin-right: 8px;" class="amount"><span
@@ -450,50 +448,80 @@
                             </ul>
                             <div class="tab-content ">
                                 <div class="tab-pane active" id="1c">
-                                    <p>CLorem ipsum dolor sit amet, consectetur adipiscing elit. Ut lobortis malesuada
-                                        mi id tristique. Sed ipsum nisi, dapibus at faucibus non, dictum a diam. Nunc
-                                        vitae interdum diam. Sed finibus, justo vel maximus facilisis, sapien turpis
-                                        euismod tellus, vulputate semper diam ipsum vel tellus.</p>
+                                    <th:block th:if="${product}" th:object="${product}">
+                                    <p th:utext="${product.getDescription()}"></p>
+                                    </th:block>
                                 </div>
+
                                 <div class="tab-pane" id="2c">
-                                    <form class="form-horizontal">
+                                    <form class="form-horizontal" th:action="@{/postReview}" th:object="${oneReview}" method="post">
                                         <div id="review"></div>
                                         <h4 class="mt_20 mb_30">Write a review</h4>
                                         <div class="form-group required">
                                             <div class="col-sm-12">
-                                                <label class="control-label" for="input-name">Your Name</label>
-                                                <input name="name" value="" id="input-name" class="form-control"
-                                                       type="text">
+                                                <label class="control-label" for="title">Tiêu đề</label>
+                                                <input th:field="*{title}" id="title" class="form-control" type="text">
                                             </div>
                                         </div>
                                         <div class="form-group required">
                                             <div class="col-sm-12">
-                                                <label class="control-label" for="input-review">Your Review</label>
-                                                <textarea name="text" rows="5" id="input-review"
-                                                          class="form-control"></textarea>
-                                                <div class="help-block"><span class="text-danger">Note:</span> HTML is
-                                                    not translated!
-                                                </div>
+                                                <label class="control-label" for="comment">Nội dung</label>
+                                                <textarea th:field="*{comment}" rows="5" id="comment" class="form-control"></textarea>
                                             </div>
                                         </div>
                                         <div class="form-group required">
                                             <div class="col-md-6">
                                                 <label class="control-label">Rating</label>
-                                                <div class="rates"><span>Bad</span>
-                                                    <input name="rating" value="1" type="radio">
-                                                    <input name="rating" value="2" type="radio">
-                                                    <input name="rating" value="3" type="radio">
-                                                    <input name="rating" value="4" type="radio">
-                                                    <input name="rating" value="5" type="radio">
+                                                <div class="rates">
+                                                    <span>Bad</span>
+                                                    <input th:field="*{ratting}" value="1" type="radio">
+                                                    <input th:field="*{ratting}" value="2" type="radio">
+                                                    <input th:field="*{ratting}" value="3" type="radio">
+                                                    <input th:field="*{ratting}" value="4" type="radio">
+                                                    <input th:field="*{ratting}" value="5" type="radio">
                                                     <span>Good</span></div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="buttons pull-right">
-                                                    <button type="submit" class="btn btn-md btn-link">Continue</button>
+                                                    <button type="submit" class="btn btn-md btn-link">Bình luận</button>
                                                 </div>
                                             </div>
                                         </div>
                                     </form>
+                                    <th:block th:if="${product}">
+                                        <div class="list-review">
+                                            <h4>Các bình luận về sản phẩm</h4>
+                                            <ul th:each="review : ${product.getReviews()}">
+                                                <li class="review-item" th:attr="data-id_comment=${review.getId()}">
+                                                    <div class="row" style="margin-top: 10px; margin-bottom: 10px;">
+                                                        <div class="col-md-12">
+                                                            <div class="review-user">
+                                                                <div style="float: left; border-radius: 10px;" class="review-avater">
+                                                                    <img src="#" alt="Image">
+                                                                </div>
+                                                                <div style="margin-left: 10px;float: left;">
+                                                                    <h5 class="user-name" th:utext="${review.getUser().getFullName()}"></h5>
+                                                                    <p class="comment-date" th:utext="${review.getCreatedAt()}"></p>
+                                                                </div>
+                                                                <div style="float: right">
+                                                                    Đánh giá : <label class="ratting" th:utext="${review.getRatting()}"></label><label>/5</label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-12">
+                                                            <div class="review-des" style="margin-top: 10px;">
+                                                                <p class="title"><strong th:utext="${review.getTitle()}"></strong></p>
+                                                                <div class="review-content">
+                                                                    <span th:utext="${review.getComment()}"></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <hr/>
+                                            </ul>
+                                        </div>
+                                    </th:block>
                                 </div>
                             </div>
                         </div>
@@ -788,7 +816,6 @@
             "                                </li>"
         $("#smal-cart-view").append(html);
     }
-
     /*]]>*/
 </script>
 </body>

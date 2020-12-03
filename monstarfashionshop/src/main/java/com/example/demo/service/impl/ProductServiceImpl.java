@@ -70,11 +70,6 @@ public class ProductServiceImpl implements ProductService {
         return productRepository.findProductsByCategoryId(categoryId, pageable);
     }
 
-//    @Override
-//    public List<Product> findProducts(String categoryName) {
-//        return productRepository.findProductsByCategoryCategoryName(categoryName);
-//    }
-
     @Override
     public Page<Product> findProductByKeyword(String keyword, List<Long> colorIds, List<Long> sizeIds, float price1, float price2, int page, int pageSize, String sortField, String sortDir) {
         Pageable pageable = PageRequest.of(page - 1, pageSize,
@@ -189,14 +184,4 @@ public class ProductServiceImpl implements ProductService {
         return listSizeAndAmount;
     }
 
-
-//    @Override
-//    public List<ProductDTO> getProductsTopSaleMan() {
-//        return null;
-//    }
-//
-//    @Override
-//    public List<ProductDTO> getProductsTopSaleWomen() {
-//        return null;
-//    }
 }

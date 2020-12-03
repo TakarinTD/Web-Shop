@@ -51,10 +51,14 @@ public class Product {
     @OneToMany (mappedBy = "product", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<ProductDetail> productDetails;
 
+    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Set<Review> reviews;
+
     @ManyToOne (cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "promotion_id")
     @JsonIgnore
     private Promotion promotion;
+
 
     public Product () {
     }
@@ -137,6 +141,14 @@ public class Product {
 
     public void setPromotion(Promotion promotion) {
         this.promotion = promotion;
+    }
+
+    public Set<Review> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(Set<Review> reviews) {
+        this.reviews = reviews;
     }
 
     public String getImage() {

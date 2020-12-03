@@ -56,10 +56,6 @@ public class CheckoutController extends BaseController{
                 order.setUser(user);
             }
             cart.values().forEach(orderDetail -> {
-                // sub quantity in warehouse after payment
-                Warehouse warehouse = orderDetail.getProductDetail().getWarehouse();
-                warehouse.setQuantityAvailable(orderDetail.getProductDetail().getWarehouse().getQuantityAvailable() - orderDetail.getQuantitiesProduct());
-                wareHouseService.updateQuantity(warehouse);
                 //set relationship between order and orderDetail
                 orderDetail.setOrder(order);
                 order.addOrderDetail(orderDetail);
@@ -73,12 +69,17 @@ public class CheckoutController extends BaseController{
                 order.setTotalPay(totalPay + Constant.SLOW_SHIP_PRICE + vat);
             }
 
-            // save order
-            if (orderService.save(order)) {
-                // add code to send info of order to account's customer here
-                _mvShare.addObject("success", "Bạn đã thanh toán thành công");
+            try {
+                // save order
+                orderService.save(order);
+                // sub quantity in warehouse after payment
+                order.getOrderDetails().forEach(orderDetail -> {
+                    Warehouse warehouse = orderDetail.getProductDetail().getWarehouse();
+                    warehouse.setQuantityAvailable(orderDetail.getProductDetail().getWarehouse().getQuantityAvailable() - orderDetail.getQuantitiesProduct());
+                    wareHouseService.updateQuantity(warehouse);
+                });
                 session.removeAttribute("cart");
-            } else {
+            } catch (RuntimeException e){
                 _mvShare.setViewName("404");
                 return _mvShare;
             }

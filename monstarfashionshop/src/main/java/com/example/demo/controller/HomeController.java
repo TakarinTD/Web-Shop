@@ -4,9 +4,11 @@ import com.example.demo.dto.ProductDTO;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
+import org.springframework.web.servlet.*;
 
 @Controller
 @RequestMapping("/")
@@ -20,5 +22,12 @@ public class HomeController extends BaseController{
         _mvShare.addObject("productMen", listProductMen);
         _mvShare.setViewName("home");
         return _mvShare;
+    }
+
+    @RequestMapping (value = {"/access_denied"}, method = RequestMethod.GET)
+    public ModelAndView accessDenied () {
+        ModelAndView model = new ModelAndView();
+        model.setViewName("/access_denied");
+        return model;
     }
 }

@@ -25,25 +25,26 @@ public class CartServiceImpl implements CartService {
         ProductDetail productDetail = productDetailRepository.getOne(idProductDetail);
         if(productDetail != null) {
             float pricePromotion  = 0;
+            double discountPercent = 0;
             Promotion promotion = productDetail.getProduct().getPromotion();
             if(promotion != null ) { // Checking products including promotions?
                 pricePromotion = productDetail.getProduct().getSalePrice()*promotion.getDiscount();
+                discountPercent = promotion.getDiscount();
             }
             if (cart.containsKey(idProductDetail)) {  // product exits in cart
                 orderDetail = cart.get(idProductDetail);
                 orderDetail.setQuantitiesProduct(orderDetail.getQuantitiesProduct() + quantity);
                 orderDetail.setTotalProductPay(orderDetail.getQuantitiesProduct() * (productDetail.getProduct().getSalePrice() - pricePromotion));
-                orderDetail.setDiscount(promotion.getDiscount());
+                orderDetail.setDiscount(discountPercent);
             } else { // product is not exits in in cart
                 orderDetail = new OrderDetail();
                 orderDetail.setProductDetail(productDetail);
                 orderDetail.setQuantitiesProduct(quantity);
                 orderDetail.setTotalProductPay(quantity * (productDetail.getProduct().getSalePrice() - pricePromotion));
-                orderDetail.setDiscount(promotion.getDiscount());
+                orderDetail.setDiscount(discountPercent);
             }
             cart.put(idProductDetail, orderDetail);
         }
-
         return cart;
     }
 

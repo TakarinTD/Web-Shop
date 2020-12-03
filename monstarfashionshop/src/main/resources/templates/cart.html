@@ -48,7 +48,7 @@
                         <div>Sign up and get 50% off your next Order</div>
                     </div>
                 </div>
-                <form onsubmit="return  validatpopupemail();" method="post">
+                <form onsubmit="return validatpopupemail();" method="post">
                     <div class="form-group required">
                         <input type="email" name="email-popup" id="email-popup" placeholder="Enter Your Email"
                                class="form-control input-lg" required/>
@@ -131,13 +131,17 @@
                                     </button>
                                 </td>
                                 <td class="text-center">
-                                    <p style="font-size: 15px; font-weight: 500; color: black;" class="unit-item-price" th:utext="${item.getValue().getProductDetail().getProduct().getSalePriceDiscount()}"></p>
-                                    <p>
-                                        <span style="text-decoration: line-through;" th:utext="${item.getValue().getProductDetail().getProduct().getSalePrice()}"></span> <span>đ</span>
-                                         |
-                                        <span>- </span><span style="font-weight: 500; color: black;" th:utext="${item.getValue().getProductDetail().getProduct().getPromotion().getDiscount() * 100}"></span><span>%</span>
-                                    </p>
-
+                                    <th:block th:if="${item.getValue().getProductDetail().getProduct().getPromotion()}">
+                                        <p style="font-size: 15px; font-weight: 500; color: black;" class="unit-item-price" th:utext="${item.getValue().getProductDetail().getProduct().getSalePriceDiscount()}"></p>
+                                        <p>
+                                            <span style="text-decoration: line-through;" th:utext="${item.getValue().getProductDetail().getProduct().getSalePrice()}"></span> <span>đ</span>
+                                             |
+                                            <span>- </span><span style="font-weight: 500; color: black;" th:utext="${item.getValue().getProductDetail().getProduct().getPromotion().getDiscount() * 100}"></span><span>%</span>
+                                        </p>
+                                    </th:block>
+                                    <th:block th:unless="${item.getValue().getProductDetail().getProduct().getPromotion()}">
+                                        <p style="font-size: 15px; font-weight: 500; color: black;" class="unit-item-price" th:utext="${item.getValue().getProductDetail().getProduct().getSalePrice()}"></p>
+                                    </th:block>
                                 </td>
                                 <td class="text-right total-item-price" style="font-size: 15px;"
                                     th:utext="${item.getValue().getTotalProductPay()}"><span>đ</span></td>

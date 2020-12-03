@@ -153,8 +153,9 @@
                                                                                                th:utext="${item.getSalePriceDiscount()}"></span></span>
                                         </th:block>
                                         <th:block th:if="${item.getSalePriceDiscount() == 0}">
-                                            <span class="price" style="color: #ee4d2d;">$<span class="amount"
-                                                                                               th:utext="${item.getSalePrice()}"></span></span>
+                                            <span class="price" style="color: #ee4d2d;">$
+                                                <span class="amount" th:utext="${item.getSalePrice()}"></span>
+                                            </span>
                                         </th:block>
                                         <p class="product-desc mt_20 mb_60" th:utext="${item.description}"></p>
                                     </div>

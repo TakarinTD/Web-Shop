@@ -1,5 +1,6 @@
 <!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -13,41 +14,30 @@
         <div class="container">
             <div class="row">
                 <div class="col-xs-12 col-sm-12">
-                    <ul class="header-top-right text-right">
-                        <li>
-                            <!--                                if="login==false"-->
-                            <a href="login.html">Login/Register</a>
-                        </li>
-                        <li>
-                            <!--                                if="login==true"-->
-                            <a href="home.html">Logout</a>
-                        </li>
-                        <li class="account">
-                            <a href="my_account.html">My Account</a>
-                        </li>
-                        <li class="language dropdown"><span class="dropdown-toggle" id="dropdownMenu1"
-                                                            data-toggle="dropdown" aria-haspopup="true"
-                                                            aria-expanded="false" role="button">Language <span
-                                class="caret"></span> </span>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                <li><a href="#">English</a></li>
-                                <li><a href="#">French</a></li>
-                                <li><a href="#">German</a></li>
-                                <li><a href="#">Vietnam</a></li>
+                    <th:block th:if="${#request.userPrincipal}">
+                        <div style="display: flex; justify-content: space-between;">
+                            <span style="font-size: 14px; font-weight: bolder 5px;" class="header-top-left" th:if="${#request.userPrincipal}" th:utext="${session.user.getFullName()}">
+                            </span>
+                            <ul class="header-top-right text-right">
+                                <li>
+                                    <a th:href="@{/logout}">Logout</a>
+                                </li>
+                                <li class="account">
+                                    <a th:href="@{/my_account}">My Account</a>
+                                </li>
+                                <li sec:authorize="hasRole('ROLE_ADMIN')">
+                                    <a href="#">Admin Manager</a>
+                                </li>
                             </ul>
-                        </li>
-                        <li class="currency dropdown"><span class="dropdown-toggle" id="dropdownMenu12"
-                                                            data-toggle="dropdown" aria-haspopup="true"
-                                                            aria-expanded="false" role="button">Currency <span
-                                class="caret"></span> </span>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu12">
-                                <li><a href="#">€ Euro</a></li>
-                                <li><a href="#">£ Pound Sterling</a></li>
-                                <li><a href="#">$ US Dollar</a></li>
-                                <li><a href="#">₫ VND</a></li>
-                            </ul>
-                        </li>
-                    </ul>
+                        </div>
+                    </th:block>
+                    <th:block th:unless="${#request.userPrincipal}">
+                        <ul class="header-top-right text-right">
+                            <li>
+                                <a th:href="@{/login}">Login/Register</a>
+                            </li>
+                        </ul>
+                    </th:block>
                 </div>
             </div>
         </div>
@@ -60,14 +50,13 @@
                         <input id="search-input" name="search" value="" placeholder="Tìm kiếm sản phẩm, danh mục"
                                class="form-control input-lg" autocomplete="off" type="text">
                         <span class="input-group-btn">
-                            <button id="search-submit" type="button" class="btn btn-default btn-lg"><i
-                                    class="fa fa-search"></i></button>
+                            <button id="search-submit" type="button" class="btn btn-default btn-lg"><i class="fa fa-search"></i></button>
                         </span>
                     </div>
                 </div>
                 <div class="navbar-header col-xs-6 col-sm-4">
-                    <a class="navbar-brand" href="home.html">
-                        <img alt="MonstarFashionShop" th:src="@{/images/logo.png}">
+                    <a class="navbar-brand" th:href="@{/home}">
+                    <img alt="MonstarFashionShop" th:src="@{/images/logo.png}">
                     </a>
                 </div>
                 <div class="col-xs-6 col-sm-4 shopcart">
@@ -99,13 +88,22 @@
                                             <td class="text-left product-name">
                                                 <a th:href="@{'/product/' + ${item.getKey()} + '/detail'}"
                                                    th:utext="${item.getValue().getProductDetail().getProduct().getProductName()}"></a>
-                                                <p>
-                                                    <span><strong>Đơn giá : </strong></span>
-                                                    <span class="text-left"
-                                                        th:utext="${item.getValue().getProductDetail().getProduct().getSalePriceDiscount()}"><span>đ</span></span>
-                                                    <span class="text-right" style="margin-left: 5px; text-decoration: line-through; font-size: 11px;"
-                                                          th:utext="${item.getValue().getProductDetail().getProduct().getSalePrice()}"><span>đ</span></span>
-                                                </p>
+                                                <th:block th:if="${item.getValue().getProductDetail().getProduct().getPromotion()}">
+                                                    <p>
+                                                        <span><strong>Đơn giá : </strong></span>
+                                                        <span class="text-left"
+                                                            th:utext="${item.getValue().getProductDetail().getProduct().getSalePriceDiscount()}"><span>đ</span></span>
+                                                        <span class="text-right" style="margin-left: 5px; text-decoration: line-through; font-size: 11px;"
+                                                              th:utext="${item.getValue().getProductDetail().getProduct().getSalePrice()}"><span>đ</span></span>
+                                                    </p>
+                                                </th:block>
+                                                <th:block th:unless="${item.getValue().getProductDetail().getProduct().getPromotion()}">
+                                                    <p>
+                                                        <span><strong>Đơn giá : </strong></span>
+                                                        <span class="text-left"
+                                                              th:utext="${item.getValue().getProductDetail().getProduct().getSalePrice()}"><span>đ</span></span>
+                                                    </p>
+                                                </th:block>
                                                 <p>
                                                     <span><strong>Màu sắc : </strong></span>
                                                     <span th:utext="${item.getValue().getProductDetail().getProductColor().getColorName()}"></span>
@@ -191,7 +189,6 @@
                         <li><a th:href="@{'/category?name=Women&page=1&sortField=salePrice&sortDir=asc&pageSize=6'}">Quần áo nữ</a></li>
                         <li><a href="#">Khuyến mãi</a></li>
                         <li><a href="#">Liên hệ</a></li>
-
                     </ul>
                 </div>
                 <!-- /.nav-collapse -->

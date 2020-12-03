@@ -6,7 +6,7 @@
 <head>
     <!-- =====  BASIC PAGE NEEDS  ===== -->
     <meta charset="utf-8">
-    <title>Thanh toán</title>
+    <title>Account</title>
     <!-- =====  SEO MATE  ===== -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="description" content="">
@@ -58,60 +58,44 @@
     <!-- =====  HEADER END  ===== -->
     <!-- =====  CONTAINER START  ===== -->
     <div class="container">
-        <div class="row ">
+        <div class="row">
             <div id="column-left" class="col-sm-4 col-lg-3 hidden-xs">
-                <th:block th:include="common/category_menu"></th:block>
-                <div class="left_banner left-sidebar-widget mb_50 mt_30">
-                    <a href="#"><img th:src="@{/images/left1.jpg}" alt="Left Banner" class="img-responsive"/></a>
+                <div id="category-menu" class="navbar collapse in mb_40" aria-expanded="true" style="" role="button">
+                    <div class="nav-responsive">
+                        <div class="heading-part">
+                            <h2 class="main_title">Full name's Account</h2>
+                        </div>
+                        <ul class="nav  main-navigation collapse in">
+                            <li><a th:href="@{/my_account}">Information Account</a></li>
+                            <li><a th:href="@{/my_account}">My Notice</a></li>
+                            <li><a th:href="@{/order_history}">Order Management</a></li>
+                        </ul>
+                    </div>
                 </div>
-            </div>
-            <div class="col-sm-8 col-lg-9 mtb_20">
-                <div class="text-center">
-                    <p><i class="fa fa-check-circle fa-10x" aria-hidden="true"></i></p>
-                    <h3 style="color: #4cae4c">Bạn đã đặt hàng thành công, theo dõi đơn hàng của mình tại mục quản lý đơn hàng</h3>
-                    <button class="btn center-pill mt_30">
-                        <a th:href="@{/}" style="color: white;">Quay về trang chủ</a>
-                    </button>
-                </div>
+                <div class="left_banner left-sidebar-widget mt_30 mb_40"><a href="#"><img
+                        th:src="@{/images/left1.jpg}" alt="Left Banner" class="img-responsive"/></a></div>
             </div>
         </div>
     </div>
-    <!-- =====  CONTAINER END  ===== -->
-    <!-- =====  FOOTER START  ===== -->
-    <th:block th:include="common/footer"></th:block>
-    <!-- =====  FOOTER END  ===== -->
 </div>
-<div class="chatB">
-    <button class="open-chatbox" onclick="openForm()" id="chat">Chat</button>
-    <div class="Chatbox" id="chatBoxForm">
-        <form action="" class="form-container">
-            <h1><img th:src="@{/images/chatbox.png}" style="width:50px;height:50px"/>Chat with us</h1>
-            <label for="msg"><b>We are here to help you!</b></label>
-            <textarea placeholder="Input message..." id="msg" name="msg" required></textarea>
-            <button type="submit" class="btn">Send</button>
-            <button type="button" class="btn close-chatbox" onclick="closeForm()">Close</button>
-        </form>
-    </div>
-</div>
+<th:block th:include="common/footer"></th:block>
 <a id="scrollup"></a>
-<script>
-
-    /*Open chatbox*/
-    function openForm() {
-        document.getElementById("chatBoxForm").style.display = "block";
-        document.getElementById("chat").style.display = "none";
-    }
-
-    /*Close chat box*/
-    function closeForm() {
-        document.getElementById("chatBoxForm").style.display = "none";
-        document.getElementById("chat").style.display = "block";
-    }
-</script>
 <script th:src="@{/js/jQuery_v3.1.1.min.js}"></script>
 <script th:src="@{/js/owl.carousel.min.js}"></script>
 <script th:src="@{/js/bootstrap.min.js}"></script>
 <script th:src="@{/js/jquery.magnific-popup.js}"></script>
+<script th:src="@{/js/jquery.firstVisitPopup.js}"></script>
 <script th:src="@{/js/custom.js}"></script>
+<script th:src="@{/js/editInfo.js}"></script>
+<script>
+    $(document).ready(function() {
+        $('input[type="checkbox"]').click(function() {
+        if( document.getElementById("change").checked == true){
+            $("#changePassword").show();
+        } else $("#changePassword").hide();
+        });
+    });
+
+</script>
 </body>
 </html>

@@ -101,13 +101,11 @@
                                             <p>Tùy chọn thanh toán:</p>
                                             <div class="radio">
                                                 <label>
-                                                    <input type="radio" checked="checked" value="register"
-                                                           name="account"> Đăng ký tài khoản</label>
+                                                    <input type="radio" checked="checked" value="register" name="account"> Đăng ký tài khoản</label>
                                             </div>
                                             <div class="radio">
                                                 <label>
-                                                    <input type="radio" value="guest" name="account"> Thanh toán không
-                                                    cần tài khoản</label>
+                                                    <input type="radio" value="guest" name="account"> Thanh toán không cần tài khoản</label>
                                             </div>
                                             <p>Bằng cách tạo tài khoản, bạn sẽ có thể mua sắm nhanh hơn, cập nhật tình
                                                 trạng đơn hàng và theo dõi các đơn hàng bạn đã thực hiện trước đó.</p>
@@ -157,54 +155,47 @@
                             <div id="collapseTwo" class="panel-collapse collapse">
                                 <div class="panel-body">
                                     <th:block th:if="${session.user}">
-                                        <div id="reciver-name">
-                                            <label>Tên người nhận: </label><input class="form-control"
-                                                                                  name="reciver-name"
-                                                                                  th:value="${session.user.getFullName()}"
-                                                                                  th:field="*{reciverName}"/>
+                                        <div>
+                                            <label th:utext="${session.user.getFullName()}"></label>
+                                            <label>Tên người nhận: </label>
+                                            <input class="form-control" th:value="${session.user.getFullName()}" id="reciverName" name="reciverName"/>
                                         </div>
                                         <br/>
                                         <div id="phone">
-                                            <label>Số điện thoại liên hệ: </label><input class="form-control"
-                                                                                         name="phone"
-                                                                                         th:value="${session.user.getPhone()}"
-                                                                                         th:field="*{phone}"/>
+                                            <label>Số điện thoại liên hệ: </label>
+                                            <input class="form-control" th:value="${session.user.getPhone()}" id="phone" name="phone"/>
                                         </div>
                                         <br/>
 
                                         <label>Địa chỉ giao hàng: </label><br>
                                         <div class="radio">
-                                            <label><input checked="checked" type="radio" value="existing"
-                                                          name="shipping_address"> Tôi muốn sử dụng địa chỉ hiện tại
+                                            <label>
+                                                <input checked="checked" type="radio" value="existing" name="shipping_address"> Tôi muốn sử dụng địa chỉ hiện tại
                                             </label>
                                             <br/>
-                                            <label><input type="radio" value="new" name="shipping_address"> Tôi mốn sử
-                                                dụng địa chỉ mới</label>
+                                            <label>
+                                                <input type="radio" value="new" name="shipping_address"> Tôi mốn sử dụng địa chỉ mới
+                                            </label>
                                         </div>
                                         <div id="shipping-existing">
-                                            <input class="form-control" name="address-detail"
-                                                   th:value="${session.user.getAddress()}" th:field="*{address}"/>
+                                            <input class="form-control" th:value="${session.user.getAddress()}" id="address" name="address"/>
                                         </div>
                                         <div id="shipping-new">
-                                            <input class="form-control" name="address-detail" th:field="*{address}"/>
+                                            <input class="form-control" id="address" name="address"/>
                                         </div>
                                     </th:block>
                                     <th:block th:unless="${session.user}">
-                                        <div id="reciver-name">
-                                            <label>Tên người nhận: </label><input class="form-control"
-                                                                                  name="reciver-name"
-                                                                                  th:field="*{reciverName}"/>
+                                        <div>
+                                            <label>Tên người nhận: </label><input class="form-control" th:field="*{reciverName}"/>
                                         </div>
                                         <br/>
                                         <div id="phone">
-                                            <label>Số điện thoại liên hệ: </label><input class="form-control"
-                                                                                         name="phone"
-                                                                                         th:field="*{phone}"/>
+                                            <label>Số điện thoại liên hệ: </label><input class="form-control" th:field="*{phone}"/>
                                         </div>
                                         <br>
                                         <label>Địa chỉ giao hàng: </label><br>
                                         <div id="shipping-address">
-                                            <input class="form-control" name="address-detail" th:field="*{address}"/>
+                                            <input class="form-control" th:field="*{address}"/>
                                         </div>
                                     </th:block>
                                     <br/>
@@ -212,10 +203,8 @@
                                     <label><strong>Loại hình giao hàng</strong></label>
                                     <div class="radio">
                                         <label><input type="radio" checked="checked" id="slow-method" value="slow"
-                                                      name="shipping_method"
                                                       th:field="*{deliveryMethod}"> Giao hàng tiêu chuẩn - $1000</label><br/>
-                                        <label><input type="radio" id="flash-method" value="flash"
-                                                      name="shipping_method" th:field="*{deliveryMethod}"> Giao hàng
+                                        <label><input type="radio" id="flash-method" value="flash" th:field="*{deliveryMethod}"> Giao hàng
                                             nhanh - $2000</label>
                                     </div>
                                     <br>
@@ -282,17 +271,20 @@
                                                         <span th:utext="${item.getValue().getProductDetail().getProductSize().getSizeName()}"></span>
                                                     </p>
                                                 </td>
-                                                <td class="text-center"
-                                                    th:utext="${item.getValue().getQuantitiesProduct()}">
+                                                <td class="text-center" th:utext="${item.getValue().getQuantitiesProduct()}">
                                                 </td>
                                                 <td class="text-center">
-                                                    <p style="font-size: 15px; font-weight: 500; color: black;" th:utext="${item.getValue().getProductDetail().getProduct().getSalePriceDiscount()}"></p>
-                                                    <p>
-                                                        <span style="text-decoration: line-through;" th:utext="${item.getValue().getProductDetail().getProduct().getSalePrice()}"></span> <span>đ</span>
-                                                        |
-                                                        <span>- </span><span style="font-weight: 500; color: black;" th:utext="${item.getValue().getProductDetail().getProduct().getPromotion().getDiscount() * 100}"></span><span>%</span>
-                                                    </p>
-
+                                                    <th:block th:if="${item.getValue().getProductDetail().getProduct().getPromotion()}">
+                                                        <p style="font-size: 15px; font-weight: 500; color: black;" th:utext="${item.getValue().getProductDetail().getProduct().getSalePriceDiscount()}"></p>
+                                                        <p>
+                                                            <span style="text-decoration: line-through;" th:utext="${item.getValue().getProductDetail().getProduct().getSalePrice()}"></span> <span>đ</span>
+                                                            |
+                                                            <span>- </span><span style="font-weight: 500; color: black;" th:utext="${item.getValue().getProductDetail().getProduct().getPromotion().getDiscount() * 100}"></span><span>%</span>
+                                                        </p>
+                                                    </th:block>
+                                                    <th:block th:enless="${item.getValue().getProductDetail().getProduct().getPromotion()}">
+                                                        <p style="font-size: 15px; font-weight: 500; color: black;" th:utext="${item.getValue().getProductDetail().getProduct().getSalePrice()}"></p>
+                                                    </th:block>
                                                 </td>
                                                 <td class="text-right" style="font-size: 15px;"
                                                     th:utext="${item.getValue().getTotalProductPay()}"><span>đ</span></td>
@@ -411,6 +403,7 @@
             $("#register-account").hide();
             $("#guest-note").show();
         }
+        $("#shipping-new").hide();
         $("#slow-method").prop('checked', true);
         $("#cod").prop('checked', true);
         $("#total-cart").text("[[${#numbers.formatDecimal(session.totalPay, 1,'COMMA',0,'POINT')}]]");

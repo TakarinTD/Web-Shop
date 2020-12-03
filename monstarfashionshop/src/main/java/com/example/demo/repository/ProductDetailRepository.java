@@ -34,7 +34,6 @@ public interface ProductDetailRepository extends JpaRepository<ProductDetail, Lo
             "order by pc.color_name asc",
             nativeQuery = true)
     Integer countAvailableByKeywordAndColor(@Param("keyword") String keyword, @Param("colorId") Long colorId);
-
     @Query(value = "select sum(w.quantity_available)\n" +
             "from warehouse as w inner join product_detail as pd on w.product_detail_id = pd.id\n" +
             "inner join product as p on pd.product_id = p.id\n" +
@@ -44,7 +43,6 @@ public interface ProductDetailRepository extends JpaRepository<ProductDetail, Lo
             "order by ps.size_name asc ",
             nativeQuery = true)
     Integer countAvailableByCategoryAndSize(@Param("categoryId") Long categoryId, @Param("sizeId") Long sizeId);
-
     @Query(value = "select sum(w.quantity_available)\n" +
             "from warehouse as w \n" +
             "inner join product_detail as pd on w.product_detail_id = pd.id\n" +

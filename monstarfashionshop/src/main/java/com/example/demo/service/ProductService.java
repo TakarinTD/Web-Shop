@@ -17,13 +17,7 @@ public interface ProductService {
 
     List<ProductDTO> getProductsByCategoryId(long categoryId);
 
-//    List<ProductDTO> getProductsTopSaleMan();
-//
-//    List<ProductDTO> getProductsTopSaleWomen();
-
     Page<Product> pageProductByCategoryId(Long categoryId, int pageNum, int pageSize, String sortField, String sortDir);
-
-//    public List<Product> findProducts(String categoryName);
 
     Page<Product> findProductByKeyword(String keyword, List<Long> colorIds, List<Long> sizeIds, float price1, float price2, int page, int pageSize, String sortField, String sortDir);
 
@@ -36,4 +30,5 @@ public interface ProductService {
     Map<ProductSize, Integer> getListSizeAndAmount(Long categoryId);
 
     Map<ProductSize, Integer> getListSizeAndAmount(String keyword);
+
 }

@@ -19,7 +19,7 @@ public class WareHouseServiceImpl implements WareHouseService {
     public boolean updateQuantity(Warehouse warehouse) {
         try {
             Warehouse savedWarehouse = wareHouseRepository.save(warehouse);
-            System.out.println("số lượng sản phẩm còn trong kho là : " + savedWarehouse.getQuantityAvailable());
+//            System.out.println("số lượng sản phẩm còn trong kho là : " + savedWarehouse.getQuantityAvailable());
             return true;
         }catch (RuntimeException e) {
             e.printStackTrace();

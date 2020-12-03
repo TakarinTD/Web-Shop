@@ -40,6 +40,7 @@ public class ProductController extends BaseController {
         _mvShare.addObject("images", mapImage);
         _mvShare.addObject("productColors", productColors);
         _mvShare.addObject("productSizes", productSizes);
+        _mvShare.addObject("oneReview", new Review());
         _mvShare.setViewName("product_detail");
         return _mvShare;
     }
