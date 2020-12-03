@@ -51,8 +51,14 @@ public class Product {
     @OneToMany (mappedBy = "product", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<ProductDetail> productDetails;
 
-    @ManyToMany (mappedBy = "products", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<Promotion> promotions;
+    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Set<Review> reviews;
+
+    @ManyToOne (cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "promotion_id")
+    @JsonIgnore
+    private Promotion promotion;
+
 
     public Product () {
     }
@@ -129,12 +135,20 @@ public class Product {
         this.productDetails = productDetails;
     }
 
-    public Set<Promotion> getPromotions () {
-        return promotions;
+    public Promotion getPromotion() {
+        return promotion;
     }
 
-    public void setPromotions (Set<Promotion> promotions) {
-        this.promotions = promotions;
+    public void setPromotion(Promotion promotion) {
+        this.promotion = promotion;
+    }
+
+    public Set<Review> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(Set<Review> reviews) {
+        this.reviews = reviews;
     }
 
     public String getImage() {
@@ -150,5 +164,12 @@ public class Product {
             productDetails = new HashSet<>();
         }
         productDetails.add(productDetail);
+    }
+
+    public float getSalePriceDiscount() {
+        if(this.promotion == null) {
+            return 0;
+        }
+        return Math.round(this.salePrice - this.salePrice * this.promotion.getDiscount());
     }
 }

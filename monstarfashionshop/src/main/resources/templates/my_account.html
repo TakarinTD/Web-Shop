@@ -87,57 +87,39 @@
                             <div class="panel-body">
                                 <div class="row">
                                     <div class="col-lg-12">
-                                        <form id="information-form" th:action="@{/my_account}" method="POST">
+                                        <form id="information-form" th:action="@{/my_account}" th:object="${user}" method="POST">
                                             <div class="row">
-                                                <div class="alert alert-success" role="alert" style="display: none"
-                                                     id="updateS">
+                                                <div class="alert alert-success" role="alert" style="display: none" id="updateS">
                                                     Update success!
                                                 </div>
                                             </div>
                                             <div class="row">
-                                                <div class="alert alert-danger" role="alert" style="display: none"
-                                                     id="updateE">
+                                                <div class="alert alert-danger" role="alert" style="display: none" id="updateE">
                                                     Update error!
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <div>
                                                     Full name: <input type="text" name="fullName" id="fullName"
-                                                                      class="form-control" th:value="${user.fullName}">
+                                                                      class="form-control" th:value="*{fullName}">
                                                 </div>
-                                                <!--                                                <div>-->
-                                                <!--                                                    <span class="text-danger align-middle"-->
-                                                <!--                                                          th:if="${#fields.hasErrors('fullName')}"-->
-                                                <!--                                                          th:errors="*{fullName}">-->
-                                                <!--                                                    </span>-->
-                                                <!--                                                </div>-->
                                             </div>
                                             <div class="form-group">
                                                 Number phone: <input type="tel" name="phone" id="phone"
-                                                                     class="form-control" th:value="${user.phone}">
+                                                                     class="form-control" th:value="*{phone}">
                                             </div>
                                             <div class="form-group">
                                                 Email: <input type="email" name="email" id="email"
-                                                              class="form-control" th:value="${user.email}" readonly>
+                                                              class="form-control" th:value="*{email}" readonly>
                                             </div>
                                             <div class="form-group">
                                                 Address: <input type="text" name="address" id="address"
-                                                                class="form-control" th:value="${user.address}">
+                                                                class="form-control" th:value="*{address}">
                                             </div>
-                                            <!--                                            <div class="form-group">-->
-                                            <!--                                                Gender:-->
-                                            <!--                                                <input type="radio" id="male" name="gender" value="male" tabindex="5">-->
-                                            <!--                                                <label for="male">Male</label>-->
-                                            <!--                                                <input type="radio" id="female" name="gender" value="female"-->
-                                            <!--                                                       tabindex="6">-->
-                                            <!--                                                <label for="female">Female</label>-->
-                                            <!--                                                <input type="radio" id="other" name="gender" value="other" tabindex="7">-->
-                                            <!--                                                <label for="other">Other</label>-->
-                                            <!--                                            </div>-->
                                             <div class="form-group">
                                                 Birthday: <input type="date" name="birthday" id="birthday"
                                                                  class="form-control"
-                                                                 th:value="${user.birthday}">
+                                                                 th:value="*{{birthday}}">
                                             </div>
                                             <div class="form-group">
                                                 <div class="row">
@@ -158,8 +140,7 @@
                                             <div id="changePassword" style="display: none">
                                                 <div class="form-group">
                                                     <div>
-                                                        Old Password: <input type="password" name="oldPassword"
-                                                                             id="oldPassword" tabindex="10"
+                                                        Old Password: <input type="password" name="oldPassword" id="oldPassword" tabindex="10"
                                                                              class="form-control">
                                                     </div>
                                                     <span id="oldE"
@@ -252,9 +233,6 @@
         } else $("#changePassword").hide();
         });
     });
-
-
-
 </script>
 </body>
 </html>

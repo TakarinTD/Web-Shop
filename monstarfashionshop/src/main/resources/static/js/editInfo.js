@@ -6,7 +6,6 @@ $(document).ready(
 			});
 
 			function editInfo() {
-
 				var formData = {
 					fullName : $("#fullName").val(),
 					phone : $("#phone").val(),
@@ -23,12 +22,12 @@ $(document).ready(
 					success : function(result) {
                         $("#updateS").show()
                         $("#updateE").hide()
-				        console.log(result)
+				        console.log(result);
 					},
 					error : function(e) {
 					    $("#updateS").hide()
                         $("#updateE").show()
-						console.log(e.responseJSON.message)
+						console.log(e.responseJSON.message);
 					}
 				});
 			}
@@ -37,9 +36,7 @@ $(document).ready(
             				event.preventDefault();
             				editPassword();
             			});
-
             			function editPassword() {
-
             				var formData = {
             				    oldPassword : $("#oldPassword").val(),
             				    password : $("#password").val(),

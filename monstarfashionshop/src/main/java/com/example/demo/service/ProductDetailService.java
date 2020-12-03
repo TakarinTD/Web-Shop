@@ -6,5 +6,7 @@ import java.util.Optional;
 
 public interface ProductDetailService {
 
+    Optional<ProductDetail> findById(Long idProductDetail);
+
     Optional<ProductDetail> findProductDetail(Long productId, Long productColorId, Long productSizeId);
 }

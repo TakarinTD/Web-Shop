@@ -1,5 +1,6 @@
 package com.example.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -31,9 +32,11 @@ public class ProductDetail {
     private String image;
 
     @OneToMany(mappedBy = "productDetail", fetch = FetchType.LAZY)
+    @JsonIgnore
     private Set<OrderDetail> orderDetails;
 
     @OneToOne(mappedBy = "productDetail", fetch = FetchType.LAZY)
+    @JsonIgnore
     private Warehouse warehouse;
 
 

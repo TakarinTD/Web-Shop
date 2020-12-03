@@ -1,6 +1,9 @@
 package com.example.demo.constant;
 
 public class Constant {
+
+    public static final float SLOW_SHIP_PRICE = 1000;
+    public static final float FLASH_SHIP_PRICE = 2000;
 	
 	public static final int ACTIVE_STATUS = 1;
 	public static final int INACTIVE_STATUS = 0;
