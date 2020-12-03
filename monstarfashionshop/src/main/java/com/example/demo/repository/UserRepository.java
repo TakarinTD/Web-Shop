@@ -1,13 +1,13 @@
 package com.example.demo.repository;
 
-import com.example.demo.entity.*;
+import com.example.demo.entity.User;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.stereotype.*;
 
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
-    User findOneByEmailAndStatus (String email, int status);
+    User findOneByEmailAndEnabledIsTrue (String email);
 
     User findByEmail(String email);
 

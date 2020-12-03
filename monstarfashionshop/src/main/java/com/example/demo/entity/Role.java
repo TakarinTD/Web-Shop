@@ -22,6 +22,7 @@ public class Role {
     private String name;
 
     @ManyToMany(mappedBy = "roles", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore
     private Set<User> users;
 
     public Role() {

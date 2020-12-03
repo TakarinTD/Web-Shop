@@ -17,6 +17,11 @@ public class ProductDetailServiceImpl implements ProductDetailService {
     private ProductDetailRepository productDetailRepository;
 
     @Override
+    public Optional<ProductDetail> findById(Long idProductDetail) {
+        return Optional.ofNullable(productDetailRepository.findById(idProductDetail).orElse(null));
+    }
+
+    @Override
     public Optional<ProductDetail> findProductDetail(Long productId, Long productColorId, Long productSizeId) {
         Optional<ProductDetail> optional = productDetailRepository.findByProductIdAndProductColorIdAndProductSizeId(productId, productColorId, productSizeId);
         return Optional.ofNullable(optional.orElse(null));

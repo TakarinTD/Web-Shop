@@ -1,30 +1,21 @@
 package com.example.demo.controller;
 
 import com.example.demo.entity.Product;
-import com.example.demo.service.CategoryService;
-import com.example.demo.service.ProductService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Controller
-public class SearchController {
-
-    @Autowired
-    private CategoryService categoryService;
-
-    @Autowired
-    private ProductService productService;
+public class SearchController extends BaseController{
 
     @GetMapping(value = "/search")
-    public String searchProductByDondition(Model model,
+    public ModelAndView searchProductByCondition(
                                            @RequestParam(required = false) String keyword,
                                            @RequestParam int page,
                                            @RequestParam int pageSize,
@@ -44,6 +35,7 @@ public class SearchController {
             price1 = (float) 0;
         }
         if (price2 == null) {
+            // find max price and set for price 2
             price2 = (float) 150000;
         }
 
@@ -59,28 +51,24 @@ public class SearchController {
 
         if (keyword != null) {
             pageResult = productService.findProductByKeyword(keyword, listColorId, listSizeId, price1, price2, page, pageSize, sortField, sortDir);
+            _mvShare.addObject("listColor", productService.getListColorAndAmount(keyword));
+            _mvShare.addObject("listSize", productService.getListSizeAndAmount(keyword));
         } else {
             pageResult = productService.findProductsWithCondition(categoryId, listColorId, listSizeId, price1, price2, page, pageSize, sortField, sortDir);
+            _mvShare.addObject("listColor", productService.getListColorAndAmount(categoryId));
+            _mvShare.addObject("listSize", productService.getListSizeAndAmount(categoryId));
         }
 
-        model.addAttribute("keyword", keyword);
-        model.addAttribute("categoryId", categoryId);
-        model.addAttribute("colorIds", colorIds);
-        model.addAttribute("sizeIds", sizeIds);
-        model.addAttribute("price1", price1);
-        model.addAttribute("price2", price2);
-        model.addAttribute("sortField", sortField);
-        model.addAttribute("sortDir", sortDir);
+        _mvShare.addObject("keyword", keyword);
+        _mvShare.addObject("colorIds", colorIds);
+        _mvShare.addObject("sizeIds", sizeIds);
+        _mvShare.addObject("price1", price1);
+        _mvShare.addObject("price2", price2);
+        _mvShare.addObject("listProductSearchResult", pageResult.getContent());
+        _mvShare.addObject("totalPages", pageResult.getTotalPages());
+        paginateCommon(page, pageSize, sortField, sortDir);
+        _mvShare.setViewName("search");
 
-        model.addAttribute("categories", categoryService.getListCategory());
-        model.addAttribute("listColor", productService.getListColorAndAmount(categoryId));
-        model.addAttribute("listSize", productService.getListSizeAndAmount(categoryId));
-
-        model.addAttribute("listProductSearchResult", pageResult.getContent());
-        model.addAttribute("pageSize", pageSize);
-        model.addAttribute("currentPage", page);
-        model.addAttribute("totalPages", pageResult.getTotalPages());
-        return "search";
+        return _mvShare;
     }
-
 }

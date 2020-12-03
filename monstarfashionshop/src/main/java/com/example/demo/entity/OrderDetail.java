@@ -1,5 +1,7 @@
 package com.example.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
@@ -13,11 +15,15 @@ public class OrderDetail {
     @Column(name = "quantities_product")
     private int quantitiesProduct;
 
+    @Column(name = "discount ")
+    private double discount;
+
     @Column(name = "total_product_pay")
     private float totalProductPay;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "order_id")
+    @JsonIgnore
     private Order order;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -41,6 +47,14 @@ public class OrderDetail {
 
     public void setQuantitiesProduct(int quantitiesProduct) {
         this.quantitiesProduct = quantitiesProduct;
+    }
+
+    public double getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(double discount) {
+        this.discount = discount;
     }
 
     public float getTotalProductPay() {
