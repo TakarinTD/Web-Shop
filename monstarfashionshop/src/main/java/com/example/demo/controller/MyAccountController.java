@@ -24,6 +24,8 @@ public class MyAccountController {
     RoleRepository roleRepository;
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
+    @Autowired
+    private OrderRepository orderRepository;
 
     @GetMapping ("/my_account")
     public String myAccount (Model model, Principal principal) {
@@ -66,6 +68,7 @@ public class MyAccountController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
         }
     }
+
     @RequestMapping (value = "/my_account", method = RequestMethod.POST)
     @ResponseBody
     public ResponseEntity editInfo (@RequestBody User userDetail, Principal principal)  {
@@ -80,5 +83,12 @@ public class MyAccountController {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
         }
+    }
+
+    @GetMapping("/order_history")
+    public String order(Model model, Principal principal){
+        User user = userService.findUserByEmail(principal.getName());
+        model.addAttribute("orders",orderRepository.findAllOrderByIdUser(user.getId()));
+        return "order_history";
     }
 }

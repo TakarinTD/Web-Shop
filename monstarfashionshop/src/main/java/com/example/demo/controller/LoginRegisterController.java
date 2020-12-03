@@ -1,16 +1,14 @@
 package com.example.demo.controller;
 
 import static com.example.demo.constant.Constant.*;
-import com.example.demo.dto.*;
 import com.example.demo.entity.*;
 import com.example.demo.service.*;
 import java.io.*;
-import java.net.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.validation.*;
+import org.apache.tomcat.util.net.openssl.ciphers.*;
 import org.springframework.beans.factory.annotation.*;
-import org.springframework.security.core.*;
 import org.springframework.security.crypto.bcrypt.*;
 import org.springframework.stereotype.*;
 import org.springframework.validation.*;
@@ -34,17 +32,17 @@ public class LoginRegisterController {
         return "login";
     }
 
-    @RequestMapping(value = "/login-success", method = RequestMethod.GET)
-    public String loginSuccess(HttpSession session, HttpServletRequest request, Authentication authentication) throws IOException, ServletException {
-        String userEmail = authentication.getName();
-        User userLogin = userService.findUserByEmail(userEmail);
-        session.setAttribute("user", userLogin);
-        String backPageUrl = (String) session.getAttribute("backPageUrl");
-        session.removeAttribute("backPageUrl");
-        int length = backPageUrl.split("/").length;
-        String contextPath = backPageUrl.split("/")[length - 1];
-        return "redirect:/" + contextPath;
-    }
+//    @RequestMapping(value = "/login-success", method = RequestMethod.GET)
+//    public String loginSuccess(HttpSession session, HttpServletRequest request, Authentication authentication) throws IOException, ServletException {
+//        String userEmail = authentication.getName();
+//        User userLogin = userService.findUserByEmail(userEmail);
+//        session.setAttribute("user", userLogin);
+//        String backPageUrl = (String) session.getAttribute("backPageUrl");
+//        session.removeAttribute("backPageUrl");
+//        int length = backPageUrl.split("/").length;
+//        String contextPath = backPageUrl.split("/")[length - 1];
+//        return "redirect:/" + contextPath;
+//    }
 
     @RequestMapping (value = {"/register"}, method = RequestMethod.GET)
     public ModelAndView signup () {

@@ -66,7 +66,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
                 //
                 .loginProcessingUrl("/login") // Submit URL
                 .loginPage("/login")//
-                .defaultSuccessUrl("/login-success")//
+                .defaultSuccessUrl("/home")//
                 .failureUrl("/login?error=true")//
                 .usernameParameter("email")//
                 .passwordParameter("password")
