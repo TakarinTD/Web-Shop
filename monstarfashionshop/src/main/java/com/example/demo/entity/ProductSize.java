@@ -1,5 +1,7 @@
 package com.example.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.HashSet;
@@ -23,6 +25,7 @@ public class ProductSize implements Comparable<ProductSize>{
     private Date updatedAt;
 
     @OneToMany(mappedBy = "productSize", fetch = FetchType.LAZY)
+    @JsonIgnore
     private Set<ProductDetail> productDetails;
 
     public ProductSize() {
