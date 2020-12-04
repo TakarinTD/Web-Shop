@@ -14,4 +14,5 @@ public class Constant {
 	public static final String FAILED_OLD_PASSWORD = "Password Error!";
 	public static final String FAILED_CONFIRM_PASSWORD = "Password Mismatch!";
 	public static final String FAILED_PASSWORD = "Password required!";
+	public static final String BACK_REGISTER = "http://localhost:8080/register";
 }

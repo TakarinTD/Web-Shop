@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>USER</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <style>
+    h1 {
+      text-align:center;
+    }
+    </style>
+</head>
+<body>
+<div class="container" style="padding: 10px">
+    <th:block th:include="common/header_admin"></th:block>
+    <h1>Danh sách sản phẩm</h1>
+    <div class="container" style="text-align:center">
+        <div class="card-block">
+            <table id="tableProduct" class="table table-hover table-bordered">
+                <thead>
+                <tr>
+                    <th>PRODUCT ID</th>
+                    <th>PRODUCT NAME</th>
+                    <th>PRODUCT IMAGE</th>
+                    <th>PURCHASE PRICE</th>
+                    <th>SALE PRICE</th>
+                    <th>CATEGORY</th>
+                    <th>DETAIL</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="product :${products}">
+                    <td th:text="${product.id}"></td>
+                    <td th:text="${product.productName}"></td>
+                    <td th:text="${product.image}"></td>
+                    <td th:text="${product.purchasePrice}"></td>
+                    <td th:text="${product.salePrice}"></td>
+                    <td th:text="${product.category.categoryName}"></td>
+                    <td><a th:href="@{/}" class="btn btn-primary eBtn">Chi tiết sản phẩm</a></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<script>
+     $(document).ready(function() {
+        $('#tableProduct').dataTable({});
+    });
+</script>
+</body>
+</html>
+

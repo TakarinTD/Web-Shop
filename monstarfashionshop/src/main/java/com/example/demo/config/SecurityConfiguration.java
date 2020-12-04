@@ -48,7 +48,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
         http.authorizeRequests().antMatchers("/postReview").permitAll();
         // Các yêu cầu phải login với vai trò user hoặc admin
         // Nếu chưa login, nó sẽ redirect tới trang /login.
-        http.authorizeRequests().antMatchers("/my_account","/editInfo")//
+        http.authorizeRequests().antMatchers("/my_account","/editInfo","/order_history")//
                 .access("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')");
 
         // Các trang chỉ dành cho MANAGER

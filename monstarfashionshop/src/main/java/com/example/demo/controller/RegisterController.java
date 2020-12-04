@@ -53,8 +53,8 @@ public class RegisterController {
             bindingResult.rejectValue("email", "error.email", "This email already exists!");
         }
         if (!bindingResult.hasErrors()) {
-            userService.saveUser(user);
-            model.addObject("msg", "User has been registered successfully!");
+            userService.saveEditUser(user);
+            model.addObject("msg", "User has been registered successfully, please login!");
             model.addObject("user", new User());
         }
 

@@ -83,7 +83,6 @@ public class MyAccountController {
                                        @RequestParam(value = "oldPassword", required = false) String oldPassword,
                                        @RequestParam(value = "passwordConfirm", required = false) String passwordConfirm) {
 
-
         User userss = (User) session.getAttribute("user");
         User user = userService.findUserByEmail(userss.getEmail());
         try {
