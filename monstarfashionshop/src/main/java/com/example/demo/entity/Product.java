@@ -8,6 +8,7 @@ import javax.persistence.*;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.TreeSet;
 
 @Entity
 @Table (name = "product")
@@ -58,7 +59,6 @@ public class Product {
     @JoinColumn(name = "promotion_id")
     @JsonIgnore
     private Promotion promotion;
-
 
     public Product () {
     }
@@ -144,7 +144,11 @@ public class Product {
     }
 
     public Set<Review> getReviews() {
-        return reviews;
+        Set<Review> reviewSet = new TreeSet<>();
+        for(Review r : this.reviews) {
+            reviewSet.add(r);
+        }
+        return reviewSet;
     }
 
     public void setReviews(Set<Review> reviews) {
