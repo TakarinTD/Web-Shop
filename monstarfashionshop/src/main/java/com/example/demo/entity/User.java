@@ -30,7 +30,7 @@ public class User {
 
     @Column(name = "birthday")
     @DateTimeFormat(pattern = "dd-MM-yyyy")
-    private Date birthday;
+    private String birthday;
 
     @Column(name = "address")
     private String address;
@@ -59,6 +59,7 @@ public class User {
     private Set<Order> orders;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonIgnore
     private Set<Review> reviews;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -108,11 +109,11 @@ public class User {
         this.fullName = fullName;
     }
 
-    public Date getBirthday() {
+    public String getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(Date birthday) {
+    public void setBirthday(String birthday) {
         this.birthday = birthday;
     }
 

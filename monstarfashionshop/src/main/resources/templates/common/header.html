@@ -26,7 +26,7 @@
                                     <a th:href="@{/my_account}">My Account</a>
                                 </li>
                                 <li sec:authorize="hasRole('ROLE_ADMIN')">
-                                    <a href="#">Admin Manager</a>
+                                    <a th:href="@{/admin}">Admin Manager</a>
                                 </li>
                             </ul>
                         </div>
@@ -55,7 +55,7 @@
                     </div>
                 </div>
                 <div class="navbar-header col-xs-6 col-sm-4">
-                    <a class="navbar-brand" th:href="@{/home}">
+                    <a class="navbar-brand" th:href="@{/}">
                     <img alt="MonstarFashionShop" th:src="@{/images/logo.png}">
                     </a>
                 </div>
