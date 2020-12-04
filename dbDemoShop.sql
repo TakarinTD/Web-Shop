@@ -311,6 +311,38 @@ INSERT INTO `promotion` VALUES (3,'Siêu sales 11-11','2020-11-10 16:35:59',NULL
 UNLOCK TABLES;
 
 --
+-- Table structure for table `reply_review`
+--
+
+DROP TABLE IF EXISTS `reply_review`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `reply_review` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `user_id` bigint NOT NULL,
+  `content` text COLLATE utf8_unicode_ci,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  `review_id` int NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_reply_review_user1_idx` (`user_id`),
+  KEY `fk_reply_review_review1_idx` (`review_id`),
+  CONSTRAINT `fk_reply_review_review1` FOREIGN KEY (`review_id`) REFERENCES `review` (`id`),
+  CONSTRAINT `fk_reply_review_user1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `reply_review`
+--
+
+LOCK TABLES `reply_review` WRITE;
+/*!40000 ALTER TABLE `reply_review` DISABLE KEYS */;
+INSERT INTO `reply_review` VALUES (1,2,'Bạn m ua ở đâu vậy','2020-12-04 00:05:19','2020-12-04 00:05:19',14),(2,3,'Đổi trả hàng như thế nào bạn','2020-12-04 00:06:19','2020-12-04 00:06:19',14),(3,3,'tôi reply lại comment của bạn','2020-12-04 13:19:00','2020-12-04 13:19:00',14),(4,3,'tôi reply lại bạn lần 2','2020-12-04 13:35:29','2020-12-04 13:35:29',14),(5,3,'tôi reply comment của bạn lần 3 :))','2020-12-04 13:49:27','2020-12-04 13:49:27',14),(6,3,'test reply comment ','2020-12-04 14:07:35','2020-12-04 14:07:35',13),(7,3,'test reply comment này lần thứ 2','2020-12-04 14:11:32','2020-12-04 14:11:32',13),(8,3,'test reply comment này lần thứ 3','2020-12-04 14:24:14','2020-12-04 14:24:14',13);
+/*!40000 ALTER TABLE `reply_review` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `review`
 --
 
@@ -332,7 +364,7 @@ CREATE TABLE `review` (
   KEY `fk_review_user1_idx` (`user_id`),
   CONSTRAINT `fk_review_product1` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`),
   CONSTRAINT `fk_review_user1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -341,7 +373,7 @@ CREATE TABLE `review` (
 
 LOCK TABLES `review` WRITE;
 /*!40000 ALTER TABLE `review` DISABLE KEYS */;
-INSERT INTO `review` VALUES (1,1,1,'Sản phẩm chất lượng','Chất lượng sản phẩm rất tốt trong tầm giá, ủng hộ shop',NULL,4,'2020-11-26 16:33:23','2020-11-26 16:33:23'),(2,1,2,'Chất lượng tốt','Đơn hàng được vận chuyển nhanh chóng, đóng gói cẩn thận, sản phẩm tốt trong tầm giá',NULL,5,'2020-11-26 16:33:23','2020-11-26 16:33:23');
+INSERT INTO `review` VALUES (1,1,1,'Sản phẩm chất lượng','Chất lượng sản phẩm rất tốt trong tầm giá, ủng hộ shop',NULL,4,'2020-11-26 16:33:23','2020-11-26 16:33:23'),(2,1,2,'Chất lượng tốt','Đơn hàng được vận chuyển nhanh chóng, đóng gói cẩn thận, sản phẩm tốt trong tầm giá',NULL,5,'2020-11-26 16:33:23','2020-11-26 16:33:23'),(4,1,1,'đfgfdgfdsgkjdfhgkdf','dklfgjslkfdjgkfdjglkdsfjglksdfg',NULL,5,'2020-12-03 16:39:27','2020-12-03 16:39:27'),(5,1,1,'test prepend','sản phẩm tốt hahahahahaha',NULL,4,'2020-12-03 16:58:48','2020-12-03 16:58:48'),(6,1,1,'édfsdfsd','dsfsdfsdfdsf',NULL,5,'2020-12-03 17:10:15','2020-12-03 17:10:15'),(7,1,1,'édfsdfsdsadsgdsagadgd','dsfsdfadgasdagsdgdgsdfdsf',NULL,5,'2020-12-03 17:11:39','2020-12-03 17:11:39'),(8,1,1,'test prepend lần 2','dfdsgdagdgkdkjaslkdsjglkdjglkdjglkdjglkdjgl',NULL,4,'2020-12-03 17:18:26','2020-12-03 17:18:26'),(9,1,1,'sản phẩm đẹp','chất vải tốt, phù hợp trong tầm giá',NULL,5,'2020-12-03 23:08:46','2020-12-03 23:08:46'),(10,1,1,'test lần n','hehehehehehehehe',NULL,4,'2020-12-03 23:18:00','2020-12-03 23:18:00'),(11,1,1,'test lần thứ nnnn','fsdkhfksadhfkahfdksahdfk',NULL,5,'2020-12-04 00:05:00','2020-12-04 00:05:00'),(12,1,1,'test lần thứ 1000','fsdkhfksadhfkahfdksahdfk',NULL,5,'2020-12-04 00:05:19','2020-12-04 00:05:19'),(13,1,1,'fgdfhgsdfhfdh','dsfsdagsdhdhsdhhasdh',NULL,0,'2020-12-04 00:06:09','2020-12-04 00:06:09'),(14,1,1,'test lần thứ mnnn','addgdsgdsgsdagsdg',NULL,5,'2020-12-04 00:43:55','2020-12-04 00:43:55');
 /*!40000 ALTER TABLE `review` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -389,7 +421,7 @@ CREATE TABLE `user` (
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -398,7 +430,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'nguyen@gmail.com','$2a$10$miClO0nFVGMUTkVucSbKs.VQUnklxIDvAjwVYapZgsq6q.yzv7XCG','Phạm Văn Nguyên hahaha',NULL,'Hà Nội','0947060528',NULL,1,'2020-11-10 11:45:41','2020-12-02 23:34:59'),(2,'nguyenpham@gmail.com','$2a$10$XfH895FPu6myDctO84v3/OunJz0/5BfNhCzSz5emtdu466xR5Xjh6','NguyenPham',NULL,NULL,NULL,NULL,0,'2020-11-10 11:45:41','2020-11-10 11:45:41');
+INSERT INTO `user` VALUES (1,'nguyen@gmail.com','$2a$10$hfG4XHgUBw7IBrXKyRqf..rv5mrljKD.cNObXgX1RA4csw.p1BZqe','Phạm Văn Nguyên',NULL,'Hà Nội','0947060528',NULL,1,'2020-11-10 11:45:41','2020-12-03 22:38:47'),(2,'nguyenpham@gmail.com','$2a$10$XfH895FPu6myDctO84v3/OunJz0/5BfNhCzSz5emtdu466xR5Xjh6','NguyenPham',NULL,NULL,NULL,NULL,0,'2020-11-10 11:45:41','2020-11-10 11:45:41'),(3,'nguyenhaha@gmail.com','$2a$10$XfH895FPu6myDctO84v3/OunJz0/5BfNhCzSz5emtdu466xR5Xjh6','Nguyen dep trai',NULL,'Hà Nội','0947060528',NULL,1,NULL,NULL);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -425,7 +457,7 @@ CREATE TABLE `user_role` (
 
 LOCK TABLES `user_role` WRITE;
 /*!40000 ALTER TABLE `user_role` DISABLE KEYS */;
-INSERT INTO `user_role` VALUES (1,1),(2,1),(1,2);
+INSERT INTO `user_role` VALUES (1,1),(2,1),(1,2),(3,2);
 /*!40000 ALTER TABLE `user_role` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -465,4 +497,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-12-03 12:58:21
+-- Dump completed on 2020-12-04 15:39:12

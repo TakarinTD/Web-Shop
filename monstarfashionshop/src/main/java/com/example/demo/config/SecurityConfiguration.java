@@ -44,6 +44,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
     @Override
     protected void configure(HttpSecurity http) throws Exception{
         http.csrf().disable();
+
+        http.authorizeRequests().antMatchers("/postReview").permitAll();
         // Các yêu cầu phải login với vai trò user hoặc admin
         // Nếu chưa login, nó sẽ redirect tới trang /login.
         http.authorizeRequests().antMatchers("/my_account","/editInfo")//

@@ -1,11 +1,17 @@
 package com.example.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Set;
+import java.util.TreeSet;
 
 @Entity
 @Table(name = "review")
-public class Review {
+public class Review implements Comparable<Review>{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,20 +30,35 @@ public class Review {
     private double ratting;
 
     @Column(name = "created_at")
+    @CreationTimestamp
     private Date createdAt;
 
     @Column(name = "updated_at")
+    @UpdateTimestamp
     private Date updatedAt;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id")
+    @JsonIgnore
     private Product product;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
+    @JsonIgnore
     private User user;
 
+    @OneToMany(mappedBy = "review", fetch = FetchType.LAZY)
+    private Set<ReplyReview> replyReviewSet;
+
     public Review() {
+    }
+
+    public Review(String title, String comment, double ratting, Product product, User user) {
+        this.title = title;
+        this.comment = comment;
+        this.ratting = ratting;
+        this.product = product;
+        this.user = user;
     }
 
     public Long getId() {
@@ -110,5 +131,22 @@ public class Review {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Set<ReplyReview> getReplyReviewSet() {
+        Set<ReplyReview> SetReplyReview = new TreeSet<>();
+        for(ReplyReview rp : this.replyReviewSet) {
+            SetReplyReview.add(rp);
+        }
+        return SetReplyReview;
+    }
+
+    public void setReplyReviewSet(Set<ReplyReview> replyReviewSet) {
+        this.replyReviewSet = replyReviewSet;
+    }
+
+    @Override
+    public int compareTo(Review o) {
+        return o.getCreatedAt().compareTo(this.getCreatedAt());
     }
 }
