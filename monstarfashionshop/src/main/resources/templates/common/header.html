@@ -16,7 +16,7 @@
                 <div class="col-xs-12 col-sm-12">
                     <th:block th:if="${#request.userPrincipal}">
                         <div style="display: flex; justify-content: space-between;">
-                            <span style="font-size: 14px; font-weight: bolder 5px;" class="header-top-left" th:if="${#request.userPrincipal}" th:utext="${session.user.getFullName()}">
+                            <span id="user-session" style="font-size: 14px; font-weight: bolder 5px;" class="header-top-left" th:if="${#request.userPrincipal}" th:attr="data-idUser=${session.user.getId()}" th:utext="${session.user.getFullName()}">
                             </span>
                             <ul class="header-top-right text-right">
                                 <li>
@@ -32,11 +32,15 @@
                         </div>
                     </th:block>
                     <th:block th:unless="${#request.userPrincipal}">
-                        <ul class="header-top-right text-right">
-                            <li>
-                                <a th:href="@{/login}">Login/Register</a>
-                            </li>
-                        </ul>
+                        <div>
+                            <span id="user-session" data-idUser="null" class="header-top-left" >
+                            </span>
+                            <ul class="header-top-right text-right">
+                                <li>
+                                    <a th:href="@{/login}">Login/Register</a>
+                                </li>
+                            </ul>
+                        </div>
                     </th:block>
                 </div>
             </div>
