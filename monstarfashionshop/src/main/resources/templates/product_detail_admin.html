@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>PRODUCT</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css"></script>
+    <script th:src="@{/js/custom.js}"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <style>
+    h1, h2 {
+      text-align:center;
+    }
+
+
+
+
+
+
+
+    </style>
+</head>
+<body>
+<div class="container" style="padding: 10px">
+    <th:block th:include="common/header_admin"></th:block>
+    <h1>Chi tiết sản phẩm #<span th:utext="${product.id}"></span></h1>
+    <div class="row mt_10 ">
+        <div class="col-md-3">
+            <a class="thumbnails">
+                <img data-name="product_image_detail"
+                     th:src="@{'/images/product/' + ${product.image}}" alt="" style="width:200px"/>
+            </a>
+        </div>
+        <div class="col-md-6 prodetail caption product-thumb">
+            <h4 data-name="product_name" class="product-name" th:utext="'Tên sản phẩm: '+${product.productName}">
+            </h4>
+            <div class="rating">
+                <label>Ratting: </label><label>4.5</label><label>/5</label>
+            </div>
+            <span class="price mb_20">
+                                <th:block th:if="${product.getSalePriceDiscount() > 0}">
+                                    <span style="font-size: 25px; line-height: 40px; margin-right: 8px;" class="amount"><span
+                                            class="currencySymbol">Giá sau KM: $</span><span
+                                            th:utext="${product.getSalePriceDiscount()}"></span></span>
+                                    <span style="margin-right: 10px; text-decoration: line-through; font-size: 14px; line-height: 20px;"
+                                          class="amount"><span class="currencySymbol">Giá gốc: $</span><span
+                                            th:utext="${product.salePrice}"></span></span>
+                                    <span style="font-size: 14px; line-height: 20px;">KM: <span
+                                            th:utext="${product.promotion.getDiscount() * 100}"></span><span>%</span></span>
+                                </th:block>
+                                <th:block th:unless="${product.getSalePriceDiscount() > 0}">
+                                    <span style="font-size: 25px; line-height: 40px; margin-right: 8px;" class="amount">
+                                        <span class="currencySymbol">$</span>
+                                        <span th:utext="${product.salePrice}"></span>
+                                    </span>
+                                </th:block>
+                        </span>
+            <br>
+            <span class="price mb_20" th:utext="'Loại: ' + ${product.category.categoryName}"></span>
+            <hr>
+            <p class="product-desc mtb_30" th:utext="'Mô tả: ' + ${product.description}"></p>
+            <div class="button-group mt_30">
+                <a th:href="@{/admin/find_product/{id}(id=${product.id})}" class="btn btn-primary epBtn">Chỉnh sửa</a>
+                <!--                <a th:href="@{/admin/find_product/{id}(id=${product.id})}" class="btn btn-primary dpBtn">Xóa sản phẩm</a>-->
+            </div>
+        </div>
+    </div>
+<!--    <h2>Danh sách phân loại</h2>-->
+<!--    <div class="container" style="text-align:center">-->
+<!--        <div class="card-block">-->
+<!--            <table id="tableProduct" class="table table-hover table-bordered">-->
+<!--                <thead>-->
+<!--                <tr>-->
+<!--                    <th>PRODUCT ID</th>-->
+<!--                    <th>PRODUCT NAME</th>-->
+<!--                    <th>PRODUCT IMAGE</th>-->
+<!--                    <th>PURCHASE PRICE</th>-->
+<!--                    <th>SALE PRICE</th>-->
+<!--                    <th>CATEGORY</th>-->
+<!--                    <th>DETAIL</th>-->
+<!--                </tr>-->
+<!--                </thead>-->
+<!--                <tbody>-->
+<!--                &lt;!&ndash;                <tr th:each="product :${products}">&ndash;&gt;-->
+<!--                &lt;!&ndash;                    <td th:text="${product.id}"></td>&ndash;&gt;-->
+<!--                &lt;!&ndash;                    <td th:text="${product.productName}"></td>&ndash;&gt;-->
+<!--                &lt;!&ndash;                    <td th:text="${product.image}"></td>&ndash;&gt;-->
+<!--                &lt;!&ndash;                    <td th:text="${product.purchasePrice}"></td>&ndash;&gt;-->
+<!--                &lt;!&ndash;                    <td th:text="${product.salePrice}"></td>&ndash;&gt;-->
+<!--                &lt;!&ndash;                    <td th:text="${product.category.categoryName}"></td>&ndash;&gt;-->
+<!--                &lt;!&ndash;                    <td><a th:href="@{/admin/product_detail/{id}(id=${product.id})}" class="btn btn-primary eBtn">Chi tiết sản phẩm</a></td>&ndash;&gt;-->
+<!--                &lt;!&ndash;                </tr>&ndash;&gt;-->
+<!--                </tbody>-->
+<!--            </table>-->
+<!--        </div>-->
+<!--    </div>-->
+    <div class="editProduct">
+        <form th:action="@{/admin/edit_product}" method="POST" id="editProductForm">
+            <div class="modal fade" id="editProduct" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Chỉnh sửa sản phẩm</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label for="id" class="col-form-label">ID: </label>
+                                <input type="text" class="form-control" id="id" name="id" value="" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="image" class="col-form-label">Ảnh minh họa: </label>
+                                <img id="anh" src="" width="100">
+                                <input type="file" class="form-control" id="image" name="image" accept="image/*">
+                            </div>
+                            <div class="form-group">
+                                <label for="productName" class="col-form-label">Tên sản phẩm: </label>
+                                <input type="text" class="form-control" id="productName" name="productName">
+                            </div>
+                            <div class="form-group">
+                                <label for="salePrice" class="col-form-label">Giá gốc: </label>
+                                <input type="text" class="form-control" id="salePrice" name="salePrice">
+                            </div>
+                            <div class="form-group">
+                                <label for="promotion" class="col-form-label">Khuyến mãi: </label>
+                                <select id="promotion" name="promotion">
+                                    <div th:each="promotion: ${promotions}">
+                                        <option th:if="${promotion.id}==${promotionId}"
+                                                th:value="${promotion.id}"
+                                                th:text="${promotion.promotionName}" selected></option>
+                                        <option th:unless="${promotion.id}==${promotionId}"
+                                                th:value="${promotion.id}"
+                                                th:text="${promotion.promotionName}"></option>
+                                    </div>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="description" class="col-form-label">Mô tả: </label>
+                                <textarea class="form-control" id="description" name="description" rows="4"
+                                          cols="50"></textarea>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <input type="submit" class="btn btn-primary" id="save" value="Save"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal fade" id="editSuccess" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header" style="background-color:green;">
+                    <h5 class="modal-title">Edit Product Success!</h5>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" onclick="window.location.reload();">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="errorEdit" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header" style="background-color:red;">
+                    <h5 class="modal-title">EDIT ERROR!</h5>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<script>
+     $(document).ready(function() {
+        $('#tableProduct').dataTable({});
+    });
+
+    $("body").on("click", ".epBtn", function(){
+        event.preventDefault();
+        var href = $(this).attr('href');
+        $.get(href,function(product,status){
+            $('.editProduct #id').val(product.id);
+            document.getElementById("anh").src = "/images/product/"+product.image;
+            $('.editProduct #productName').val(product.productName);
+            $('.editProduct #salePrice').val(product.salePrice);
+            $('.editProduct #description').val(product.description);
+        });
+        $('.editProduct #editProduct').modal();
+    });
+
+    $(document).ready(function() {
+        $("#editProductForm").submit(function(event) {
+        event.preventDefault();
+        editProduct();
+        });
+        function editProduct() {
+
+            var formData = {
+                id: $("#id").val(),
+                image : document.getElementById("anh").src.slice(37),
+                productName : $("#productName").val(),
+                salePrice : $("#salePrice").val(),
+                promotion : $("#promotion").val(),
+                description : $("#description").val()
+            }
+            var promotion = formData.promotion;
+            console.log(formData);
+            $.ajax({
+                type : "POST",
+                url : '/admin/edit_product?promotion=' + promotion,
+                data : JSON.stringify(formData),
+                contentType:"application/json",
+                dataType : "json",
+                success : function(result) {
+                    document.getElementById("anh").src = "/images/product/"+result.image;
+                    $("#productName").html(result.productName);
+                    document.getElementById("salePrice").innerHTML = result.salePrice;
+                    document.getElementById("description").innerHTML = result.description;
+
+                    console.log(result);
+
+                    $('#editProduct').modal('hide');
+                    $('#editSuccess').modal();
+                },
+                error : function(e) {
+                     $('#errorEdit').modal();
+                }
+            });
+        }
+    });
+
+
+
+
+
+</script>
+</body>
+</html>
+

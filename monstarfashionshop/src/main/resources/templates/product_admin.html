@@ -32,6 +32,7 @@
                     <th>PURCHASE PRICE</th>
                     <th>SALE PRICE</th>
                     <th>CATEGORY</th>
+<!--                    <th>STATUS</th>-->
                     <th>DETAIL</th>
                 </tr>
                 </thead>
@@ -43,7 +44,9 @@
                     <td th:text="${product.purchasePrice}"></td>
                     <td th:text="${product.salePrice}"></td>
                     <td th:text="${product.category.categoryName}"></td>
-                    <td><a th:href="@{/}" class="btn btn-primary eBtn">Chi tiết sản phẩm</a></td>
+<!--                    <td th:if="${product.enable}">Đang bán</td>-->
+<!--                    <td th:unless="${product.enable}">Không còn bán</td>-->
+                    <td><a th:href="@{/admin/product_detail/{id}(id=${product.id})}" class="btn btn-primary eBtn">Chi tiết sản phẩm</a></td>
                 </tr>
                 </tbody>
             </table>

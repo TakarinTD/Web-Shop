@@ -15,6 +15,12 @@
     h1 {
       text-align:center;
     }
+
+
+
+
+
+
     </style>
 </head>
 <body>
@@ -43,25 +49,137 @@
                     <td th:text="${user.birthday}"></td>
                     <td th:text="${user.email}"></td>
                     <td th:text="${user.phone}"></td>
-                    <td th:text="${user.enabled}"></td>
+                    <td th:if="${user.enabled}" style="color: green">Đang hoạt động</td>
+                    <td th:unless="${user.enabled}" style="color: red">Đã khóa</td>
                     <td>
                         <div th:each="role: ${user.roles}">
                             <p th:text="${role.name}"></p>
                         </div>
                     </td>
-                    <td><a th:href="@{/}" class="btn btn-primary eBtn">Đổi quyền</a>
-                        <br>
-                        <a th:href="@{/}" class="btn btn-danger dBtn">Khóa tài khoản</a></td>
+                    <td th:each="role, state: ${user.roles}" th:if="${role.name}=='ROLE_USER' and ${state.size}==1">
+                        <a th:href="@{/admin/find_user/{id}(id=${user.id})}" class="btn btn-primary rBtn" style="margin-bottom: 5px;">Cấp quyền</a>
+                        <a th:if="${user.enabled}" th:href="@{/admin/find_user/{id}(id=${user.id})}" class="btn btn-danger lBtn">Khóa tài khoản</a>
+                        <a th:unless="${user.enabled}" th:href="@{/admin/find_user/{id}(id=${user.id})}" class="btn btn-success oBtn">Mở tài khoản</a>
+                    </td>
                 </tr>
                 </tbody>
             </table>
         </div>
     </div>
+    <div class="capQuyen">
+        <form action="" method="POST" id="capQuyenForm">
+            <div class="modal fade" id="capQuyen" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog" role="document" id="dialog">
+                    <div class="modal-content">
+                        <div class="modal-header" style="background-color:green">
+                            <h5 class="modal-title">Cấp quyền!</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                Bạn có chắc muốn cấp quyền admin cho user này?
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Không</button>
+                            <input type="submit" class="btn btn-success" value="Cấp" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="khoa">
+        <form action="" method="POST" id="khoaForm">
+            <div class="modal fade" id="khoa" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog" role="document" id="dialog">
+                    <div class="modal-content">
+                        <div class="modal-header" style="background-color:red">
+                            <h5 class="modal-title">Khóa tài khoản!</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                Bạn có chắc muốn khóa tài khoản này?
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Không</button>
+                            <input type="submit" class="btn btn-danger" value="Khóa" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="mo">
+        <form action="" method="POST" id="moForm">
+            <div class="modal fade" id="mo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog" role="document" id="dialog">
+                    <div class="modal-content">
+                        <div class="modal-header" style="background-color:green">
+                            <h5 class="modal-title">Mở tài khỏan!</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                Bạn có chắc muốn mở khóa tài khoản này?
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Không</button>
+                            <input type="submit" class="btn btn-success" value="mỏ" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
 </div>
 <script>
      $(document).ready(function() {
         $('#tableUser').dataTable({});
+     });
+
+    $("body").on("click", ".rBtn", function(){
+        event.preventDefault();
+        var href = $(this).attr('href');
+
+        $.get(href,function(user,status){
+            document.getElementById('capQuyenForm').action = "/admin/cap_quyen?id="+user.id;
+        });
+        $('.capQuyen <div id="capQuyen"></div>').modal();
     });
+
+    $("body").on("click", ".lBtn", function(){
+        event.preventDefault();
+        var href = $(this).attr('href');
+
+        $.get(href,function(user,status){
+            document.getElementById('khoaForm').action = "/admin/khoa?id="+user.id;
+        });
+        $('.khoa #khoa').modal();
+    });
+
+    $("body").on("click", ".oBtn", function(){
+        event.preventDefault();
+        var href = $(this).attr('href');
+
+        $.get(href,function(user,status){
+            document.getElementById('moForm').action = "/admin/mo?id="+user.id;
+        });
+        $('.mo #mo').modal();
+    });
+
 </script>
 </body>
 </html>

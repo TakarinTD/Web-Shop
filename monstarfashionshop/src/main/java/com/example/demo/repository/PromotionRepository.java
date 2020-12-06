@@ -4,4 +4,5 @@ import com.example.demo.entity.Promotion;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface PromotionRepository extends JpaRepository<Promotion, Long> {
+    Promotion findByProductsId(Long productId);
 }

@@ -34,6 +34,9 @@ public class Product {
     @Column (name = "description")
     private String description;
 
+//    @Column (name = "enable")
+//    private String enable;
+
     @Temporal (TemporalType.TIMESTAMP)
     @CreationTimestamp
     @Column (name = "created_at")
@@ -142,6 +145,14 @@ public class Product {
     public void setPromotion(Promotion promotion) {
         this.promotion = promotion;
     }
+
+//    public String getEnable () {
+//        return enable;
+//    }
+//
+//    public void setEnable (String enable) {
+//        this.enable = enable;
+//    }
 
     public Set<Review> getReviews() {
         Set<Review> reviewSet = new TreeSet<>();

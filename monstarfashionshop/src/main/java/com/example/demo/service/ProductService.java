@@ -31,4 +31,6 @@ public interface ProductService {
 
     Map<ProductSize, Integer> getListSizeAndAmount(String keyword);
 
+    Product saveProduct(Product product);
+
 }
