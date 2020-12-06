@@ -1,10 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.constant.Constant;
-import com.example.demo.entity.Order;
-import com.example.demo.entity.OrderDetail;
-import com.example.demo.entity.User;
-import com.example.demo.entity.Warehouse;
+import com.example.demo.entity.*;
 import com.example.demo.service.CartService;
 import com.example.demo.service.OrderService;
 import com.example.demo.service.WareHouseService;
@@ -18,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
+import java.util.List;
 
 @Controller
 public class CheckoutController extends BaseController{
@@ -39,6 +37,8 @@ public class CheckoutController extends BaseController{
             _mvShare.setViewName("redirect:/cart");
             return _mvShare;
         }
+        List<Product> listProductTopSale = productService.getTopProductSale(9);
+        _mvShare.addObject("productsTopSale", listProductTopSale);
         _mvShare.addObject("flashShipPrice", 2000);
         _mvShare.addObject("slowShipPrice", 1000);
         _mvShare.addObject("categories", categoryService.getListCategory());

@@ -6,7 +6,7 @@
 <head>
     <!-- =====  BASIC PAGE NEEDS  ===== -->
     <meta charset="utf-8">
-    <title>Thanh toán</title>
+    <title>Liên hệ</title>
     <!-- =====  SEO MATE  ===== -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="description" content="">
@@ -31,7 +31,6 @@
 
 <body>
 <!-- =====  LOADER  ===== -->
-<!--<div class="loader"></div>-->
 <div class="wrapper">
     <th:block th:include="common/header"></th:block>
     <!-- =====  HEADER END  ===== -->
@@ -42,9 +41,9 @@
                 <th:block th:include="common/category_menu"></th:block>
             </div>
             <div class="col-sm-8 col-lg-9 mtb_20">
-                <div class="text-center"  style="padding-top: 50px;">
-                    <p><i class="fa fa-check-circle fa-10x" aria-hidden="true"></i></p>
-                    <h3 style="color: #4cae4c">Bạn đã đặt hàng thành công, theo dõi đơn hàng của mình tại mục quản lý đơn hàng</h3>
+                <div class="text-center" style="padding-top: 50px;">
+                    <h3 style="color: #4cae4c">Cảm ơn bạn đã liên hệ với cửa hàng, chúng tôi sẽ xem xét và phản hồi bạn sớm nhất,
+                        hãy check email liên hệ của bạn thường xuyên nhé !</h3>
                     <button class="btn center-pill mt_30">
                         <a th:href="@{/}" style="color: white;">Quay về trang chủ</a>
                     </button>
@@ -58,19 +57,6 @@
     <!-- =====  FOOTER END  ===== -->
 </div>
 <a id="scrollup"></a>
-<script>
-    /*Open chatbox*/
-    function openForm() {
-        document.getElementById("chatBoxForm").style.display = "block";
-        document.getElementById("chat").style.display = "none";
-    }
-
-    /*Close chat box*/
-    function closeForm() {
-        document.getElementById("chatBoxForm").style.display = "none";
-        document.getElementById("chat").style.display = "block";
-    }
-</script>
 <script th:src="@{/js/jQuery_v3.1.1.min.js}"></script>
 <script th:src="@{/js/owl.carousel.min.js}"></script>
 <script th:src="@{/js/bootstrap.min.js}"></script>

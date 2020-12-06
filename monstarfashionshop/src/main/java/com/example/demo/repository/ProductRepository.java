@@ -13,11 +13,18 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     @Query("SELECT p FROM Product p JOIN FETCH p.category WHERE p.category.id = :categoryId")
     List<Product> findALlByCategoryId(@Param("categoryId") long categoryId);
 
-    List<Product> findProductsByCategoryCategoryName(String categoryName);
+    @Query(value = "SELECT DISTINCT p.* FROM product AS p\n" +
+            "INNER JOIN promotion AS pt ON p.promotion_id = pt.id\n" +
+            "INNER JOIN product_detail AS pd ON p.id = pd.product_id\n" +
+            "INNER JOIN order_detail AS od ON pd.id = od.product_detail_id\n" +
+            "ORDER BY quantities_product DESC LIMIT 9", nativeQuery = true)
+    List<Product> getTopProductSale();
 
     Page<Product> findProductsByCategoryId(Long categoryId, Pageable pageable);
 
     List<Product> findProductByIdAndCategoryId(Long productId, Long CategoryId);
+
+    Page<Product> findProductsByCategoryIdAndPromotionId(Long categoryId, Long idPromotion, Pageable pageable);
 
     @Query("SELECT DISTINCT p FROM Product p WHERE p.salePrice BETWEEN :price1 AND :price2 AND " +
             "p.productName LIKE %:keyword% OR p.category.categoryName LIKE %:keyword%")
@@ -41,16 +48,10 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
             "p.productName LIKE %:keyword% OR p.category.categoryName LIKE %:keyword%")
     Page<Product> findProductsByProductNameOrCategoryName3(String keyword, @Param("price1") float price1, @Param("price2") float price2, @Param("sizeIds") List<Long> sizeIds, Pageable pageable);
 
-
     @Query("SELECT DISTINCT p FROM Product p INNER JOIN p.productDetails pd " +
             "WHERE p.category.id= :categoryId AND pd.productColor.id IN :colorIds AND pd.productSize.id IN :sizeIds " +
             "AND p.salePrice BETWEEN :price1 AND :price2")
-    Page<Product> searchProductDetailsWithConditional1(
-            @Param("categoryId") Long categoryId,
-            @Param("colorIds") List<Long> colorIds,
-            @Param("sizeIds") List<Long> sizeIds,
-            @Param("price1") float price1, @Param("price2") float price2,
-            Pageable pageable
+    Page<Product> searchProductDetailsWithConditional1( @Param("categoryId") Long categoryId, @Param("colorIds") List<Long> colorIds, @Param("sizeIds") List<Long> sizeIds, @Param("price1") float price1, @Param("price2") float price2, Pageable pageable
     );
 
     @Query("SELECT DISTINCT p FROM Product p INNER JOIN p.productDetails pd " +

@@ -64,6 +64,18 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public Page<Product> getProductsByCategoryIdAndPromotionId(Long categoryId, Long promotionId, int pageNum, int pageSize, String sortField, String sortDir) {
+        Pageable pageable = PageRequest.of(pageNum - 1, pageSize,
+                sortDir.equalsIgnoreCase("asc") ? Sort.by(sortField).ascending() : Sort.by(sortField).descending());
+        return productRepository.findProductsByCategoryIdAndPromotionId(categoryId, promotionId,pageable);
+    }
+
+    @Override
+    public List<Product> getTopProductSale(int limit) {
+        return productRepository.getTopProductSale();
+    }
+
+    @Override
     public Page<Product> pageProductByCategoryId(Long categoryId, int pageNum, int pageSize, String sortField, String sortDir) {
         Pageable pageable = PageRequest.of(pageNum - 1, pageSize,
                 sortDir.equalsIgnoreCase("asc") ? Sort.by(sortField).ascending() : Sort.by(sortField).descending());
