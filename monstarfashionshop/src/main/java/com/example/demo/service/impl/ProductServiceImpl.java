@@ -184,4 +184,9 @@ public class ProductServiceImpl implements ProductService {
         return listSizeAndAmount;
     }
 
+    @Override
+    public Product saveProduct (Product product) {
+        return productRepository.save(product);
+    }
+
 }
