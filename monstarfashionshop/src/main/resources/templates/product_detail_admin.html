@@ -10,15 +10,15 @@
     <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css"></script>
-    <script th:src="@{/js/custom.js}"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <style>
     h1, h2 {
       text-align:center;
     }
-
-
-
+    #tableProduct td, th {
+      text-align: center;
+      vertical-align: middle;
+    }
 
 
 
@@ -70,35 +70,38 @@
             </div>
         </div>
     </div>
-<!--    <h2>Danh sách phân loại</h2>-->
-<!--    <div class="container" style="text-align:center">-->
-<!--        <div class="card-block">-->
-<!--            <table id="tableProduct" class="table table-hover table-bordered">-->
-<!--                <thead>-->
-<!--                <tr>-->
-<!--                    <th>PRODUCT ID</th>-->
-<!--                    <th>PRODUCT NAME</th>-->
-<!--                    <th>PRODUCT IMAGE</th>-->
-<!--                    <th>PURCHASE PRICE</th>-->
-<!--                    <th>SALE PRICE</th>-->
-<!--                    <th>CATEGORY</th>-->
-<!--                    <th>DETAIL</th>-->
-<!--                </tr>-->
-<!--                </thead>-->
-<!--                <tbody>-->
-<!--                &lt;!&ndash;                <tr th:each="product :${products}">&ndash;&gt;-->
-<!--                &lt;!&ndash;                    <td th:text="${product.id}"></td>&ndash;&gt;-->
-<!--                &lt;!&ndash;                    <td th:text="${product.productName}"></td>&ndash;&gt;-->
-<!--                &lt;!&ndash;                    <td th:text="${product.image}"></td>&ndash;&gt;-->
-<!--                &lt;!&ndash;                    <td th:text="${product.purchasePrice}"></td>&ndash;&gt;-->
-<!--                &lt;!&ndash;                    <td th:text="${product.salePrice}"></td>&ndash;&gt;-->
-<!--                &lt;!&ndash;                    <td th:text="${product.category.categoryName}"></td>&ndash;&gt;-->
-<!--                &lt;!&ndash;                    <td><a th:href="@{/admin/product_detail/{id}(id=${product.id})}" class="btn btn-primary eBtn">Chi tiết sản phẩm</a></td>&ndash;&gt;-->
-<!--                &lt;!&ndash;                </tr>&ndash;&gt;-->
-<!--                </tbody>-->
-<!--            </table>-->
-<!--        </div>-->
-<!--    </div>-->
+    <h2>Danh sách phân loại</h2>
+    <button class="btn btn-primary npcBtn">Thêm loại mới</button>
+    <div class="container" style="text-align:center">
+        <div class="card-block">
+            <table id="tableProduct" class="table table-hover table-bordered">
+                <thead>
+                <tr>
+                    <th>Mã loại</th>
+                    <th>Ảnh</th>
+                    <th>Màu sắc</th>
+                    <th>Kích thước</th>
+                    <th>Số lượng còn lại</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="pDetail :${pDetails}">
+                    <td th:text="${pDetail.id}"></td>
+                    <td><img th:src="@{'/images/product/' + ${pDetail.image}}" style="width:60px"/></td>
+                    <td th:text="${pDetail.productColor.colorName}"></td>
+                    <td th:text="${pDetail.productSize.sizeName}"></td>
+                    <td th:if="${pDetail.warehouse.quantityAvailable}"><a
+                            th:href="@{/admin/find_detail/{id}(id=${pDetail.id})}" class="addQuantity"
+                            th:text="${pDetail.warehouse.quantityAvailable}" title="thêm số lượng"></a></td>
+                    <td th:unless="${pDetail.warehouse.quantityAvailable}"><a
+                            th:href="@{/admin/find_detail/{id}(id=${pDetail.id})}" class="addQuantity" style="color:red"
+                            title="thêm số lượng">hết
+                        hàng</a></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
     <div class="editProduct">
         <form th:action="@{/admin/edit_product}" method="POST" id="editProductForm">
             <div class="modal fade" id="editProduct" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -157,12 +160,95 @@
             </div>
         </form>
     </div>
+    <div class="addCategoryProduct">
+        <form th:action="@{/admin/add_detail_product}" method="POST" id="addCategoryProductForm">
+            <div class="modal fade" id="addCategoryProduct" tabindex="-1" role="dialog"
+                 aria-labelledby="exampleModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Thêm loại mới</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label for="productId" class="col-form-label">Mã sản phẩm: </label>
+                                <input type="text" class="form-control" id="productId" name="productId"
+                                       th:value="${product.id}" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="image" class="col-form-label">Ảnh minh họa: </label>
+                                <input type="file" class="form-control" id="image" name="image" accept="image/*">
+                            </div>
+                            <div class="form-group">
+                                <label for="colorName" class="col-form-label">Màu sắc: </label>
+                                <select id="colorName" name="colorName">
+                                    <option th:each="color: ${colors}"
+                                            th:value="${color.id}"
+                                            th:text="${color.colorName}"></option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="sizeName" class="col-form-label">Kích thước: </label>
+                                <select id="sizeName" name="sizeName">
+                                    <option th:each="size: ${sizes}"
+                                            th:value="${size.id}"
+                                            th:text="${size.sizeName}"></option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="quantityAvailable" class="col-form-label">Số lượng: </label>
+                                <input type="number" class="form-control" id="quantityAvailable"
+                                       name="quantityAvailable">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <input type="submit" class="btn btn-primary" id="save" value="Thêm"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="addQuantity">
+        <form th:action="@{/admin/addQuantity}" method="POST" id="addQuantityForm">
+            <div class="modal fade" id="addQuantity" tabindex="-1" role="dialog"
+                 aria-labelledby="exampleModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Thêm sản phẩm</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label for="quantityAvailable" class="col-form-label">Số lượng cần thêm: </label>
+                                <input type="number" class="form-control" id="quantityAvailable"
+                                       name="quantityAvailable">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <input type="submit" class="btn btn-primary" id="save" value="Thêm"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
     <div class="modal fade" id="editSuccess" role="dialog">
         <div class="modal-dialog">
             <!-- Modal content-->
             <div class="modal-content">
                 <div class="modal-header" style="background-color:green;">
-                    <h5 class="modal-title">Edit Product Success!</h5>
+                    <h5 class="modal-title">Success!</h5>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-footer">
@@ -176,7 +262,7 @@
             <!-- Modal content-->
             <div class="modal-content">
                 <div class="modal-header" style="background-color:red;">
-                    <h5 class="modal-title">EDIT ERROR!</h5>
+                    <h5 class="modal-title">ERROR!</h5>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-footer">
@@ -205,11 +291,29 @@
         $('.editProduct #editProduct').modal();
     });
 
+    $("body").on("click", ".npcBtn", function(){
+        event.preventDefault();
+        var href = $(this).attr('href');
+        $('.addCategoryProduct #addCategoryProduct').modal();
+    });
+
+    $("body").on("click", ".addQuantity", function(){
+        event.preventDefault();
+        var href = $(this).attr('href');
+        $('.addQuantity #addQuantity').modal();
+    });
+
     $(document).ready(function() {
         $("#editProductForm").submit(function(event) {
         event.preventDefault();
         editProduct();
         });
+
+        $("#addCategoryProductForm").submit(function(event) {
+            event.preventDefault();
+            addCategoryProduct();
+        });
+
         function editProduct() {
 
             var formData = {
@@ -229,13 +333,6 @@
                 contentType:"application/json",
                 dataType : "json",
                 success : function(result) {
-                    document.getElementById("anh").src = "/images/product/"+result.image;
-                    $("#productName").html(result.productName);
-                    document.getElementById("salePrice").innerHTML = result.salePrice;
-                    document.getElementById("description").innerHTML = result.description;
-
-                    console.log(result);
-
                     $('#editProduct').modal('hide');
                     $('#editSuccess').modal();
                 },
@@ -244,6 +341,59 @@
                 }
             });
         }
+
+        function addCategoryProduct() {
+            var formData = {
+                productId: $("#productId").val(),
+                image : "product1.jpg",
+                colorId : $("#colorName").val(),
+                sizeId : $("#sizeName").val(),
+                quantityAvailable : $("#quantityAvailable").val(),
+            }
+            console.log(formData);
+            $.ajax({
+                type : "POST",
+                url : '/admin/add_detail_product?quantityAvailable=' + formData.quantityAvailable + '&productId=' + formData.productId + '&colorId=' + formData.colorId + '&sizeId=' + formData.sizeId,
+                data : JSON.stringify(formData),
+                contentType:"application/json",
+                dataType : "json",
+                success : function(result) {
+                    console.log(result);
+                    $('#editProduct').modal('hide');
+                    $('#editSuccess').modal();
+                },
+                error : function(e) {
+                     $('#errorEdit').modal();
+                }
+            });
+        }
+
+        $("#addQuantityForm").submit(function(event) {
+            event.preventDefault();
+            addQuantity();
+        });
+        function addQuantity() {
+            var formData = {
+                quantityAvailable : $("#quantityAvailable").val(),
+            }
+            console.log(formData);
+            $.ajax({
+                type : "POST",
+                url : '/admin/addQuantity?quantityAvailable=' + formData.quantityAvailable,
+                data : JSON.stringify(formData),
+                contentType:"application/json",
+                dataType : "json",
+                success : function(result) {
+                    console.log(result);
+                    $('#editProduct').modal('hide');
+                    $('#editSuccess').modal();
+                },
+                error : function(e) {
+                     $('#errorEdit').modal();
+                }
+            });
+        }
+
     });
 
 
