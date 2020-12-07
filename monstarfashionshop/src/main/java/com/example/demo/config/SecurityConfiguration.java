@@ -15,7 +15,7 @@ import org.springframework.security.web.util.matcher.*;
 
 @Configuration
 @EnableWebSecurity
-public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
+public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Bean
     public UserDetailsService userDetailsService() {
@@ -42,13 +42,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
     }
 
     @Override
-    protected void configure(HttpSecurity http) throws Exception{
+    protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
 
-        http.authorizeRequests().antMatchers("/postReview").permitAll();
         // Các yêu cầu phải login với vai trò user hoặc admin
         // Nếu chưa login, nó sẽ redirect tới trang /login.
-        http.authorizeRequests().antMatchers("/my_account","/editInfo","/order_history")//
+        http.authorizeRequests().antMatchers("/my_account", "/order_history")//
                 .access("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')");
 
         // Các trang chỉ dành cho MANAGER
@@ -62,18 +61,18 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
         // Cấu hình cho Login Form.
         http.authorizeRequests().and()
                 .formLogin()//
-                    .loginProcessingUrl("/login") // Submit URL
-                    .loginPage("/login")//
-                    .defaultSuccessUrl("/login-success")//
-                    .failureUrl("/login?error")//
-                    .usernameParameter("email")//
-                    .passwordParameter("password")
+                .loginProcessingUrl("/login") // Submit URL
+                .loginPage("/login")//
+                .defaultSuccessUrl("/login-success")//
+                .failureUrl("/login?error")//
+                .usernameParameter("email")//
+                .passwordParameter("password")
 
                 // Cấu hình cho trang Logout.
                 // (Sau khi logout, chuyển tới trang home)
                 .and()
                 .logout()
-                    .logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/").deleteCookies("JSESSIONID");
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/").deleteCookies("JSESSIONID");
         //Remember me
         http.authorizeRequests().and().rememberMe().tokenRepository(persistentTokenRepository())
                 .tokenValiditySeconds(60);

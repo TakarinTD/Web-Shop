@@ -30,7 +30,7 @@ public class User {
 
     @Column(name = "birthday")
     @DateTimeFormat(pattern = "dd-MM-yyyy")
-    private String birthday;
+    private Date birthday;
 
     @Column(name = "address")
     private String address;
@@ -109,11 +109,11 @@ public class User {
         this.fullName = fullName;
     }
 
-    public String getBirthday() {
+    public Date getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(String birthday) {
+    public void setBirthday(Date birthday) {
         this.birthday = birthday;
     }
 

@@ -26,17 +26,18 @@ public class MyAccountController {
     private UserService userService;
 
     @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
     HttpSession session;
 
     private PasswordEncoder bcryptPasswordEncoder = new BCryptPasswordEncoder();
 
     @GetMapping("/my_account")
-    public String myAccount(Model model) {
+    public String myAccount(Model model, Principal principal) {
         User user = (User) session.getAttribute("user");
-        model.addAttribute("user", user);
+        if(user == null) {
+            user = userService.findUserByEmail(principal.getName());
+            model.addAttribute("user", user);
+            return "redirect:login";
+        }
         return "my_account";
     }
 
@@ -49,7 +50,7 @@ public class MyAccountController {
         user.setAddress(userDetail.getAddress());
         user.setBirthday(userDetail.getBirthday());
         try {
-            User userSaved = userRepository.save(user);
+            User userSaved = userService.editInfo(user);
             session.setAttribute("user", user);
             return ResponseEntity.ok(userSaved);
         } catch (Exception e) {
@@ -64,9 +65,8 @@ public class MyAccountController {
             //Check Old password
             if (bcryptPasswordEncoder.matches(oldPassword, user.getPassword())) {
                 //Check password confirm
-                if (password.equals(passwordConfirm)) {
-                    user.setPassword(bcryptPasswordEncoder.encode(password));
-                } else {
+                if (!password.equals(passwordConfirm)) {
+//                    user.setPassword(bcryptPasswordEncoder.encode(password))
                     throw new FailedCheckPassword(FAILED_CONFIRM_PASSWORD);
                 }
             } else {
@@ -87,7 +87,7 @@ public class MyAccountController {
         User user = userService.findUserByEmail(userss.getEmail());
         try {
             validatePassword(user, oldPassword, userDetail.getPassword(), passwordConfirm);
-            return ResponseEntity.ok(userRepository.save(user));
+            return ResponseEntity.ok(userService.editPassword(user));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
         }

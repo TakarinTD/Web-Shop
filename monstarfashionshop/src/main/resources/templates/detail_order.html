@@ -54,43 +54,39 @@
                         </ul>
                     </div>
                 </div>
-                <div class="left_banner left-sidebar-widget mt_30 mb_40"><a href="#"><img
-                        th:src="@{/images/left1.jpg}" alt="Left Banner" class="img-responsive"/></a></div>
             </div>
             <div class="col-sm-8 col-lg-9 mtb_20">
                 <!-- contact  -->
                 <div class="row">
                     <div class="col-md-9 col-md-offset-1" style="width: 100%; margin-left: 1%;">
-                        <div>
-                            <div style="font-size: 20px">
-                                <b>Chi tiết đơn hàng #<span th:utext="${order.id}"></span> - <span
-                                        th:if="${order.status}==0">Đang chờ xử lý</span>
-                                    <span th:if="${order.status}==1">Đang giao</span>
-                                    <span th:if="${order.status}==2">Đã giao</span>
-                                    <span th:if="${order.status}==3">Đã hủy</span>
-                                    <button th:if="${order.status}==0" onclick="huyDon()"> Hủy đơn</button>
-                                </b>
+                        <div class="row" style="font-size: 20px">
+                            <b>Chi tiết đơn hàng #<span th:utext="${order.id}"></span> - <span
+                                    th:if="${order.status}==0">Đang chờ xử lý</span>
+                                <span th:if="${order.status}==1">Đang giao</span>
+                                <span th:if="${order.status}==2">Đã giao</span>
+                                <span th:if="${order.status}==3">Đã hủy</span>
+                                <button th:if="${order.status}==0" onclick="huyDon()"> Hủy đơn</button>
+                            </b>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="title">Địa chỉ người nhận:</div>
+                                <div class="content"><span th:utext="${user.fullName}"></span>
+                                    <p class="address">Địa chỉ: <span th:utext="${user.address}"></span></p>
+                                    <p class="phone">Điện thoại: <span th:utext="${user.phone}"></span></p></div>
                             </div>
-                            <div class="styles__StyledGroupSection-ri73gr-0 kHWfJY">
-                                <div class="styles__StyledSection-ri73gr-1 ipnhKS">
-                                    <div class="title">Địa chỉ người nhận:</div>
-                                    <div class="content"><span th:utext="${user.fullName}"></span>
-                                        <p class="address">Địa chỉ: <span th:utext="${user.address}"></span></p>
-                                        <p class="phone">Điện thoại: <span th:utext="${user.phone}"></span></p></div>
-                                </div>
-                                <div class="styles__StyledSection-ri73gr-1 ipnhKS">
-                                    <div class="title">Hình thức giao hàng:</div>
-                                    <div class="content"><span th:utext="${order.deliveryMethod}"></span>
-                                        <p>Phí vận chuyển: <span>30.000VND </span></p></div>
-                                </div>
-                                <div class="styles__StyledSection-ri73gr-1 ipnhKS">
-                                    <div class="title">Hình thức Thanh toán:</div>
-                                    <div class="content"><span th:utext="${order.paymentMethod}"></span>
-                                    </div>
+                            <div class="col-md-4">
+                                <div class="title">Hình thức giao hàng:</div>
+                                <div class="content"><span th:utext="${order.deliveryMethod}"></span>
+                                    <p>Phí vận chuyển: <span>30.000VND </span></p></div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="title">Hình thức Thanh toán:</div>
+                                <div class="content"><span th:utext="${order.paymentMethod}"></span>
                                 </div>
                             </div>
                         </div>
-                        <div style="padding: 10px;">
+                        <div class="row" style="padding-top: 10px;">
                             <table id="tableProduct" class="table table-hover table-bordered">
                                 <thead>
                                 <tr>
@@ -103,7 +99,8 @@
                                 </thead>
                                 <tbody>
                                 <tr th:each="orderDetail :${orderDetails}">
-                                    <td><a th:href="@{/product/{id}/detail(id=${orderDetail.productDetail.product.id})}" th:text="${orderDetail.productDetail.product.productName}"></a></td>
+                                    <td><a th:href="@{/product/{id}/detail(id=${orderDetail.productDetail.product.id})}"
+                                           th:text="${orderDetail.productDetail.product.productName}"></a></td>
                                     <td th:text="${orderDetail.productDetail.product.salePrice}"></td>
                                     <td th:text="${orderDetail.quantitiesProduct}"></td>
                                     <td th:text="${orderDetail.discount}"></td>
@@ -136,7 +133,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Không</button>
-                            <input type="submit" class="btn btn-danger" value="Hủy" />
+                            <input type="submit" class="btn btn-danger" value="Hủy"/>
                         </div>
                     </div>
                 </div>
@@ -157,18 +154,18 @@
 <script th:src="@{/js/jquery.firstVisitPopup.js}"></script>
 <script th:src="@{/js/custom.js}"></script>
 <script>
-    $(document).ready(function() {
-        $('input[type="checkbox"]').click(function() {
-        if( document.getElementById("change").checked == true){
-            $("#changePassword").show();
-        } else $("#changePassword").hide();
+    $(document).ready(function () {
+        $('input[type="checkbox"]').click(function () {
+            if (document.getElementById("change").checked == true) {
+                $("#changePassword").show();
+            } else $("#changePassword").hide();
         });
     });
-    $(document).ready(function() {
+    $(document).ready(function () {
         $('#tableProduct').dataTable({});
     });
 
-    function huyDon(){
+    function huyDon() {
         $('.huyDon #huyDon').modal();
     }
 </script>

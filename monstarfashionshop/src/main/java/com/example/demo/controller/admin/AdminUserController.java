@@ -45,7 +45,7 @@ public class AdminUserController {
             }
         }
         user.setRoles(roles);
-        userService.saveUser(user);
+        userService.editInfo(user);
         model.addAttribute("users", userRepository.findAll());
         return "user_admin";
     }
@@ -54,7 +54,7 @@ public class AdminUserController {
     public String khoa (@RequestParam(value = "id", required = false) Long userId, Model model) {
         User user=userService.findUserById(userId);
         user.setEnabled(false);
-        userService.saveUser(user);
+        userService.editInfo(user);
         model.addAttribute("users", userRepository.findAll());
         return "user_admin";
     }
@@ -63,7 +63,7 @@ public class AdminUserController {
     public String mo (@RequestParam(value = "id", required = false) Long userId, Model model) {
         User user=userService.findUserById(userId);
         user.setEnabled(true);
-        userService.saveUser(user);
+        userService.editInfo(user);
         model.addAttribute("users", userRepository.findAll());
         return "user_admin";
     }

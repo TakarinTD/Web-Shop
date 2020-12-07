@@ -9,12 +9,12 @@ public class UserDTO {
     private String fullName;
     private String phone;
     private String address;
-    private String birthday;
+    private Date birthday;
 
     public UserDTO() {
     }
 
-    public UserDTO(Long id, String email, String fullName, String phone, String address, String birthday) {
+    public UserDTO(Long id, String email, String fullName, String phone, String address, Date birthday) {
         this.id = id;
         this.email = email;
         this.fullName = fullName;
@@ -63,11 +63,11 @@ public class UserDTO {
         this.address = address;
     }
 
-    public String getBirthday() {
+    public Date getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(String birthday) {
+    public void setBirthday(Date birthday) {
         this.birthday = birthday;
     }
 }

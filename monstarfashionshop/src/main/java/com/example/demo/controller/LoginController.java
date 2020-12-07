@@ -24,17 +24,20 @@ public class LoginController {
 
     @GetMapping("/login")
     public String login(HttpServletRequest httpServletRequest, HttpSession httpSession) throws URISyntaxException, MalformedURLException {
-        System.out.println(httpServletRequest.getContextPath());
         String backUrlPath = httpServletRequest.getHeader("referer");
+        System.out.println(backUrlPath);
         String backPath;
         String backQuery;
-        System.out.println(backUrlPath);
-        if (backUrlPath == null||backUrlPath.equals(BACK_REGISTER)) {
+        if (backUrlPath == null || backUrlPath.equals(BACK_REGISTER)) {
             backPath = "/";
-            backQuery="/";
+            backQuery = null;
         } else {
             backPath = new URL(backUrlPath).getPath();
             backQuery = new URL(backUrlPath).getQuery();
+        }
+
+        if(backPath.equals("/login")) {
+            backPath = "/";
         }
         String backServletPath = backPath;
         if (backQuery != null) {
@@ -45,12 +48,13 @@ public class LoginController {
     }
 
     @RequestMapping(value = "/login-success", method = RequestMethod.GET)
-    public String loginSuccess(HttpSession session, Authentication authentication){
+    public String loginSuccess(HttpSession session, HttpServletRequest httpServletRequest, Authentication authentication){
         String userEmail = authentication.getName();
         User userLogin = userService.findUserByEmail(userEmail);
-        System.out.println(userEmail);
         session.setAttribute("user", userLogin);
         String backPageUrl = ((String) session.getAttribute("backServletPath"));
+        System.out.println(backPageUrl);
+        System.out.println(httpServletRequest.getRequestURL());
         session.removeAttribute("backServletPath");
 
         return "redirect:" + backPageUrl;

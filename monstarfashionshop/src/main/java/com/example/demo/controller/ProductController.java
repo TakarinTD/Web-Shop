@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.TreeMap;
 import java.util.TreeSet;
@@ -37,6 +38,8 @@ public class ProductController extends BaseController {
             _mvShare.setViewName("404");
             return _mvShare;
         }
+        List<Product> listProductTopSale = productService.getTopProductSale();
+        _mvShare.addObject("productsTopSale", listProductTopSale);
         _mvShare.addObject("images", mapImage);
         _mvShare.addObject("productColors", productColors);
         _mvShare.addObject("productSizes", productSizes);

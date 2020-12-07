@@ -4,14 +4,20 @@ import com.example.demo.constant.Constant;
 import com.example.demo.entity.User;
 import com.example.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.mail.MessagingException;
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.io.UnsupportedEncodingException;
 
 @Controller
 public class RegisterController {
@@ -29,7 +35,9 @@ public class RegisterController {
     }
 
     @RequestMapping (value = {"/register"}, method = RequestMethod.POST)
-    public ModelAndView createUser (@Valid User user, BindingResult bindingResult, @RequestParam (name = "passwordConfirm") String passwordConfirm) {
+    public ModelAndView createUser (HttpServletRequest request,
+                                    @Valid User user, BindingResult bindingResult,
+                                    @RequestParam(name= "passwordConfirm") String passwordConfirm) throws UnsupportedEncodingException, MessagingException 
         ModelAndView model = new ModelAndView();
         User userExists = userService.findUserByEmail(user.getEmail());
         if (user.getFullName().equals("")) {
@@ -52,9 +60,13 @@ public class RegisterController {
         if (userExists != null) {
             bindingResult.rejectValue("email", "error.email", "This email already exists!");
         }
-        if (! bindingResult.hasErrors()) {
-            userService.saveEditUser(user);
-            model.addObject("msg", "User has been registered successfully, please login!");
+        if (!bindingResult.hasErrors()) {
+            User dbUser = userService.register(user);
+            if(dbUser != null) {
+                String siteURL = request.getRequestURL().toString().replace(request.getServletPath(), "");
+                userService.sendVerificationEmail(dbUser, siteURL);
+            }
+            model.addObject("msg", "User has been registered successfully!");
             model.addObject("user", new User());
         }
 
@@ -63,5 +75,13 @@ public class RegisterController {
         model.setViewName("register");
 
         return model;
+    }
+
+    @GetMapping("/verify")
+    public String verifyAccount(@Param("code") String code, Model model) {
+        System.out.println(code);
+        boolean verified = userService.verify(code);
+        model.addAttribute("registerMessage", "Tài khoản đã được kích hoạt, hãy đăng nhập ngay");
+        return (verified ? "login" : "404");
     }
 }
