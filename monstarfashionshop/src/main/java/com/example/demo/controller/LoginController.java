@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import static com.example.demo.constant.Constant.BACK_REGISTER;
 import com.example.demo.entity.*;
 import com.example.demo.service.*;
 
@@ -23,10 +24,21 @@ public class LoginController {
 
     @GetMapping("/login")
     public String login(HttpServletRequest httpServletRequest, HttpSession httpSession) throws URISyntaxException, MalformedURLException {
-        System.out.println(httpServletRequest.getContextPath());
         String backUrlPath = httpServletRequest.getHeader("referer");
-        String backPath = new URL(backUrlPath).getPath();
-        String backQuery = new URL(backUrlPath).getQuery();
+        System.out.println(backUrlPath);
+        String backPath;
+        String backQuery;
+        if (backUrlPath == null || backUrlPath.equals(BACK_REGISTER)) {
+            backPath = "/";
+            backQuery = null;
+        } else {
+            backPath = new URL(backUrlPath).getPath();
+            backQuery = new URL(backUrlPath).getQuery();
+        }
+
+        if(backPath.equals("/login")) {
+            backPath = "/";
+        }
         String backServletPath = backPath;
         if (backQuery != null) {
             backServletPath += "?" + backQuery;
@@ -36,11 +48,13 @@ public class LoginController {
     }
 
     @RequestMapping(value = "/login-success", method = RequestMethod.GET)
-    public String loginSuccess(HttpSession session, Authentication authentication){
+    public String loginSuccess(HttpSession session, HttpServletRequest httpServletRequest, Authentication authentication){
         String userEmail = authentication.getName();
         User userLogin = userService.findUserByEmail(userEmail);
         session.setAttribute("user", userLogin);
         String backPageUrl = ((String) session.getAttribute("backServletPath"));
+        System.out.println(backPageUrl);
+        System.out.println(httpServletRequest.getRequestURL());
         session.removeAttribute("backServletPath");
 
         return "redirect:" + backPageUrl;

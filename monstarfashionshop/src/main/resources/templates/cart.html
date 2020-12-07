@@ -134,7 +134,9 @@
                                 </td>
                                 <td class="text-center">
                                     <th:block th:if="${item.getValue().getProductDetail().getProduct().getPromotion()}">
-                                        <p style="font-size: 15px; font-weight: 500; color: black;" class="unit-item-price" th:utext="${item.getValue().getProductDetail().getProduct().getSalePriceDiscount()}"></p>
+                                        <p>
+                                            <span style="font-size: 15px; font-weight: 500; color: black;" class="unit-item-price" th:utext="${item.getValue().getProductDetail().getProduct().getSalePriceDiscount()}"></span><span>đ</span>
+                                        </p>
                                         <p>
                                             <span style="text-decoration: line-through;" th:utext="${item.getValue().getProductDetail().getProduct().getSalePrice()}"></span> <span>đ</span>
                                              |
@@ -142,11 +144,14 @@
                                         </p>
                                     </th:block>
                                     <th:block th:unless="${item.getValue().getProductDetail().getProduct().getPromotion()}">
-                                        <p style="font-size: 15px; font-weight: 500; color: black;" class="unit-item-price" th:utext="${item.getValue().getProductDetail().getProduct().getSalePrice()}"></p>
+                                        <p>
+                                            <span style="font-size: 15px; font-weight: 500; color: black;" class="unit-item-price" th:utext="${item.getValue().getProductDetail().getProduct().getSalePrice()}"></span><span>đ</span>
+                                        </p>
                                     </th:block>
                                 </td>
-                                <td class="text-right total-item-price" style="font-size: 15px;"
-                                    th:utext="${item.getValue().getTotalProductPay()}"><span>đ</span></td>
+                                <td class="text-right">
+                                    <span class="total-item-price" style="font-size: 15px;" th:utext="${item.getValue().getTotalProductPay()}"></span><span>đ</span>
+                                </td>
                             </tr>
                         </th:block>
                         </tbody>
@@ -158,7 +163,7 @@
                             <tbody>
                             <tr>
                                 <td class="text-right"><strong>Tạm tính:</strong></td>
-                                <td class="text-right"><span id="total-items-pay" th:utext="${session.totalPay}"></span>
+                                <td class="text-right"><span id="total-items-pay" th:utext="${session.totalPay} "></span><span>đ</span>
                                 </td>
                             </tr>
                             </tbody>
@@ -179,33 +184,7 @@
     <th:block th:include="common/footer"></th:block>
     <!-- =====  FOOTER END  ===== -->
 </div>
-<div class="chatB">
-    <button class="open-chatbox" onclick="openForm()" id="chat">Chat</button>
-    <div class="Chatbox" id="chatBoxForm">
-        <form action="" class="form-container">
-            <h1><img th:src="@{/images/chatbox.png}" style="width:50px;height:50px"/>Chat with us</h1>
-            <label for="msg"><b>We are here to help you!</b></label>
-            <textarea placeholder="Input message..." id="msg" name="msg" required></textarea>
-            <button type="submit" class="btn">Send</button>
-            <button type="button" class="btn close-chatbox" onclick="closeForm()">Close</button>
-        </form>
-    </div>
-</div>
 <a id="scrollup"></a>
-<script>
-
-    /*Open chatbox*/
-    function openForm() {
-        document.getElementById("chatBoxForm").style.display = "block";
-        document.getElementById("chat").style.display = "none";
-    }
-
-    /*Close chat box*/
-    function closeForm() {
-        document.getElementById("chatBoxForm").style.display = "none";
-        document.getElementById("chat").style.display = "block";
-    }
-</script>
 <script th:src="@{/js/jQuery_v3.1.1.min.js}"></script>
 <script th:src="@{/js/owl.carousel.min.js}"></script>
 <script th:src="@{/js/bootstrap.min.js}"></script>
@@ -219,10 +198,10 @@
             if (oldQuantity > 1) {
                 let newQuantity = oldQuantity - 1;
                 let idProductDetail = self.closest("tr").attr("data_productDetail");
-                let unitItemPrice = parseFloat(self.closest("tr").find("p.unit-item-price").text());
+                let unitItemPrice = parseFloat(self.closest("tr").find("span.unit-item-price").text());
                 $('tr[data_productDetail_header="' + idProductDetail + '"]').find("td > p > span#item-quantity-header").text(newQuantity);
                 self.closest("tr").find("input[name='quantity']").val(newQuantity);
-                self.closest("tr").find("td.total-item-price").text(parseFloat(unitItemPrice * newQuantity));
+                self.closest("tr").find("span.total-item-price").text(parseFloat(unitItemPrice * newQuantity));
                 editItemCart(idProductDetail, unitItemPrice, oldQuantity, newQuantity);
             } else {
                 self.closest("tr").find("input[name='quantity']").val(1);
@@ -234,10 +213,10 @@
             let oldQuantity = parseInt(self.parent().siblings("input[name='quantity']").val());
             let newQuantity = oldQuantity + 1;
             let idProductDetail = self.closest("tr").attr("data_productDetail");
-            let unitItemPrice = parseFloat(self.closest("tr").find("p.unit-item-price").text());
+            let unitItemPrice = parseFloat(self.closest("tr").find("span.unit-item-price").text());
             $('tr[data_productDetail_header="' + idProductDetail + '"]').find("td > p > span#item-quantity-header").text(newQuantity);
             self.closest("tr").find("input[name='quantity']").val(newQuantity);
-            self.closest("tr").find("td.total-item-price").text(parseFloat(unitItemPrice * newQuantity));
+            self.closest("tr").find("span.total-item-price").text(parseFloat(unitItemPrice * newQuantity));
             editItemCart(idProductDetail, unitItemPrice, oldQuantity, newQuantity);
         });
 
@@ -251,7 +230,7 @@
         function caculateTotalCart() {
             let totalPay = 0.0;
             $("tbody#items-cart > tr").each(function (index) {
-                totalPay += parseFloat($(this).children("td.total-item-price").text());
+                totalPay += parseFloat($(this).find("td span.total-item-price").text());
             });
             $("#total-items-pay").text(totalPay);
             $("#total-items-pay-header").text(totalPay);
@@ -274,7 +253,7 @@
                     if (result === false) {
                         alert("Không đủ số lượng đáp ứng");
                         $('tr[data_productDetail="' + idProductDetail + '"]').find("input[name='quantity']").val(oldQuantity);
-                        $('tr[data_productDetail="' + idProductDetail + '"]').find("td.total-item-price").text(parseFloat(unitItemPrice * oldQuantity));
+                        $('tr[data_productDetail="' + idProductDetail + '"]').find("span.total-item-price").text(parseFloat(unitItemPrice * oldQuantity));
                         $('#item-quantity-header').text(oldQuantity);
                     } else {
                         caculateTotalCart();

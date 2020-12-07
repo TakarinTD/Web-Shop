@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>USER</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <style>
+    h1 {
+      text-align:center;
+    }
+    </style>
+</head>
+<body>
+<div class="container" style="padding: 10px">
+    <th:block th:include="common/header_admin"></th:block>
+    <h1>Danh sách người dùng</h1>
+    <div class="container" style="text-align:center">
+        <div class="card-block">
+            <table id="tableUser" class="table table-hover table-bordered">
+                <thead>
+                <tr>
+                    <th>USER ID</th>
+                    <th>FULL NAME</th>
+                    <th>BIRTHDAY</th>
+                    <th>EMAIL</th>
+                    <th>PHONE</th>
+                    <th>ACTIVE</th>
+                    <th>ROLE</th>
+                    <th>ACTION</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="user :${users}" th:if="${user.email}!=${session.user.getEmail()}">
+                    <td th:text="${user.id}"></td>
+                    <td th:text="${user.fullName}"></td>
+                    <td th:text="${user.birthday}"></td>
+                    <td th:text="${user.email}"></td>
+                    <td th:text="${user.phone}"></td>
+                    <td th:text="${user.enabled}"></td>
+                    <td>
+                        <div th:each="role: ${user.roles}">
+                            <p th:text="${role.name}"></p>
+                        </div>
+                    </td>
+                    <td><a th:href="@{/}" class="btn btn-primary eBtn">Đổi quyền</a>
+                        <br>
+                        <a th:href="@{/}" class="btn btn-danger dBtn">Khóa tài khoản</a></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<script>
+     $(document).ready(function() {
+        $('#tableUser').dataTable({});
+    });
+</script>
+</body>
+</html>
+

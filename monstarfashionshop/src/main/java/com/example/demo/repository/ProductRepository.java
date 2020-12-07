@@ -17,7 +17,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
             "INNER JOIN promotion AS pt ON p.promotion_id = pt.id\n" +
             "INNER JOIN product_detail AS pd ON p.id = pd.product_id\n" +
             "INNER JOIN order_detail AS od ON pd.id = od.product_detail_id\n" +
-            "ORDER BY quantities_product DESC LIMIT 9", nativeQuery = true)
+            "ORDER BY quantities_product DESC LIMIT 4", nativeQuery = true)
     List<Product> getTopProductSale();
 
     Page<Product> findProductsByCategoryId(Long categoryId, Pageable pageable);

@@ -91,6 +91,9 @@ body {
     font-weight: 400;
     letter-spacing: 0.5px;
 }
+th {
+    text-align: center;
+}
 .loader {
     position: fixed;
     left: 0px;
@@ -1457,7 +1460,7 @@ input#amount {
     color: #e40001;
     font-weight: 700;
     font-size: 16px;
-    width: 140px;
+    width: 200px;
 }
 .Shipping, .Order, .Save, .Safe {
     background: transparent url("../images/sprite.png") no-repeat scroll -127px 0px;
@@ -2499,6 +2502,7 @@ a.thumbnail:hover, a.thumbnail:focus, a.thumbnail.active {
         font-size: 40px;
         line-height: 55px;
     }
+    margin-left: 1%;
 }
 
 /*----------------------------------*/
@@ -2859,21 +2863,39 @@ a.thumbnail:hover, a.thumbnail:focus, a.thumbnail.active {
     z-index: 99;
 }
 
-    #scrollup::before {
-        background: #e40001 none repeat scroll 0 0;
-        bottom: 20px;
-        color: #fff;
-        content: "\f106";
-        font-family: fontawesome;
-        font-size: 25px;
-        height: 40px;
-        padding: 6px 12px;
-        position: fixed;
-        right: 20px;
-        width: 40px;
-        z-index: 99;
-    }
+#scrollup::before {
+    background: #e40001 none repeat scroll 0 0;
+    bottom: 20px;
+    color: #fff;
+    content: "\f106";
+    font-family: fontawesome;
+    font-size: 25px;
+    height: 40px;
+    padding: 6px 12px;
+    position: fixed;
+    right: 20px;
+    width: 40px;
+    z-index: 99;
+}
+.ipnhKS{
+    padding-right: 5px;
+    width: 265px
+}
+.ipnhKS .content {
+    color: beige;
+    display: flex;
+    flex-direction: column;
+    background-color: gray;
+    padding: 10px;
+    border-radius: 4px;
+    height: 100%;
+}
 
+.kHWfJY {
+    display: flex;
+    margin: 10px 0px 20px;
+    width: max-content;
+}
 
 
     /* =====  END RESPONSIVE CSS  =====*/

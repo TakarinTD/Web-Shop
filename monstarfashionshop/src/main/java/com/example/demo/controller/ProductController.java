@@ -38,7 +38,7 @@ public class ProductController extends BaseController {
             _mvShare.setViewName("404");
             return _mvShare;
         }
-        List<Product> listProductTopSale = productService.getTopProductSale(9);
+        List<Product> listProductTopSale = productService.getTopProductSale();
         _mvShare.addObject("productsTopSale", listProductTopSale);
         _mvShare.addObject("images", mapImage);
         _mvShare.addObject("productColors", productColors);

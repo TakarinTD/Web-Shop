@@ -21,4 +21,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Modifying
     void setEnable(@Param("enabled") boolean enabled, @Param("id") Long id);
 
+    User findUserByOrdersId(long orderId);
+
 }

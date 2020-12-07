@@ -21,7 +21,7 @@ public class ContactController extends BaseController{
     @GetMapping("/contact")
     public ModelAndView viewContactPage() {
         Contact contact = new Contact();
-        List<Product> listProductTopSale = productService.getTopProductSale(9);
+        List<Product> listProductTopSale = productService.getTopProductSale();
         _mvShare.addObject("productsTopSale", listProductTopSale);
         _mvShare.addObject("contact", contact);
         _mvShare.setViewName("contact_us");

@@ -151,6 +151,11 @@
                                 <div class="tab-pane" id="2c">
                                     <form class="form-horizontal" th:action="@{/postReview}" method="post">
                                         <h4 class="mt_20 mb_30">Thêm bình luận của bạn</h4>
+                                        <div class="btn-warning form-group required" id="lack-info-review" style="display: none;">
+                                            <div class="col-sm-12">
+                                                <p>Hãy nhập đầy đủ thông tin đánh giá !</p>
+                                            </div>
+                                        </div>
                                         <div class="form-group required">
                                             <div class="col-sm-12">
                                                 <label class="control-label" for="title">Tiêu đề</label>
@@ -168,13 +173,13 @@
                                             <div class="col-md-6">
                                                 <div class="rates">
                                                     <label>Rating</label>
-                                                    <span>Bad</span>
+                                                    <span style="color: red;">Bad</span>
                                                     <input name="ratting" value="1" type="radio">
                                                     <input name="ratting" value="2" type="radio">
                                                     <input name="ratting" value="3" type="radio">
                                                     <input name="ratting" value="4" type="radio">
                                                     <input name="ratting" value="5" type="radio">
-                                                    <span>Good</span>
+                                                    <span style="color: #4cae4c">Good</span>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
@@ -198,7 +203,7 @@
                                                                 <div class="review-user">
                                                                     <div style="float: left; border-radius: 10px;"
                                                                          class="review-avater">
-                                                                        <img src="#" alt="Image">
+                                                                        <img style="width: 40px;" th:src="@{/images/user-avatar.png}" alt="Image">
                                                                     </div>
                                                                     <div style="margin-left: 10px;float: left;">
                                                                         <h5 class="user-name"
@@ -212,7 +217,7 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="review-des"
-                                                                     style="margin-top: 10px; margin-left: 16px;">
+                                                                     style="margin-top: 10px; margin-left: 50px;">
                                                                     <div class="title">
                                                                         <p><strong
                                                                                 th:utext="${review.getTitle()}"></strong>
@@ -236,12 +241,18 @@
                                                                     <i class="fa fa-reply" aria-hidden="true"></i><span>Trả lời</span>
                                                                 </span>
                                                             </div>
-                                                            <hr style="width:50% ;margin-left:10px;"/>
                                                         </div>
 
                                                         <div th:attr="id=${'reply-review-' + review.getId()}"
                                                              class="col-md-12 reply-input"
                                                              style="margin-left: 25px; display: none;">
+                                                            <div class="row">
+                                                                <div class="form-group btn-warning" style="display: none;" id="lack-reply">
+                                                                    <div class="col-md-12">
+                                                                        <p>Hãy viết phản hồi của bạn </p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
                                                             <form th:action="@{/postReplyReview}"
                                                                   class="form-horizontal" method="post">
                                                                 <div class="form-group required">
@@ -272,11 +283,12 @@
                                                                     câu trả lời
                                                                 </div>
                                                                 <div class="reply-item"
-                                                                     style="margin-left: 30px; padding-top: 10px; padding-bottom: 20px; display: none;"
+                                                                     style="margin-left: 8px; padding-top: 10px; padding-bottom: 20px; display: none;"
                                                                      th:each="reply : ${review.getReplyReviewSet()}">
+                                                                    <hr style="width:50% ;margin-left:10px; padding-bottom: 8px;"/>
                                                                     <div class="info_reply-user"
                                                                          style="margin-left: 10px;">
-                                                                        <span style="margin-right: 10px;"><img src="#"
+                                                                        <span style="margin-right: 10px;"><img style="width: 40px;" th:src="@{/images/user-avatar.png}"
                                                                                                                alt="Image"></span>
                                                                         <span class="user-name"
                                                                               style="margin-right: 10px;"
@@ -285,7 +297,7 @@
                                                                               style="margin-right: 10px;"
                                                                               th:utext="${reply.getCreatedAt()}"></span>
                                                                     </div>
-                                                                    <div class="reply-content" style="margin-top: 5px;">
+                                                                    <div class="reply-content" style="margin-left: 64px; margin-top: 5px;">
                                                                         <p th:utext="${reply.getContent()}"></p>
                                                                     </div>
                                                                 </div>
@@ -309,131 +321,69 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="heading-part text-center mb_10">
-                            <h2 class="main_title mt_50">Related Products</h2>
-                        </div>
-                        <div class="related_pro box">
-                            <div class="product-layout  product-grid related-pro  owl-carousel mb_50 ">
-                                <div class="item">
-                                    <div class="product-thumb">
-                                        <div class="image product-imageblock"><a href="product_detail.html"> <img
-                                                data-name="product_image" th:src="@{/images/product/product7.jpg}"
-                                                alt="iPod Classic" title="iPod Classic" class="img-responsive"> <img
-                                                th:src="@{/images/product/product7-1.jpg}" alt="iPod Classic"
-                                                title="iPod Classic" class="img-responsive"> </a>
-                                            <div class="button-group text-center">
-                                                <div class="wishlist"><a href="#"><span>wishlist</span></a></div>
-                                                <div class="quickview"><a href="#"><span>Quick View</span></a></div>
-                                                <div class="compare"><a href="#"><span>Compare</span></a></div>
-                                                <div class="add-to-cart"><a href="#"><span>Add to cart</span></a></div>
-                                            </div>
-                                        </div>
-                                        <div class="caption product-detail text-center">
-                                            <h6 data-name="product_name" class="product-name mt_20"><a href="#"
-                                                                                                       title="Casual Shirt With Ruffle Hem">New
-                                                LCDScreen and HD Video Recording</a></h6>
-                                            <div class="rating">
-                                                <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i><i
-                                                        class="fa fa-star fa-stack-1x"></i></span>
-                                                <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i><i
-                                                        class="fa fa-star fa-stack-1x"></i></span>
-                                                <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i><i
-                                                        class="fa fa-star fa-stack-1x"></i></span>
-                                                <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i><i
-                                                        class="fa fa-star fa-stack-1x"></i></span>
-                                                <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i><i
-                                                        class="fa fa-star fa-stack-x"></i></span>
-                                            </div>
-                                            <span class="price"><span class="amount"><span
-                                                    class="currencySymbol">$</span>70.00</span>
-                        </span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="product-thumb">
-                                        <div class="image product-imageblock"><a href="product_detail.html"> <img
-                                                data-name="product_image" th:src="@{/images/product/product8.jpg}"
-                                                alt="iPod Classic" title="iPod Classic" class="img-responsive"> <img
-                                                th:src="@{/images/product/product8-1.jpg}" alt="iPod Classic"
-                                                title="iPod Classic" class="img-responsive"> </a>
-                                            <div class="button-group text-center">
-                                                <div class="wishlist"><a href="#"><span>wishlist</span></a></div>
-                                                <div class="quickview"><a href="#"><span>Quick View</span></a></div>
-                                                <div class="compare"><a href="#"><span>Compare</span></a></div>
-                                                <div class="add-to-cart"><a href="#"><span>Add to cart</span></a></div>
-                                            </div>
-                                        </div>
-                                        <div class="caption product-detail text-center">
-                                            <h6 data-name="product_name" class="product-name mt_20"><a href="#"
-                                                                                                       title="Casual Shirt With Ruffle Hem">New
-                                                LCDScreen and HD Video Recording</a></h6>
-                                            <div class="rating">
-                                                <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i><i
-                                                        class="fa fa-star fa-stack-1x"></i></span>
-                                                <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i><i
-                                                        class="fa fa-star fa-stack-1x"></i></span>
-                                                <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i><i
-                                                        class="fa fa-star fa-stack-1x"></i></span>
-                                                <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i><i
-                                                        class="fa fa-star fa-stack-1x"></i></span>
-                                                <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i><i
-                                                        class="fa fa-star fa-stack-x"></i></span>
-                                            </div>
-                                            <span class="price"><span class="amount"><span
-                                                    class="currencySymbol">$</span>70.00</span>
-                        </span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="product-thumb">
-                                        <div class="image product-imageblock"><a href="product_detail.html"> <img
-                                                data-name="product_image" th:src="@{/images/product/product9.jpg}"
-                                                alt="iPod Classic" title="iPod Classic" class="img-responsive"> <img
-                                                th:src="@{/images/product/product9-1.jpg}" alt="iPod Classic"
-                                                title="iPod Classic" class="img-responsive"> </a>
-                                            <div class="button-group text-center">
-                                                <div class="wishlist"><a href="#"><span>wishlist</span></a></div>
-                                                <div class="quickview"><a href="#"><span>Quick View</span></a></div>
-                                                <div class="compare"><a href="#"><span>Compare</span></a></div>
-                                                <div class="add-to-cart"><a href="#"><span>Add to cart</span></a></div>
-                                            </div>
-                                        </div>
-                                        <div class="caption product-detail text-center">
-                                            <h6 data-name="product_name" class="product-name mt_20"><a href="#"
-                                                                                                       title="Casual Shirt With Ruffle Hem">New
-                                                LCDScreen and HD Video Recording</a></h6>
-                                            <div class="rating">
-                                                <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i><i
-                                                        class="fa fa-star fa-stack-1x"></i></span>
-                                                <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i><i
-                                                        class="fa fa-star fa-stack-1x"></i></span>
-                                                <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i><i
-                                                        class="fa fa-star fa-stack-1x"></i></span>
-                                                <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i><i
-                                                        class="fa fa-star fa-stack-1x"></i></span>
-                                                <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i><i
-                                                        class="fa fa-star fa-stack-x"></i></span>
-                                            </div>
-                                            <span class="price"><span class="amount"><span
-                                                    class="currencySymbol">$</span>70.00</span>
-                        </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
     <!-- =====  CONTAINER END  ===== -->
     <th:block th:include="common/footer"></th:block>
     <!-- =====  FOOTER END  ===== -->
+
+    <div id="add-cart-dialog" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Sản phẩm đã được thêm vào giỏ hàng</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="err-dialog" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Đã có lỗi xảy ra</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="login-dialog" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Thông báo</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Bạn phải đăng nhập trước khi bình luận</p>
+                </div>
+                <div class="modal-footer">
+                    <a th:href="@{/login}"><button type="button" class="btn btn-primary">Đăng nhập</button></a>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
 <a id="scrollup"></a>
 <script th:src="@{/js/jQuery_v3.1.1.min.js}"></script>
@@ -458,9 +408,14 @@
         $("#post-comment").click(function () {
             let url = $(this).closest("form").attr("action");
             let idUser = $('#user-session').attr('data-idUser');
+            let title = $("input[id='title']").val();
+            let comment = $("textarea[id='comment']").val();
+            let ratting = $("input[name='ratting']:checked");
             if (idUser === "null") {
-                alert("Bạn phải đăng nhập trước khi bình luận");
-            } else {
+                $("#login-dialog").modal('show');
+            } else if((title === "") || (comment === "") || (ratting.size() == 0) ) {
+                $("#lack-info-review").show();
+            }  else {
                 let data = {
                     product: {
                         id: $("h4[data-name='product_name']").attr('data-idProduct')
@@ -468,9 +423,9 @@
                     user: {
                         id: idUser
                     },
-                    title: $("input[id='title']").val(),
-                    comment: $("textarea[id='comment']").val(),
-                    ratting: $("input[name='ratting']:checked").val(),
+                    title: title,
+                    comment: comment,
+                    ratting: ratting.val()
                 }
                 $.ajax({
                     url: url,
@@ -496,7 +451,7 @@
                             "                                                            </div>\n" +
                             "                                                        </div>\n" +
                             "                                                        <div class=\"col-md-12\">\n" +
-                            "                                                            <div class=\"review-des\" style=\"margin-top: 10px;\">\n" +
+                            "                                                            <div class=\"review-des\" style=\"margin-left: 8px;margin-top: 10px;\">\n" +
                             "                                                                <div  class=\"title\"><p><strong>" + result.title + "</strong></p></div>\n" +
                             "                                                                <div class=\"review-content\">\n" +
                             "                                                                    <span>" + result.comment + "</span>\n" +
@@ -507,10 +462,11 @@
                             "                                                </li>\n" +
                             "<hr style=\"height:2px;border-width:0;color:gray;background-color:gray\"/>";
 
+                        $("#lack-info-review").hide();
                         $(html).delay(1000).prependTo("#list-review-group").hide().slideDown().fadeIn();
                     },
                     error: function (e) {
-                        alert("Đã có lỗi xảy ra");
+                        $("#err-dialog").modal('show');
                     }
                 });
             }
@@ -520,9 +476,13 @@
             let url = $(this).closest("form").attr("action");
             let idUser = $('#user-session').attr('data-idUser');
             let idReview = $(this).closest("li").attr("data-id_comment");
+            let content = $(this).closest("form").find("textarea.reply-comment_input").val();
             if (idUser === "null") {
-                alert("Bạn phải đăng nhập trước khi bình luận");
-            } else {
+                $("#login-dialog").modal('show');
+            } else if(content === "") {
+                $("#lack-reply").show();
+            }
+            else {
                 let data = {
                     review: {
                         id: idReview
@@ -530,7 +490,7 @@
                     user: {
                         id: idUser
                     },
-                    content: $(this).closest("form").find("textarea.reply-comment_input").val()
+                    content: content
                 }
                 $.ajax({
                     url: url,
@@ -541,19 +501,21 @@
                     success: function (result) {
                         $("div.reply-input").hide();
                         let html = "<div class=\"reply-item\" style=\"margin-left: 30px; padding-top: 10px; padding-bottom: 20px;\">\n" +
+                            "                                                                <hr style=\"width:50% ;margin-left:10px; padding-bottom: 8px;\"/>\n" +
                             "                                                                    <div class=\"info_reply-user\" style=\"margin-left: 10px;\">\n" +
                             "                                                                        <span style=\"margin-right: 10px;\"><img src=\"#\" alt=\"Image\"></span>\n" +
                             "                                                                        <span class=\"user-name\" style=\"margin-right: 10px;\">" + result.user.fullName + "</span>\n" +
                             "                                                                        <span class=\"comment-date\" style=\"margin-right: 10px;\">" + result.createdAt + "</span>\n" +
                             "                                                                    </div>\n" +
-                            "                                                                    <div class=\"reply-content\" style=\"margin-top: 5px;\">\n" +
+                            "                                                                    <div class=\"reply-content\" style=\"margin-left: 64px; margin-top: 5px;\">\n" +
                             "                                                                        <p>" + result.content + "</p>\n" +
                             "                                                                    </div>\n" +
                             "                                                                </div>";
+                        $("#lack-reply").show();
                         $(html).delay(1000).prependTo("#reply-items-review-" + idReview).hide().slideDown().fadeIn();
                     },
                     error: function (e) {
-                        alert("Đã có lỗi xảy ra");
+                        $("#err-dialog").modal('show');
                     }
                 });
             }
@@ -574,7 +536,7 @@
         $(".reply").click(function () {
             let idUser = $('#user-session').attr('data-idUser');
             if (idUser === "null") {
-                alert("Bạn phải đăng nhập trước khi bình luận");
+                $("#login-dialog").modal('show');
             } else {
                 let idReview = $(this).closest("li").attr("data-id_comment");
                 $("#reply-review-" + idReview).show();
@@ -595,15 +557,17 @@
                 dataType: 'json',
                 success: function (result) {
                     if (result.cartSize > 0) {
-                        alert("Product is added to cart");
+                        $("#add-cart-dialog ").find(".modal-body p").text("Sản phẩm đã được thêm vào giỏ hàng");
+                        $("#add-cart-dialog").modal('show');
                         $("#cart-size").text("(" + result.cartSize + ")");
                         changeCartHeader(result.itemsCart, result.totalPay);
                     } else {
-                        alert("Số lượng không đủ để đáp ứng");
+                        $("#add-cart-dialog ").find(".modal-body p").text("Số lượng không đủ đáp ứng");
+                        $("#add-cart-dialog").modal('show');
                     }
                 },
                 error: function (XMLHttpRequest) {
-                    alert("Đã có lỗi xảy ra");
+                    $("#err-dialog").modal('show');
                 }
             });
         });
@@ -637,7 +601,7 @@
                 }
             },
             error: function (XMLHttpRequest) {
-                alert("Đã có lỗi xảy ra");
+                $("#err-dialog").modal('show');
             }
         });
     }
@@ -656,13 +620,21 @@
                 "                                                </a>\n" +
                 "                                            </td>\n" +
                 "                                            <td class=\"text-left product-name\">\n" +
-                "                                                <a href=\"/product/" + item.productDetail.product.id + "/detail\">" + item.productDetail.product.productName + "</a>\n" +
-                "                                                <p>\n" +
-                "                                                    <span><strong>Đơn giá : </strong></span>\n" +
-                "                                                    <span class=\"text-left\">" + item.productDetail.product.salePriceDiscount + "<span>đ</span></span>\n" +
-                "                                                    <span class=\"text-right\" style=\"margin-left: 5px; text-decoration: line-through;\">" + item.productDetail.product.salePrice + "<span>đ</span></span>\n" +
-                "                                                </p>\n" +
-                "                                                <p>\n" +
+                "                                                <a href=\"/product/" + item.productDetail.product.id + "/detail\">" + item.productDetail.product.productName + "</a>\n";
+            if(item.productDetail.product.salePriceDiscount == 0) {
+                html += "<p>\n" +
+                        "       <span><strong>Đơn giá : </strong></span>\n" +
+                        "       <span class=\"text-right\">" + item.productDetail.product.salePrice + "<span>đ</span></span>\n" +
+                        "   </p>\n";
+            } else {
+                html += "<p>\n" +
+                        "        <span><strong>Đơn giá : </strong></span>\n" +
+                        "        <span class=\"text-left\" style=\"color: red;\">" + item.productDetail.product.salePriceDiscount + "<span>đ</span></span>\n" +
+                        "        <span class=\"text-right\" style=\"margin-left: 5px; text-decoration: line-through;\">" + item.productDetail.product.salePrice + "<span>đ</span></span>\n" +
+                        "    </p>\n";
+            }
+
+            html +=    "                                        <p>\n" +
                 "                                                    <span><strong>Màu sắc : </strong></span>\n" +
                 "                                                    <span>" + item.productDetail.productColor.colorName + "</span>\n" +
                 "                                                </p>\n" +

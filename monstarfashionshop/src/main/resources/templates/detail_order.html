@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<!--[if (gte IE 9)|!(IE)]><!-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!--<![endif]-->
+
+<head>
+    <!-- =====  BASIC PAGE NEEDS  ===== -->
+    <meta charset="utf-8">
+    <title>Account</title>
+    <!-- =====  SEO MATE  ===== -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="distribution" content="global">
+    <meta name="revisit-after" content="2 Days">
+    <meta name="robots" content="ALL">
+    <meta name="rating" content="8 YEARS">
+    <meta name="Language" content="en-us">
+    <meta name="GOOGLEBOT" content="NOARCHIVE">
+    <!-- =====  MOBILE SPECIFICATION  ===== -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="viewport" content="width=device-width">
+    <!-- =====  CSS  ===== -->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/font-awesome.min.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/magnific-popup.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/owl.carousel.css}">
+    <link rel="shortcut icon" th:href="@{/images/favicon.png}">
+</head>
+
+<body>
+<!-- =====  LOADER  ===== -->
+<!--<div class="loader"></div>-->
+<div class="wrapper">
+    <th:block th:include="common/header"></th:block>
+    <!-- =====  HEADER END  ===== -->
+    <!-- =====  CONTAINER START  ===== -->
+    <div class="container">
+        <div class="row">
+            <div id="column-left" class="col-sm-4 col-lg-3 hidden-xs">
+                <div id="category-menu" class="navbar collapse in mb_40" aria-expanded="true" style="" role="button">
+                    <div class="nav-responsive">
+                        <div class="heading-part">
+                            <h2 class="main_title">
+                                <th:block th:utext="${session.user.getFullName()}"/>
+                                's Account
+                            </h2>
+                        </div>
+                        <ul class="nav main-navigation collapse in">
+                            <li><a th:href="@{/my_account}">Information Account</a></li>
+                            <li><a th:href="@{/my_account}">My Notice</a></li>
+                            <li><a th:href="@{/order_history}">Order Management</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-8 col-lg-9 mtb_20">
+                <!-- contact  -->
+                <div class="row">
+                    <div class="col-md-9 col-md-offset-1" style="width: 100%; margin-left: 1%;">
+                        <div class="row" style="font-size: 20px">
+                            <b>Chi tiết đơn hàng #<span th:utext="${order.id}"></span> - <span
+                                    th:if="${order.status}==0">Đang chờ xử lý</span>
+                                <span th:if="${order.status}==1">Đang giao</span>
+                                <span th:if="${order.status}==2">Đã giao</span>
+                                <span th:if="${order.status}==3">Đã hủy</span>
+                                <button th:if="${order.status}==0" onclick="huyDon()"> Hủy đơn</button>
+                            </b>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="title">Địa chỉ người nhận:</div>
+                                <div class="content"><span th:utext="${user.fullName}"></span>
+                                    <p class="address">Địa chỉ: <span th:utext="${user.address}"></span></p>
+                                    <p class="phone">Điện thoại: <span th:utext="${user.phone}"></span></p></div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="title">Hình thức giao hàng:</div>
+                                <div class="content"><span th:utext="${order.deliveryMethod}"></span>
+                                    <p>Phí vận chuyển: <span>30.000VND </span></p></div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="title">Hình thức Thanh toán:</div>
+                                <div class="content"><span th:utext="${order.paymentMethod}"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" style="padding-top: 10px;">
+                            <table id="tableProduct" class="table table-hover table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>Sản phẩm</th>
+                                    <th>Giá</th>
+                                    <th>Số lượng</th>
+                                    <th>Giảm giá</th>
+                                    <th>Tạm tính</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="orderDetail :${orderDetails}">
+                                    <td><a th:href="@{/product/{id}/detail(id=${orderDetail.productDetail.product.id})}"
+                                           th:text="${orderDetail.productDetail.product.productName}"></a></td>
+                                    <td th:text="${orderDetail.productDetail.product.salePrice}"></td>
+                                    <td th:text="${orderDetail.quantitiesProduct}"></td>
+                                    <td th:text="${orderDetail.discount}"></td>
+                                    <td th:text="${orderDetail.totalProductPay}"></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="huyDon">
+        <form th:action="@{/huy_don/{id}(id=${order.id})}" method="POST" id="huyDonForm">
+            <div class="modal fade" id="huyDon" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog" role="document" id="dialog">
+                    <div class="modal-content">
+                        <div class="modal-header" style="background-color:Red">
+                            <h5 class="modal-title">Hủy đơn!</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                Bạn có chắc muốn hủy đơn hàng này?
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Không</button>
+                            <input type="submit" class="btn btn-danger" value="Hủy"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<!-- Single Blog  -->
+<!-- End Blog   -->
+<!-- =====  CONTAINER END  ===== -->
+<!-- =====  FOOTER START  ===== -->
+<th:block th:include="common/footer"></th:block>
+<a id="scrollup"></a>
+<script th:src="@{/js/jQuery_v3.1.1.min.js}"></script>
+<script th:src="@{/js/owl.carousel.min.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/jquery.magnific-popup.js}"></script>
+<script th:src="@{/js/jquery.firstVisitPopup.js}"></script>
+<script th:src="@{/js/custom.js}"></script>
+<script>
+    $(document).ready(function () {
+        $('input[type="checkbox"]').click(function () {
+            if (document.getElementById("change").checked == true) {
+                $("#changePassword").show();
+            } else $("#changePassword").hide();
+        });
+    });
+    $(document).ready(function () {
+        $('#tableProduct').dataTable({});
+    });
+
+    function huyDon() {
+        $('.huyDon #huyDon').modal();
+    }
+</script>
+</body>
+</html>

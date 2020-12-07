@@ -26,17 +26,18 @@ public class MyAccountController {
     private UserService userService;
 
     @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
     HttpSession session;
 
     private PasswordEncoder bcryptPasswordEncoder = new BCryptPasswordEncoder();
 
     @GetMapping("/my_account")
-    public String myAccount(Model model) {
+    public String myAccount(Model model, Principal principal) {
         User user = (User) session.getAttribute("user");
-        model.addAttribute("user", user);
+        if(user == null) {
+            user = userService.findUserByEmail(principal.getName());
+            model.addAttribute("user", user);
+            return "redirect:login";
+        }
         return "my_account";
     }
 
@@ -81,7 +82,6 @@ public class MyAccountController {
     public ResponseEntity editPassword(@RequestBody User userDetail,
                                        @RequestParam(value = "oldPassword", required = false) String oldPassword,
                                        @RequestParam(value = "passwordConfirm", required = false) String passwordConfirm) {
-
 
         User userss = (User) session.getAttribute("user");
         User user = userService.findUserByEmail(userss.getEmail());

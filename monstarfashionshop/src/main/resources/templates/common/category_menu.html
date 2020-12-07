@@ -12,13 +12,14 @@
         </ul>
     </div>
 </div>
+<th:block th:if="${productsTopSale}">
 <div class="left-special left-sidebar-widget mb_50">
     <div class="heading-part mb_10 ">
         <h2 class="main_title">Top bán chạy</h2>
     </div>
     <div id="left-special" class="owl-carousel">
-        <ul class="row" th:if="${productsTopSale}">
-            <th:block th:each="product, state : ${productsTopSale}" th:if="${(state.index ge 0 && state.index le 3)}">
+        <ul class="row">
+            <th:block th:each="product, state : ${productsTopSale}">
                 <li class="item product-layout-left mb_20">
                     <div class="product-list col-xs-4">
                         <div class="product-thumb">
@@ -35,124 +36,6 @@
                             <h6 class="product-name">
                                 <a th:href="@{'/product/' + ${product.getId()} + '/detail'}" th:utext="${product.getProductName()}"></a>
                             </h6>
-                            <div class="rating">
-                                            <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i><i
-                                                    class="fa fa-star fa-stack-1x"></i></span>
-                                <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i><i
-                                        class="fa fa-star fa-stack-1x"></i></span>
-                                <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i><i
-                                        class="fa fa-star fa-stack-1x"></i></span>
-                                <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i><i
-                                        class="fa fa-star fa-stack-1x"></i></span>
-                                <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i><i
-                                        class="fa fa-star fa-stack-x"></i></span>
-                            </div>
-                            <th:block th:if="${product.getSalePriceDiscount() > 0}">
-                                            <span class="price"
-                                                  style="color: rgba(0,0,0,.54); text-decoration: line-through;margin-right: 5px; font-size: 14px; ">
-                                                <span class="amount" th:utext="${product.getSalePrice()}"></span><span
-                                                    class="currencySymbol">đ</span>
-                                            </span>
-                                <span class="price" style="color: #ee4d2d;">
-                                                <span class="amount"
-                                                      th:utext="${product.getSalePriceDiscount()}"></span><span
-                                        class="currencySymbol">đ</span>
-                                            </span>
-                            </th:block>
-                            <th:block th:if="${product.getSalePriceDiscount() == 0}">
-                                            <span class="price" style="color: #ee4d2d;">$
-                                                <span class="amount" th:utext="${product.getSalePrice()}"></span><span
-                                                        class="currencySymbol">đ</span></span>
-                                </span>
-                            </th:block>
-                        </div>
-                    </div>
-                </li>
-            </th:block>
-        </ul>
-        <ul class="row" th:if="${productsTopSale}">
-            <th:block th:each="product, state : ${productsTopSale}" th:if="${(state.index ge 0 && state.index le 3)}">
-                <li class="item product-layout-left mb_20">
-                    <div class="product-list col-xs-4">
-                        <div class="product-thumb">
-                            <div class="image product-imageblock">
-                                <a th:href="@{'/product/' + ${product.getId()} + '/detail'}">
-                                    <img class="img-responsive" title="iPod Classic" alt="iPod Classic"
-                                         th:src="@{'/images/product/' + ${product.getImage()}}">
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xs-8">
-                        <div class="caption product-detail">
-                            <h6 class="product-name">
-                                <a th:href="@{'/product/' + ${product.getId()} + '/detail'}" th:utext="${product.getProductName()}"></a>
-                            </h6>
-                            <div class="rating">
-                                            <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i><i
-                                                    class="fa fa-star fa-stack-1x"></i></span>
-                                <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i><i
-                                        class="fa fa-star fa-stack-1x"></i></span>
-                                <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i><i
-                                        class="fa fa-star fa-stack-1x"></i></span>
-                                <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i><i
-                                        class="fa fa-star fa-stack-1x"></i></span>
-                                <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i><i
-                                        class="fa fa-star fa-stack-x"></i></span>
-                            </div>
-                            <th:block th:if="${product.getSalePriceDiscount() > 0}">
-                                            <span class="price"
-                                                  style="color: rgba(0,0,0,.54); text-decoration: line-through;margin-right: 5px; font-size: 14px; ">
-                                                <span class="amount" th:utext="${product.getSalePrice()}"></span><span
-                                                    class="currencySymbol">đ</span>
-                                            </span>
-                                <span class="price" style="color: #ee4d2d;">
-                                                <span class="amount"
-                                                      th:utext="${product.getSalePriceDiscount()}"></span><span
-                                        class="currencySymbol">đ</span>
-                                            </span>
-                            </th:block>
-                            <th:block th:if="${product.getSalePriceDiscount() == 0}">
-                                            <span class="price" style="color: #ee4d2d;">$
-                                                <span class="amount" th:utext="${product.getSalePrice()}"></span><span
-                                                        class="currencySymbol">đ</span></span>
-                                </span>
-                            </th:block>
-                        </div>
-                    </div>
-                </li>
-            </th:block>
-        </ul>
-        <ul class="row" th:if="${productsTopSale}">
-            <th:block th:each="product, state : ${productsTopSale}" th:if="${(state.index ge 0 && state.index le 3)}">
-                <li class="item product-layout-left mb_20">
-                    <div class="product-list col-xs-4">
-                        <div class="product-thumb">
-                            <div class="image product-imageblock">
-                                <a th:href="@{'/product/' + ${product.getId()} + '/detail'}">
-                                    <img class="img-responsive" title="iPod Classic" alt="iPod Classic"
-                                         th:src="@{'/images/product/' + ${product.getImage()}}">
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xs-8">
-                        <div class="caption product-detail">
-                            <h6 class="product-name">
-                                <a th:href="@{'/product/' + ${product.getId()} + '/detail'}" th:utext="${product.getProductName()}"></a>
-                            </h6>
-                            <div class="rating">
-                                            <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i><i
-                                                    class="fa fa-star fa-stack-1x"></i></span>
-                                <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i><i
-                                        class="fa fa-star fa-stack-1x"></i></span>
-                                <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i><i
-                                        class="fa fa-star fa-stack-1x"></i></span>
-                                <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i><i
-                                        class="fa fa-star fa-stack-1x"></i></span>
-                                <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i><i
-                                        class="fa fa-star fa-stack-x"></i></span>
-                            </div>
                             <th:block th:if="${product.getSalePriceDiscount() > 0}">
                                             <span class="price"
                                                   style="color: rgba(0,0,0,.54); text-decoration: line-through;margin-right: 5px; font-size: 14px; ">
@@ -178,3 +61,4 @@
         </ul>
     </div>
 </div>
+</th:block>

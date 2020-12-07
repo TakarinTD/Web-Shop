@@ -35,7 +35,7 @@ public class CartController extends BaseController {
         if (cart == null) {
             cart = new HashMap<Long, OrderDetail>();
         }
-        List<Product> listProductTopSale = productService.getTopProductSale(9);
+        List<Product> listProductTopSale = productService.getTopProductSale();
         _mvShare.addObject("productsTopSale", listProductTopSale);
         _mvShare.setViewName("cart");
         return _mvShare;

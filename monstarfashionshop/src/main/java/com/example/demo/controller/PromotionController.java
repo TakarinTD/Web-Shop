@@ -24,7 +24,7 @@ public class PromotionController extends BaseController{
     public ModelAndView viewPromotionPage() {
         Date today = new Date();
         List<Promotion> promotionList = promotionService.getAllPromotion(today);
-        List<Product> listProductTopSale = productService.getTopProductSale(9);
+        List<Product> listProductTopSale = productService.getTopProductSale();
         _mvShare.addObject("productsTopSale", listProductTopSale);
         _mvShare.addObject("promotions", promotionList);
         _mvShare.setViewName("promotion");
@@ -46,7 +46,7 @@ public class PromotionController extends BaseController{
             _mvShare.addObject("productsPromotion", page.getContent());
             _mvShare.addObject("totalPages", page.getTotalPages());
         }
-        List<Product> listProductTopSale = productService.getTopProductSale(9);
+        List<Product> listProductTopSale = productService.getTopProductSale();
         _mvShare.addObject("productsTopSale", listProductTopSale);
         _mvShare.addObject("promotionId", promotionId);
         _mvShare.addObject("categoryId", categoryId);

@@ -71,7 +71,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Product> getTopProductSale(int limit) {
+    public List<Product> getTopProductSale() {
         return productRepository.getTopProductSale();
     }
 

@@ -21,39 +21,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="viewport" content="width=device-width">
     <!-- =====  CSS  ===== -->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/css/font-awesome.min.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.css}"/>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/css/magnific-popup.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/css/owl.carousel.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/dataTables.bootstrap4.min.css}">
     <link rel="shortcut icon" th:href="@{/images/favicon.png}">
 </head>
 
 <body>
-<!-- =====  LOADER  ===== -->
-<!--<div class="loader"></div>-->
 <div class="wrapper">
-    <div id="subscribe-me" class="modal animated fade in" role="dialog" data-keyboard="true" tabindex="-1">
-        <div class="newsletter-popup"><img class="offer" th:src="@{/images/newsbg.jpg}" alt="offer">
-            <div class="newsletter-popup-static newsletter-popup-top">
-                <div class="popup-text">
-                    <div class="popup-title">50% <span>off</span></div>
-                    <div class="popup-desc">
-                        <div>Sign up and get 50% off your next Order</div>
-                    </div>
-                </div>
-                <form onsubmit="return  validatpopupemail();" method="post">
-                    <div class="form-group required">
-                        <input type="email" name="email-popup" id="email-popup" placeholder="Enter Your Email"
-                               class="form-control input-lg" required/>
-                        <button type="submit" class="btn btn-default btn-lg" id="email-popup-submit">Subscribe</button>
-                        <label class="checkme">
-                            <input type="checkbox" value="" id="checkme"/> Don't show again</label>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
     <th:block th:include="common/header"></th:block>
     <!-- =====  HEADER END  ===== -->
     <!-- =====  CONTAINER START  ===== -->
@@ -63,30 +41,62 @@
                 <div id="category-menu" class="navbar collapse in mb_40" aria-expanded="true" style="" role="button">
                     <div class="nav-responsive">
                         <div class="heading-part">
-                            <h2 class="main_title">Full name's Account</h2>
+                            <h2 class="main_title">
+                                Quản lý tài khoản
+                            </h2>
                         </div>
                         <ul class="nav  main-navigation collapse in">
-                            <li><a th:href="@{/my_account}">Information Account</a></li>
-                            <li><a th:href="@{/my_account}">My Notice</a></li>
-                            <li><a th:href="@{/order_history}">Order Management</a></li>
+                            <li><a th:href="@{/my_account}">Thông tin tài khoản</a></li>
+                            <li><a th:href="@{/order_history}">Lịch sử mua hàng</a></li>
                         </ul>
                     </div>
                 </div>
-                <div class="left_banner left-sidebar-widget mt_30 mb_40"><a href="#"><img
-                        th:src="@{/images/left1.jpg}" alt="Left Banner" class="img-responsive"/></a></div>
+            </div>
+            <div class="col-sm-8 col-lg-9 mtb_20">
+                <div class="row">
+                    <div class="col-md-9 col-md-offset-1" style="width: 100%; margin-left: 1%;">
+                        <h1 style="text-align:center;">Danh sách đơn hàng</h1>
+                        <div>
+                            <table id="tableOrder" class="table table-hover table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>Mã đơn hàng</th>
+                                    <th>Ngày mua</th>
+                                    <th>Tổng tiền</th>
+                                    <th>Trạng thái</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="order :${orders}">
+                                    <td><a th:href="@{/detail_order/{id}(id=${order.id})}" th:text="${order.id}"></a>
+                                    </td>
+                                    <td th:text="${order.orderDate}"></td>
+                                    <td th:text="${order.totalPay}"></td>
+                                    <td th:if="${order.status}==0">Đang chờ xử lý</td>
+                                    <td th:if="${order.status}==1">Đang giao</td>
+                                    <td th:if="${order.status}==2">Đã giao</td>
+                                    <td th:if="${order.status}==3">Đã hủy</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
 <th:block th:include="common/footer"></th:block>
 <a id="scrollup"></a>
+<script th:src="@{/js/jquery.dataTables.min.js}"></script>
+<script th:src="@{/js/dataTables.bootstrap4.min.js}"></script>
+<script th:src="@{/js/jquery-3.5.1.js}"></script>
 <script th:src="@{/js/jQuery_v3.1.1.min.js}"></script>
 <script th:src="@{/js/owl.carousel.min.js}"></script>
 <script th:src="@{/js/bootstrap.min.js}"></script>
 <script th:src="@{/js/jquery.magnific-popup.js}"></script>
 <script th:src="@{/js/jquery.firstVisitPopup.js}"></script>
 <script th:src="@{/js/custom.js}"></script>
-<script th:src="@{/js/editInfo.js}"></script>
 <script>
     $(document).ready(function() {
         $('input[type="checkbox"]').click(function() {
@@ -94,6 +104,9 @@
             $("#changePassword").show();
         } else $("#changePassword").hide();
         });
+    });
+    $(document).ready(function() {
+        $('#tableOrder').dataTable({});
     });
 
 </script>

@@ -18,7 +18,7 @@ public interface ProductService {
 
     Page<Product> getProductsByCategoryIdAndPromotionId(Long categoryId, Long promotionId, int pageNum, int pageSize, String sortField, String sortDir);
 
-    List<Product> getTopProductSale(int pageable);
+    List<Product> getTopProductSale();
 
     List<ProductDTO> getProductsByCategoryId(long categoryId);
 

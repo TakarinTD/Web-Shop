@@ -37,7 +37,7 @@ public class CheckoutController extends BaseController{
             _mvShare.setViewName("redirect:/cart");
             return _mvShare;
         }
-        List<Product> listProductTopSale = productService.getTopProductSale(9);
+        List<Product> listProductTopSale = productService.getTopProductSale();
         _mvShare.addObject("productsTopSale", listProductTopSale);
         _mvShare.addObject("flashShipPrice", 2000);
         _mvShare.addObject("slowShipPrice", 1000);

@@ -59,6 +59,7 @@ public class User {
     private Set<Order> orders;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonIgnore
     private Set<Review> reviews;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
