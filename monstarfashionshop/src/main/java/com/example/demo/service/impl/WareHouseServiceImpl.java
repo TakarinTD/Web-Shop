@@ -26,4 +26,14 @@ public class WareHouseServiceImpl implements WareHouseService {
             return false;
         }
     }
+
+    @Override
+    public Warehouse findByProductDetailId (Long productDetailId) {
+        return wareHouseRepository.findByProductDetailId(productDetailId);
+    }
+
+    @Override
+    public Warehouse saveWarehouse (Warehouse warehouse) {
+        return wareHouseRepository.save(warehouse);
+    }
 }

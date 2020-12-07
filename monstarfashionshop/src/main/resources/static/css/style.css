@@ -2897,5 +2897,9 @@ a.thumbnail:hover, a.thumbnail:focus, a.thumbnail.active {
     width: max-content;
 }
 
+td {
+  text-align: center;
+  vertical-align: middle;
+}
 
     /* =====  END RESPONSIVE CSS  =====*/

@@ -19,7 +19,7 @@ public class RegisterController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping(value = {"/register"}, method = RequestMethod.GET)
+    @RequestMapping (value = {"/register"}, method = RequestMethod.GET)
     public ModelAndView signup () {
         ModelAndView model = new ModelAndView();
         User user = new User();
@@ -29,22 +29,22 @@ public class RegisterController {
     }
 
     @RequestMapping (value = {"/register"}, method = RequestMethod.POST)
-    public ModelAndView createUser (@Valid User user, BindingResult bindingResult, @RequestParam(name= "passwordConfirm") String passwordConfirm) {
+    public ModelAndView createUser (@Valid User user, BindingResult bindingResult, @RequestParam (name = "passwordConfirm") String passwordConfirm) {
         ModelAndView model = new ModelAndView();
         User userExists = userService.findUserByEmail(user.getEmail());
-        if(user.getFullName().equals("")){
+        if (user.getFullName().equals("")) {
             bindingResult.rejectValue("fullName", "error.fullName", "Full name not null!");
         }
-        if(user.getEmail().equals("")){
+        if (user.getEmail().equals("")) {
             bindingResult.rejectValue("email", "error.email", "Email not null!");
         }
-        if(user.getPassword().equals("")){
+        if (user.getPassword().equals("")) {
             bindingResult.rejectValue("password", "error.password", "Password not null!");
         }
-        if(passwordConfirm.equals("")){
+        if (passwordConfirm.equals("")) {
             model.addObject("passwordConfirm", "Password confirm not null!");
         }
-        if(!passwordConfirm.equals(user.getPassword())){
+        if (! passwordConfirm.equals(user.getPassword())) {
             model.addObject("passwordConfirm", "These passwords don't match!");
             model.setViewName("register");
             return model;
@@ -52,7 +52,7 @@ public class RegisterController {
         if (userExists != null) {
             bindingResult.rejectValue("email", "error.email", "This email already exists!");
         }
-        if (!bindingResult.hasErrors()) {
+        if (! bindingResult.hasErrors()) {
             userService.saveEditUser(user);
             model.addObject("msg", "User has been registered successfully, please login!");
             model.addObject("user", new User());

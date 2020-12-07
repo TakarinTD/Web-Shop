@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>ORDER</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <style>
+    h1 {
+      text-align:center;
+    }
+
+    </style>
+</head>
+<body>
+<div class="container" style="padding: 10px">
+    <th:block th:include="common/header_admin"></th:block>
+    <h1>Danh sách đơn hàng</h1>
+    <div class="row" style="text-align:center">
+        <a th:href="@{/admin/orders}" class="btn btn-secondary" style="margin:5px">Tất cả đơn hàng</a>
+        <a th:href="@{/admin/order?status=0}" class="btn btn-secondary" style="margin:5px">Đơn hàng chưa xử lý</a>
+        <a th:href="@{/admin/order?status=1}" class="btn btn-secondary" style="margin:5px">Đơn hàng đang giao</a>
+        <a th:href="@{/admin/order?status=2}" class="btn btn-secondary" style="margin:5px">Đơn hàng đã giao</a>
+        <a th:href="@{/admin/order?status=3}" class="btn btn-secondary" style="margin:5px">Đơn hàng đã hủy</a>
+    </div>
+    <div class="container" style="text-align:center">
+        <div class="card-block">
+            <table id="tableOrder" class="table table-hover table-bordered">
+                <thead>
+                <tr>
+                    <th>Mã đơn hàng</th>
+                    <th>Ngày mua</th>
+                    <th>Tổng tiền</th>
+                    <th>Trạng thái</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="order :${orders}">
+                    <td><a th:href="@{/detail_order_admin/{id}(id=${order.id})}" th:text="${order.id}"></a>
+                    </td>
+                    <td th:text="${order.orderDate}"></td>
+                    <td th:text="${order.totalPay}"></td>
+                    <td th:if="${order.status}==0">Đang chờ xử lý</td>
+                    <td th:if="${order.status}==1">Đang giao</td>
+                    <td th:if="${order.status}==2">Đã giao</td>
+                    <td th:if="${order.status}==3">Đã hủy</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<script>
+     $(document).ready(function() {
+        $('#tableOrder').dataTable({});
+     });
+
+</script>
+</body>
+</html>
+
