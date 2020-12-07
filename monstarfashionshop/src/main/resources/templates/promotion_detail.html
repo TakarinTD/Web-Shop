@@ -4,7 +4,7 @@
 <head>
     <!-- =====  BASIC PAGE NEEDS  ===== -->
     <meta charset="utf-8">
-    <title>Danh mục sản phẩm</title>
+    <title>Chi tiết khuyến mãi</title>
     <!-- =====  SEO MATE  ===== -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="description" content="">
@@ -24,7 +24,6 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/css/magnific-popup.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/css/owl.carousel.css}">
-    <link rel="stylesheet" type="text/css" th:href="@{/css/jquery-ui.css}">
     <link rel="shortcut icon" th:href="@{/images/favicon.png}">
 </head>
 
@@ -36,53 +35,14 @@
     <!-- =====  HEADER END  ===== -->
     <!-- =====  CONTAINER START  ===== -->
     <div class="container">
-        <div class="col-sm-12">
-            <div class="breadcrumb ptb_20">
-                <h1>Danh mục quần áo <span th:utext="${cateName}"></span></h1>
-            </div>
-        </div>
         <div class="row ">
+            <div class="col-sm-12">
+                <div class="breadcrumb ptb_20">
+                    <h1>Chi tiết khuyễn mãi</h1>
+                </div>
+            </div>
             <div id="column-left" class="col-sm-4 col-lg-3 ">
                 <th:block th:include="common/category_menu"></th:block>
-                <div class="filter left-sidebar-widget mb_50">
-                    <div class="heading-part mtb_20 ">
-                        <h2 class="main_title">TÌM KIẾM THEO</h2>
-                    </div>
-                    <div class="filter-block">
-                        <p>
-                            <label for="amount">Giá:</label>
-                            <input type="text" id="amount" readonly>
-                        </p>
-                        <div id="slider-range" class="mtb_20"></div>
-                        <div class="list-group" id="search">
-                            <div class="list-group-item mb_10">
-                                <label>Màu sắc</label>
-                                <div id="filter-group1">
-                                    <th:block th:each="item : ${listColor}">
-                                        <div class="checkbox">
-                                            <label>
-                                                <input th:value="${item.key.getId()}" type="checkbox" name="colorId"
-                                                       th:utext="${item.key.getColorName()} + ' (' + ${item.value} + ')'"></label>
-                                        </div>
-                                    </th:block>
-                                </div>
-                            </div>
-                            <div class="list-group-item mb_10">
-                                <label>Size</label>
-                                <div id="filter-group3">
-                                    <th:block th:each="item : ${listSize}">
-                                        <div class="checkbox">
-                                            <label>
-                                                <input th:value="${item.key.getId()}" type="checkbox" name="sizeId"
-                                                       th:utext="${item.key.getSizeName()} + ' (' + ${item.value} + ')'"></label>
-                                        </div>
-                                    </th:block>
-                                </div>
-                            </div>
-                            <button type="button" class="btn">Tìm kiếm</button>
-                        </div>
-                    </div>
-                </div>
             </div>
             <div class="col-sm-8 col-lg-9 mtb_20">
                 <div class="category-page-wrapper mb_30">
@@ -117,9 +77,19 @@
                         </div>
                         <span><i class="fa fa-angle-down" aria-hidden="true"></i></span>
                     </div>
+                    <div class="page-wrapper pull-right">
+                        <label class="control-label" for="input-limit">Danh mục : </label>
+                        <div class="limit">
+                            <select id="input-category" class="form-control">
+                                <option id="cate-men" value="16">Quần áo nam</option>
+                                <option id="cate-women" value="1">Quần áo nữ</option>
+                            </select>
+                        </div>
+                        <span><i class="fa fa-angle-down" aria-hidden="true"></i></span>
+                    </div>
                 </div>
                 <div class="row">
-                    <th:block th:each="item:${listProduct}">
+                    <th:block th:each="item:${productsPromotion}">
                         <div class="product-layout  product-grid  col-md-4 col-sm-6 col-xs-12 ">
                             <div class="item">
                                 <div class="product-thumb clearfix mb_30">
@@ -170,32 +140,32 @@
                 <div class="pagination-nav text-center mt_50">
                     <ul>
                         <li>
-                            <a th:href="@{'/category?name=' + ${cateName} + '&page=1' + '&sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + '&pageSize=' + ${pageSize}}">First</a>
+                            <a th:href="@{'/promotion/products/' + ${promotionId} + '?categoryId=' + ${categoryId} + '&page=1' + '&sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + '&pageSize=' + ${pageSize}}">First</a>
                         </li>
                         <li th:if="${currentPage gt 1}"><a
-                                th:href="@{'/category?name=' + ${cateName} + '&page=' + ${currentPage - 1} + '&sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + '&pageSize=' + ${pageSize}}">
+                                th:href="@{'/promotion/products/' + ${promotionId} + '?categoryId=' + ${categoryId} + '&page=' + ${currentPage - 1} + '&sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + '&pageSize=' + ${pageSize}}">
                             <i class="fa fa-angle-left"></i></a></li>
                         <li th:if="${currentPage eq 1}"><a
-                                th:href="@{'/category?name=' + ${cateName} + '&page=1' + '&sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + '&pageSize=' + ${pageSize}}">
+                                th:href="@{'/promotion/products/' + ${promotionId} + '?categoryId=' + ${categoryId} + '&page=1' + '&sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + '&pageSize=' + ${pageSize}}">
                             <i class="fa fa-angle-left"></i></a></li>
                         <th:block th:each="i : ${#numbers.sequence(1, totalPages)}">
                             <li th:if="${currentPage eq i}" class="active">
-                                <a th:href="@{'/category?name=' + ${cateName} + '&page=' + ${i} + '&sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + '&pageSize=' + ${pageSize}}">[[${i}]]</a>
+                                <a th:href="@{'/promotion/products/' + ${promotionId} + '?categoryId=' + ${categoryId} + '&page=' + ${i} + '&sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + '&pageSize=' + ${pageSize}}">[[${i}]]</a>
                             </li>
-                            <li th:unless="${currentPage eq i}">
-                                <a th:href="@{'/category?name=' + ${cateName} + '&page=' + ${i} + '&sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + '&pageSize=' + ${pageSize}}">[[${i}]]</a>
+                            <li th:if="${(currentPage ne i) and (i gt 0)}">
+                                <a th:href="@{'/promotion/products/' + ${promotionId} + '?categoryId=' + ${categoryId} + '&page=' + ${i} + '&sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + '&pageSize=' + ${pageSize}}">[[${i}]]</a>
                             </li>
                         </th:block>
                         <li th:if="${currentPage lt totalPages}">
-                            <a th:href="@{'/category?name=' + ${cateName} + '&page=' + ${currentPage + 1} + '&sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + '&pageSize=' + ${pageSize}}">
+                            <a th:href="@{'/promotion/products/' + ${promotionId} + '?categoryId=' + ${categoryId} + '&page=' + ${currentPage + 1} + '&sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + '&pageSize=' + ${pageSize}}">
                                 <i class="fa fa-angle-right"></i></a>
                         </li>
                         <li th:if="${currentPage eq totalPages}">
-                            <a th:href="@{'/category?name=' + ${cateName} + '&page=' + ${totalPages} + '&sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + '&pageSize=' + ${pageSize}}">
+                            <a th:href="@{'/promotion/products/' + ${promotionId} + '?categoryId=' + ${categoryId} + '&page=' + ${totalPages} + '&sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + '&pageSize=' + ${pageSize}}">
                                 <i class="fa fa-angle-right"></i></a>
                         </li>
                         <li>
-                            <a th:href="@{'/category?name=' + ${cateName} + '&page=' + ${totalPages} + '&sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + '&pageSize=' + ${pageSize}}">Last</a>
+                            <a th:href="@{'/promotion/products/' + ${promotionId} + '?categoryId=' + ${categoryId} + '&page=' + ${totalPages} + '&sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + '&pageSize=' + ${pageSize}}">Last</a>
                         </li>
                     </ul>
                 </div>
@@ -217,6 +187,9 @@
 <script th:src="@{/js/jquery-ui.js}"></script>
 <script>
     $(function () {
+        $("#input-category").change(function () {
+            sortAndPage();
+        });
 
         $("#input-limit").change(function () {
             sortAndPage();
@@ -228,71 +201,18 @@
 
         function sortAndPage() {
             let url;
+            let categoryId = $("#input-category option:selected").val();
             let sortDir = $("#input-sort option:selected").val();
             let sortName = $("#input-sort option:selected").text();
             let pageSize = $("#input-limit option:selected").val();
             sortName = sortName.slice(0, sortName.indexOf("(")).trim();
             if (sortName === "Name") {
-                url = "/category?name=" + "[[${cateName}]]" + "&page=1&sortField=productName&sortDir=" + sortDir + "&pageSize=" + pageSize;
+                url = "/promotion/products/" + "[[${promotionId}]]" +  "?categoryId=" + categoryId + "&page=1&sortField=productName&sortDir=" + sortDir + "&pageSize=" + pageSize;
             } else if (sortName === "Price") {
-                url = "/category?name=" + "[[${cateName}]]" + "&page=1&sortField=salePrice&sortDir=" + sortDir + "&pageSize=" + pageSize;
+                url = "/promotion/products/" + "[[${promotionId}]]" +  "?categoryId=" + categoryId + "&page=1&sortField=salePrice&sortDir=" + sortDir + "&pageSize=" + pageSize;
             }
             window.location = url;
         }
-
-        $("#search > button[type='button']").click(function () {
-            let price1 = $('#slider-range').slider("values")[0];
-            let price2 = $('#slider-range').slider("values")[1];
-
-            let colorIds = [];
-            let sizeIds = [];
-            $('input[name="colorId"]:checked').each(function () {
-                colorIds.push(this.value);
-            });
-
-            $('input[name="sizeId"]:checked').each(function () {
-                sizeIds.push(this.value);
-            });
-
-            let url = "/search?page=1";
-            if ("[[${categoryId}]]" !== "") {
-                url += "&categoryId=" + "[[${categoryId}]]";
-            }
-
-            if (colorIds.length > 0) {
-                url += "&colorIds=" + colorIds.toString().replace(",", ".");
-            } else {
-                url += "&colorIds=null";
-            }
-
-            if (sizeIds.length > 0) {
-                url += "&sizeIds=" + sizeIds.toString().replace(",", ".");
-            } else {
-                url += "&sizeIds=null";
-            }
-
-            url += "&price1=" + price1 + "&price2=" + price2 + "&pageSize=" + "[[${pageSize}]]" + "&sortField=salePrice&sortDir=asc";
-            window.location = url;
-        });
-
-        $("#search-submit").click(function () {
-            let keyword = $("#search-input").val();
-            if (keyword !== "") {
-                window.location = "/search?keyword=" + keyword + "&page=1&pageSize=" + "[[${pageSize}]]" + "&sortField=salePrice&sortDir=asc";
-            }
-        });
-
-
-        $("#slider-range").slider({
-            range: true,
-            min: 0,
-            max: 15000,
-            values: [0, 15000],
-            slide: function (event, ui) {
-                $("#amount").val("$" + ui.values[0] + " - $" + ui.values[1]);
-            }
-        });
-        $("#amount").val("$" + $("#slider-range").slider("values", 0) + " - $" + $("#slider-range").slider("values", 1));
     });
 
     function onloadPage() {
@@ -313,6 +233,12 @@
 
         $('#input-limit option').each(function () {
             if($(this).val() === "[[${pageSize}]]") {
+                $(this).attr('selected', "selected");
+            }
+        });
+
+        $('#input-category option').each(function() {
+            if($(this).val() === "[[${categoryId}]]") {
                 $(this).attr('selected', "selected");
             }
         });

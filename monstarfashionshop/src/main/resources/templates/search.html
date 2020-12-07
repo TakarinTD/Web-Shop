@@ -36,6 +36,11 @@
     <!-- =====  HEADER END  ===== -->
     <!-- =====  CONTAINER START  ===== -->
     <div class="container">
+        <div class="col-sm-12">
+            <div class="breadcrumb ptb_20">
+                <h1>Danh mục quần áo <span th:utext="${cateName}"></span></h1>
+            </div>
+        </div>
         <div class="row ">
             <div id="column-left" class="col-sm-4 col-lg-3 ">
                 <th:block th:include="common/category_menu"></th:block>
@@ -45,7 +50,7 @@
                     </div>
                     <div class="filter-block">
                         <p>
-                            <label for="amount">Price range:</label>
+                            <label for="amount">Giá:</label>
                             <input type="text" id="amount" readonly>
                         </p>
                         <div id="slider-range" class="mtb_20"></div>
@@ -157,6 +162,7 @@
                         </div>
                     </th:block>
                 </div>
+                <th:block th:if="${totalPages > 0}">
                 <div id="pagination-keyword" class="pagination-nav text-center mt_50">
                     <ul>
                         <li>
@@ -233,6 +239,7 @@
                         </li>
                     </ul>
                 </div>
+                </th:block>
             </div>
             <div id="brand_carouse" class="ptb_30 text-center">
                 <div id="test1"></div>

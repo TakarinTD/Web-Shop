@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<!--[if (gte IE 9)|!(IE)]><!-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!--<![endif]-->
+
+<head>
+    <!-- =====  BASIC PAGE NEEDS  ===== -->
+    <meta charset="utf-8">
+    <title>Khuyến mãi</title>
+    <!-- =====  SEO MATE  ===== -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="distribution" content="global">
+    <meta name="revisit-after" content="2 Days">
+    <meta name="robots" content="ALL">
+    <meta name="rating" content="8 YEARS">
+    <meta name="Language" content="en-us">
+    <meta name="GOOGLEBOT" content="NOARCHIVE">
+    <!-- =====  MOBILE SPECIFICATION  ===== -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="viewport" content="width=device-width">
+    <!-- =====  CSS  ===== -->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/font-awesome.min.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/magnific-popup.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/owl.carousel.css}">
+    <link rel="shortcut icon" th:href="@{/images/favicon.png}">
+</head>
+
+<body>
+<!-- =====  LOADER  ===== -->
+<!--<div class="loader"></div>-->
+<div class="wrapper">
+    <th:block th:include="common/header"></th:block>
+    <!-- =====  HEADER END  ===== -->
+    <!-- =====  CONTAINER START  ===== -->
+    <div class="container">
+        <div class="row ">
+            <div class="col-sm-12">
+                <div class="breadcrumb ptb_20">
+                    <h1>Chương trình khuyến mãi</h1>
+                </div>
+            </div>
+            <div id="column-left" class="col-sm-4 col-lg-3 hidden-xs">
+                <th:block th:include="common/category_menu"></th:block>
+            </div>
+            <div class="col-sm-8 col-lg-9 mtb_20">
+                <div class="row">
+                    <div class="product-layout product-list col-xs-12">
+                        <div class="item">
+                            <div style="border: 2px solid #ded5d5; border-radius: 5px;" class="product-thumb clearfix mb_30" th:if="${promotions}" th:each="promotion : ${promotions}">
+                                <div class="image product-imageblock">
+                                    <a th:href="@{'/promotion/products/' + ${promotion.getId()} + '?categoryId=16&page=1&sortField=productName&sortDir=desc&pageSize=6'}">
+                                        <img style="width: 100%; height: 300px;" data-name="product_image" th:src="@{'images/' + ${promotion.getImage()}}" alt="iPod Classic" title="iPod Classic" class="img-responsive">
+                                    </a>
+                                </div>
+                                <div class="caption product-detail text-center">
+                                    <h6 data-name="promotion_name" class="promotion-name mt_20">
+                                        <a style="font-size: 30px;font-family: cursive; font-weight: 600;" th:href="@{'/promotion/products/' + ${promotion.getId()} + '?categoryId=16&page=1&sortField=productName&sortDir=desc&pageSize=6'}"
+                                           title="Casual Shirt With Ruffle Hem" th:utext="${promotion.getPromotionName()}"></a>
+                                    </h6>
+                                    <span><span>Ngày hết hạn : </span><span class="end-date" th:utext="${promotion.getEndDate()}"></span></span>
+                                    <p class="product-desc mt_20 mb_60" th:utext="${promotion.getDescription()}"></p>
+                                </div>
+                                <div class="buttons pull-left">
+                                    <a th:href="@{'/promotion/products/' + ${promotion.getId()} + '?categoryId=16&page=1&sortField=productName&sortDir=desc&pageSize=6'}">
+                                        <button type="button" class="btn btn-md btn-link">
+                                            Xem chi tiết
+                                        </button>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- =====  CONTAINER END  ===== -->
+    <!-- =====  FOOTER START  ===== -->
+    <th:block th:include="common/footer"></th:block>
+    <!-- =====  FOOTER END  ===== -->
+</div>
+<a id="scrollup"></a>
+<script th:src="@{/js/jQuery_v3.1.1.min.js}"></script>
+<script th:src="@{/js/owl.carousel.min.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/jquery.magnific-popup.js}"></script>
+<script th:src="@{/js/custom.js}"></script>
+</body>
+</html>

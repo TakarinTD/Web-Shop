@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.entity.OrderDetail;
+import com.example.demo.entity.Product;
 import com.example.demo.entity.ProductDetail;
 import com.example.demo.service.CartService;
 import com.example.demo.service.ProductDetailService;
@@ -12,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -33,6 +35,8 @@ public class CartController extends BaseController {
         if (cart == null) {
             cart = new HashMap<Long, OrderDetail>();
         }
+        List<Product> listProductTopSale = productService.getTopProductSale();
+        _mvShare.addObject("productsTopSale", listProductTopSale);
         _mvShare.setViewName("cart");
         return _mvShare;
     }

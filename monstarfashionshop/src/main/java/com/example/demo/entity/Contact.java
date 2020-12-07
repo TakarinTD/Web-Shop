@@ -14,7 +14,10 @@ public class Contact {
     private String guestName;
 
     @Column(name = "email")
-    private String emal;
+    private String email;
+
+    @Column(name = "phone")
+    private String phone;
 
     @Column(name = "subject")
     private String subject;
@@ -41,12 +44,20 @@ public class Contact {
         this.guestName = guestName;
     }
 
-    public String getEmal() {
-        return emal;
+    public String getEmail() {
+        return email;
     }
 
-    public void setEmal(String emal) {
-        this.emal = emal;
+    public void setEmail(String emal) {
+        this.email = email;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public String getSubject() {

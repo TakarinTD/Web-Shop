@@ -18,9 +18,11 @@ public class Promotion {
     private String promotionName;
 
     @Column(name = "start_date")
+    @Temporal(TemporalType.DATE)
     private Date startDate;
 
     @Column(name = "end_date")
+    @Temporal(TemporalType.DATE)
     private Date endDate;
 
     @Column(name = "description")

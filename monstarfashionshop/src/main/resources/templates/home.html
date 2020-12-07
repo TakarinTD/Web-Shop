@@ -116,12 +116,9 @@
                                         <div class="item">
                                             <div class="product-thumb">
                                                 <div class="image product-imageblock">
-                                                    <a href="product_detail.html">
+                                                    <a th:href="@{'/product/' + ${product.getId()} + '/detail'}">
                                                         <img data-name="product_image"
                                                              th:src="@{'/images/product/' + ${product.image}}"
-                                                             alt="iPod Classic"
-                                                             title="iPod Classic" class="img-responsive">
-                                                        <img th:src="@{/images/product/product9-1.jpg}"
                                                              alt="iPod Classic"
                                                              title="iPod Classic" class="img-responsive">
                                                     </a>
@@ -134,7 +131,7 @@
                                                 </div>
                                                 <div class="caption product-detail text-center">
                                                     <h6 data-name="product_name" class="product-name">
-                                                        <a href="#" title="Casual Shirt With Ruffle Hem"
+                                                        <a th:href="@{'/product/' + ${product.getId()} + '/detail'}" title="Casual Shirt With Ruffle Hem"
                                                            th:utext="${product.productName}">Product name</a>
                                                     </h6>
                                                     <span class="price">
@@ -156,12 +153,9 @@
                                         <div class="item">
                                             <div class="product-thumb">
                                                 <div class="image product-imageblock">
-                                                    <a href="product_detail.html">
+                                                    <a th:href="@{'/product/' + ${product.getId()} + '/detail'}">
                                                         <img data-name="product_image"
                                                              th:src="@{'/images/product/' + ${product.image}}"
-                                                             alt="iPod Classic"
-                                                             title="iPod Classic" class="img-responsive">
-                                                        <img th:src="@{/images/product/product9-1.jpg}"
                                                              alt="iPod Classic"
                                                              title="iPod Classic" class="img-responsive">
                                                     </a>
@@ -170,13 +164,13 @@
                                                         <div class="wishlist"><a href="#"><span>View detail</span></a>
                                                         </div>
                                                         <div class="add-to-cart"><a
-                                                                href="#"><span>Add to cart</span></a>
+                                                                th:href="@{'/product/' + ${product.getId()} + '/detail'}"><span>Add to cart</span></a>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="caption product-detail text-center">
                                                     <h6 data-name="product_name" class="product-name">
-                                                        <a href="#" title="Casual Shirt With Ruffle Hem"
+                                                        <a th:href="@{'/product/' + ${product.getId()} + '/detail'}" title="Casual Shirt With Ruffle Hem"
                                                            th:utext="${product.productName}">Product name</a>
                                                     </h6>
                                                     <span class="price">
@@ -200,8 +194,11 @@
                     <div class="cms_banner mt_50">
                         <div class="col-sm-12 mt_10">
                             <div id="subbanner3" class="sub-hover">
-                                <div class="sub-img"><a href="#"><img th:src="@{/images/sub6.jpg}" alt="Sub Banner3"
-                                                                      class="img-responsive"></a></div>
+                                <div class="sub-img">
+                                    <a th:href="@{'/promotion/products/4?categoryId=16&page=1&sortField=productName&sortDir=desc&pageSize=6'}">
+                                    <img th:src="@{/images/sub6.jpg}" alt="Sub Banner3" class="img-responsive">
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
