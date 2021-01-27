@@ -17,6 +17,7 @@ import org.springframework.stereotype.*;
 import org.springframework.ui.*;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 @Controller
@@ -31,11 +32,12 @@ public class MyAccountController {
     private PasswordEncoder bcryptPasswordEncoder = new BCryptPasswordEncoder();
 
     @GetMapping("/my_account")
-    public String myAccount(Model model, Principal principal) {
+    public String myAccount(Model model, Principal principal, HttpServletRequest request, HttpSession session) {
         User user = (User) session.getAttribute("user");
         if(user == null) {
-            user = userService.findUserByEmail(principal.getName());
-            model.addAttribute("user", user);
+            String url = request.getRequestURL().toString();
+            System.out.println("my account url : " + url);
+            session.setAttribute("backServletPath", url);
             return "redirect:login";
         }
         return "my_account";
