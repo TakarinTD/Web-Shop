@@ -30,7 +30,7 @@ public class CartController extends BaseController {
     private CartService cartService;
 
     @GetMapping
-    public ModelAndView viewCard(Model model, HttpSession session) {
+    public ModelAndView viewCard(HttpSession session) {
         HashMap<Long, OrderDetail> cart = (HashMap<Long, OrderDetail>) session.getAttribute("cart");
         if (cart == null) {
             cart = new HashMap<Long, OrderDetail>();

@@ -236,7 +236,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <input type="submit" class="btn btn-primary" id="save" value="Thêm"/>
+                            <input type="submit" class="btn btn-primary" id="add-quantity" value="Thêm"/>
                         </div>
                     </div>
                 </div>
@@ -310,6 +310,7 @@
         });
 
         $("#addCategoryProductForm").submit(function(event) {
+            alert("hahahaha");
             event.preventDefault();
             addCategoryProduct();
         });
@@ -368,13 +369,13 @@
             });
         }
 
-        $("#addQuantityForm").submit(function(event) {
-            event.preventDefault();
+        $("#add-quantity").click(function() {
             addQuantity();
         });
         function addQuantity() {
+            let quantity = $("#addQuantityForm").find("input[id='quantityAvailable']").val();
             var formData = {
-                quantityAvailable : $("#quantityAvailable").val(),
+                quantityAvailable : quantity,
             }
             console.log(formData);
             $.ajax({

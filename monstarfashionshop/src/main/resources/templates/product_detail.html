@@ -413,7 +413,7 @@
             let ratting = $("input[name='ratting']:checked");
             if (idUser === "null") {
                 $("#login-dialog").modal('show');
-            } else if((title === "") || (comment === "") || (ratting.size() == 0) ) {
+            } else if((title === "") || (comment === "") ) {
                 $("#lack-info-review").show();
             }  else {
                 let data = {
@@ -439,7 +439,7 @@
                             "                                                        <div class=\"col-md-12\">\n" +
                             "                                                            <div class=\"review-user\">\n" +
                             "                                                                <div style=\"float: left; border-radius: 10px;\" class=\"review-avater\">\n" +
-                            "                                                                    <img src=\"#\" alt=\"Image\">\n" +
+                            "                                                                    <img style=\"width: 40px;\" src=\"/images/user-avatar.png\" alt=\"Image\">\n" +
                             "                                                                </div>\n" +
                             "                                                                <div style=\"margin-left: 10px;float: left;\">\n" +
                             "                                                                    <h5 class=\"user-name\">" + result.user.fullName + "</h5>\n" +
@@ -503,7 +503,7 @@
                         let html = "<div class=\"reply-item\" style=\"margin-left: 30px; padding-top: 10px; padding-bottom: 20px;\">\n" +
                             "                                                                <hr style=\"width:50% ;margin-left:10px; padding-bottom: 8px;\"/>\n" +
                             "                                                                    <div class=\"info_reply-user\" style=\"margin-left: 10px;\">\n" +
-                            "                                                                        <span style=\"margin-right: 10px;\"><img src=\"#\" alt=\"Image\"></span>\n" +
+                            "                                                                        <span style=\"margin-right: 10px;\"><img src=\"/images/user-avatar.png\" alt=\"Image\"></span>\n" +
                             "                                                                        <span class=\"user-name\" style=\"margin-right: 10px;\">" + result.user.fullName + "</span>\n" +
                             "                                                                        <span class=\"comment-date\" style=\"margin-right: 10px;\">" + result.createdAt + "</span>\n" +
                             "                                                                    </div>\n" +
@@ -608,6 +608,7 @@
 
     function changeCartHeader(itemsCart, totalPay) {
         let totalItemsPay = totalPay;
+        console.log(itemsCart);
 
         $("#smal-cart-view").empty();
         let html = "<li>\n" +

@@ -37,7 +37,7 @@ public class RegisterController {
     @RequestMapping (value = {"/register"}, method = RequestMethod.POST)
     public ModelAndView createUser (HttpServletRequest request,
                                     @Valid User user, BindingResult bindingResult,
-                                    @RequestParam(name= "passwordConfirm") String passwordConfirm) throws UnsupportedEncodingException, MessagingException 
+                                    @RequestParam(name= "passwordConfirm") String passwordConfirm) throws UnsupportedEncodingException, MessagingException {
         ModelAndView model = new ModelAndView();
         User userExists = userService.findUserByEmail(user.getEmail());
         if (user.getFullName().equals("")) {

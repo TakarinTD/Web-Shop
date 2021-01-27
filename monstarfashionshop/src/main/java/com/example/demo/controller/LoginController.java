@@ -24,26 +24,28 @@ public class LoginController {
 
     @GetMapping("/login")
     public String login(HttpServletRequest httpServletRequest, HttpSession httpSession) throws URISyntaxException, MalformedURLException {
-        String backUrlPath = httpServletRequest.getHeader("referer");
-        System.out.println(backUrlPath);
-        String backPath;
-        String backQuery;
-        if (backUrlPath == null || backUrlPath.equals(BACK_REGISTER)) {
-            backPath = "/";
-            backQuery = null;
-        } else {
-            backPath = new URL(backUrlPath).getPath();
-            backQuery = new URL(backUrlPath).getQuery();
-        }
+        if(httpSession.getAttribute("backServletPath") == null) {
+            String backUrlPath = httpServletRequest.getHeader("referer");
+            System.out.println(backUrlPath);
+            String backPath;
+            String backQuery;
+            if (backUrlPath == null || backUrlPath.equals(BACK_REGISTER)) {
+                backPath = "/";
+                backQuery = null;
+            } else {
+                backPath = new URL(backUrlPath).getPath();
+                backQuery = new URL(backUrlPath).getQuery();
+            }
 
-        if(backPath.equals("/login")) {
-            backPath = "/";
+            if(backPath.equals("/login")) {
+                backPath = "/";
+            }
+            String backServletPath = backPath;
+            if (backQuery != null) {
+                backServletPath += "?" + backQuery;
+            }
+            httpSession.setAttribute("backServletPath", backServletPath);
         }
-        String backServletPath = backPath;
-        if (backQuery != null) {
-            backServletPath += "?" + backQuery;
-        }
-        httpSession.setAttribute("backServletPath", backServletPath);
         return "login";
     }
 
